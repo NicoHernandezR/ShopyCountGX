@@ -47,3 +47,7 @@ body{
     border-radius: 3px;
     border-color: rgba( 104, 157, 221, 1 );;
 }
+
+.pd_tp{
+    padding-top: 10px;
+}
