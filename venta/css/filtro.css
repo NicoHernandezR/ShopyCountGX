@@ -140,7 +140,14 @@ html.responsive .leftcol, html.responsive {
     .contenedor_cuenta{
         padding-left: 0%;
         width: 100%;
+        padding-top: 10px;
     }
+}
+
+.contenedor_cuenta {
+    padding-left: 5%;
+    width: 75%;
+    padding-top: 10px;
 }
 
 
@@ -409,6 +416,32 @@ a:-webkit-any-link {
 
 .txt_info, .pd_1st_r{
     padding-top: 4%;
+}
+
+@media (min-width:1420px) {
+    .txt_info{
+    padding-top: 2%;
+    }
+
+    .img_info{
+        padding-top: 1%;
+    }
+
+}
+
+
+
+@media (min-width:2550px) {
+    .txt_info{
+    padding-top: 1%;
+    }
+
+    .img_info{
+        padding-top: 0%;
+        bottom: 50px;
+    }
+
+
 }
 
 .pd_1st_r{

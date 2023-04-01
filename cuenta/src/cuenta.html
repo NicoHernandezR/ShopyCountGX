@@ -55,9 +55,9 @@
 
     <div class="container-fluid pd_tp">
         <div class="row justify-content-center">
-            <div class="col-md-2"></div>
-            <div class="col-12 col-md-4 img_cn">
-                <img src="../img/steamlogo_negro.png" alt="" width="250">
+
+            <div class="col-12 col-md-6 img_cn">
+                <img src="../img/steamlogo_negro.png" alt="" width="250" class="img_cn_ph">
             </div>
             <div class="col-12 col-md-6 col_info">
               <div class="container-fluid br_info">
@@ -83,30 +83,38 @@
       <div class="row btn_centrar_row">
 
         <div class="col-12 col-md-3 btn_centrar">
-          <button class="btn_size"> Confirmar</button>
-        </div>
-        <div class="col-12 col-md-3 btn_centrar">
           <button class="btn_size"> Cancelar</button>
         </div>
         <div class="col-12 col-md-3 btn_centrar">
-          <button class="btn_size"> Cambiar</button>
+          <button type="button" class="btn_size" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Confirmar
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="modal" tabindex="-1">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Cambios Cuenta</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Modal body text goes here.</p>
+            Desea realizar los cambios a la informacion de su cuenta?
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="container-fluid">
+              <div class="row_mod">
+              <div class="col-6">
+                <button type="button" class="btn_size_m" data-bs-dismiss="modal">Close</button>
+              </div>
+              <div class="col-6">
+                <button type="button" onClick="history.go(0)" VALUE="Refresh" class="btn_size_m"> Aceptar </button>
+              </div>
+            </div>
+            
+          </div>
           </div>
         </div>
       </div>
