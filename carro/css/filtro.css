@@ -158,7 +158,8 @@ html.responsive .leftcol, html.responsive {
 }
 
 .bg_filtro{
-    background-color: rgba(174, 254, 255, 0.7);
+    background-color: rgba(7, 35, 39, 0.9);
+    color: white;
 }
 
 
@@ -408,7 +409,7 @@ a:-webkit-any-link {
 }
 
 .txt_info, .pd_1st_r{
-    padding-top: 4%;
+    padding-top: 3%;
 }
 
 .pd_1st_r{
@@ -416,7 +417,9 @@ a:-webkit-any-link {
 }
 
 .img_info{
-    padding-top: 3%;
+    position: relative;
+    top: 20%;
+    left: 10%;
 }
 
 

@@ -20,3 +20,43 @@
     border-radius: 3px;
     border-color: rgba( 104, 157, 221, 1 );;
 }
+
+.btn_clr {
+    width: 50px !important;
+    /* padding-left: 10px; */
+    margin-left: 50%;
+}
+@media (min-width: 768px){
+    .col-md-8-m {
+        flex: 0 0 auto;
+        width: 66.66666667%;
+        display: inherit;
+    }
+
+}
+
+
+.padd_row{
+    padding-left: 10%;
+    padding-right: 30%;
+}
+
+.padd_row_ti {
+    padding-left: 10%;
+    padding-right: 5%;
+}
+
+
+.btn_centrar_c{
+    padding-top: 10px;
+    
+}
+
+
+.btn_size_c{
+    width: 150px;
+    height: 50px;
+    background-color: rgba(7, 35, 39, 0.9);
+    border-radius: 3px;
+    border-color: rgba( 104, 157, 221, 1 );;
+}
