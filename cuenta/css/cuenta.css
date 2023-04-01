@@ -22,6 +22,20 @@ body{
     background-color: rgba(80, 189, 186, 1);
 }
 
+@media (max-width:767px) {
+    .br_info{
+        padding-top: 2%;
+        border-color: black;
+        border: 1px;
+        border-style: solid;
+        width: 80%;
+        height: auto;
+        background-color: rgba(80, 189, 186, 1);
+    }
+    
+}
+
+
 @media (max-width: 760px){
     .img_cn{
         display: flex;
@@ -50,4 +64,23 @@ body{
 
 .pd_tp{
     padding-top: 10px;
+}
+
+.in_cn{
+    color: black;
+    display: inline;
+    width: 50%;
+    margin-bottom: 10px;
+    background-color: rgba(160, 189, 186,1);
+
+}
+
+.inf_cn{
+    width: 20% !important;
+    color: black;
+    float: right;
+}
+
+*, ::after, ::before {
+    box-sizing: inherit;
 }
