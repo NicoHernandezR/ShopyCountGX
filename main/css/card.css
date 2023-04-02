@@ -14,7 +14,7 @@
 .card{
     width: 250px;
     top: 20%;
-    left: 20%;
+    left: 17%;
     margin: 20px;
     border-radius: 6px;
     overflow: hidden;
@@ -25,6 +25,71 @@
     color: white;
     padding: 0%;
 }
+
+@media (max-width:1200px){
+    .card{
+        left: 10%;
+    }
+}
+
+@media (max-width:1050px){
+    .card{
+        left: 4%;
+    }
+}
+
+@media (max-width:970px){
+    .card{
+        left: 0%;
+    }
+}
+
+@media (max-width:767px){
+    .card{
+        left: 30%;
+    }
+}
+
+@media (max-width:600px){
+    .card{
+        left: 25%;
+    }
+}
+
+@media (max-width:525px){
+    .card{
+        left: 21%;
+    }
+}
+
+@media (max-width:450px){
+    .card{
+        left: 16%;
+    }
+}
+
+@media (max-width:390px){
+    .card{
+        left: 11%;
+    }
+}
+
+@media (max-width:340px){
+    .card{
+        left: 3%;
+    }
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 910px){
+    .card{
+        width: 210px;
+    }
+}
+
+
+
+
 
 .card{
     position: relative;

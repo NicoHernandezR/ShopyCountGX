@@ -172,10 +172,11 @@ html.responsive .leftcol, html.responsive {
 .contenedor_cuenta{
     padding-left: 5%;
     width: 75%;
+    padding-top: 10px;
 }
 
 .searchbar {
-    padding-top: 1%;
+    padding-top: 1% !important;
     padding-bottom: 5%;
     height: 40px;
 }
@@ -409,7 +410,7 @@ a:-webkit-any-link {
 }
 
 .txt_info, .pd_1st_r{
-    padding-top: 3%;
+    padding-top: 4%;
 }
 
 .pd_1st_r{
@@ -427,4 +428,44 @@ a:-webkit-any-link {
     .rightcol{
         right: 0% !important;
     }
+}
+
+
+@media (min-width: 2550px){
+    .img_info {
+        padding-top: 0% !important;
+        bottom: 50px;
+    }
+}
+
+@media (min-width: 1420px){
+    .img_info {
+        padding-top: 1%;
+    }
+}
+
+
+
+@media (min-width: 2550px){
+    .txt_info {
+        padding-top: 1% !important;
+    }
+
+}
+
+@media (min-width: 1420px){
+    .txt_info {
+        padding-top: 2%;
+    }
+}
+
+@media (max-width:400px){
+    .txt_info{
+        font-size: 16px;
+    }
+
+    #btn_bs{
+        font-size: 14px;
+    }
+
 }

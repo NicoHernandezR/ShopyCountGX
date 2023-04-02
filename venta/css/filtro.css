@@ -430,6 +430,19 @@ a:-webkit-any-link {
 
 }
 
+@media (max-width:400px){
+    .txt_info{
+        font-size: 16px;
+    }
+
+    #btn_bs{
+        font-size: 14px;
+    }
+
+}
+
+
+
 
 
 @media (min-width:2550px) {
@@ -438,7 +451,7 @@ a:-webkit-any-link {
     }
 
     .img_info{
-        padding-top: 0%;
+        padding-top: 0% !important;
         bottom: 50px;
     }
 
@@ -449,9 +462,7 @@ a:-webkit-any-link {
     padding-bottom: 2%;
 }
 
-.img_info{
-    padding-top: 3%;
-}
+
 
 @media (min-width:1251px){
     .rightcol{
@@ -469,3 +480,4 @@ a:-webkit-any-link {
     top: 20%;
     left: 10%;
 }
+
