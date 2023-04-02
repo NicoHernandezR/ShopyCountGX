@@ -10,47 +10,53 @@
     <link rel="stylesheet" href="../css/filtro.css">
     <link rel="stylesheet" href="../../main/css/navbar.css">
     <link rel="stylesheet" href="../css/imagen.css">
+    <link rel="stylesheet" href="../css/card.css">
 
 </head>
-<nav class="navbar navbar-expand-lg bg-body-tertiary nv_bg">
-  <div class="container-fluid nv_bg">
-    <a class="navbar-brand" href="#"><img src="../../main/img/mando.logo.jpg" alt="" height="55"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+<body>
+  
 
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Tienda
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Buscar</a></li>
-            <li><a class="dropdown-item" href="#">Ver Carro</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Cuenta
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
-            <li><a class="dropdown-item" href="#">Historial Compras</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
-            <li><a class="dropdown-item" href="#">Crear Cuenta</a></li>
-          </ul>
-        </li>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary nv_bg">
+    <div class="container-fluid nv_bg">
+      <a class="navbar-brand" href="../../main/src/index.html"><img src="../../main/img/mando.logo.jpg" alt="" height="55"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
 
-      </ul>
-      <a class="navbar-brand" href="#"><img src="../../main/img/carrito-de-compras.png" alt="" height="55"></a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Tienda
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../../venta/src/venta.html">Buscar</a></li>
+              <li><a class="dropdown-item" href="../../carro/src/carro.html">Ver Carro</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Cuenta
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../../cuenta/src/cuenta_2.html">Ver cuenta</a></li>
+              <li><a class="dropdown-item" href="#">Historial Compras</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+              <li><a class="dropdown-item" href="">Crear Cuenta</a></li>
+            </ul>
+          </li>
 
+
+        </ul>
+        <a class="navbar-brand" href="../../carro/src/carro.html"><img src="../../main/img/carrito-de-compras.png" alt="" height="55"></a>
+
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
       
 
@@ -64,7 +70,7 @@
       <div class="rightcol small responsive_local_menu autocollapse_enabled bg_filtro">
           <div class="block search_collapse_block">
               <div class="block_header labs_block_header">
-                  <div>Filtrar por precio</div>
+                  <div class="fil_inf">Filtrar por precio</div>
               </div>
           </div>
           <div class="block_content block_content_inner">
@@ -117,45 +123,105 @@
 
     </div>
     <div class="row justify-content-center">
-
       <div class="col-12 col-md-9">
-          <a href="#" class="search_result_row ds_collapse_flag ">
-          <div class="container-fluid">
+        <div class="card bg_wh">
+          <div class="img_crd">
               <div class="row">
-                  <div class="col-4 col-md-4 img_info"> <img src="../img/steamlogo.png" alt="" width="40" class="img_cn"></div>
+                  <div class="col-4 col-md-4"> <img src="../img/steamlogo50.png" alt="" class="img_info"></div>
                   <div class="col-4 col-md-4 txt_info">23 Juegos</div>
                   <div class="col-4 col-md-4 txt_info">$3200</div>
               </div>
+
           </div>
-      </a>
+
+          <div class="txt-top">
+            <div class="container-fluid">
+              <div class="row btn_centrar_row">
+                <div class="col-md-2"></div>
+                <div class="col-6 col-md-4 btn_centrar_c">
+                  <form action="../../pago/src/pago.html">
+                    <button class="btn_size_c"> Ver Cuenta</button>
+                  </form>
+                </div>
+                <div class="col-6 col-md-4 btn_centrar_c">
+                  <button class="btn_size_c">Agregar Al Carro</button>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+            </div>
+            
+            
+          </div>
+
+      </div>
       </div>
     </div>
     <div class="row justify-content-center">
-
       <div class="col-12 col-md-9">
-          <a href="#" class="search_result_row ds_collapse_flag ">
-          <div class="container-fluid">
+        <div class="card bg_wh">
+          <div class="img_crd">
               <div class="row">
-                <div class="col-4 col-md-4 img_info"> <img src="../img/steamlogo.png" alt="" width="40" class="img_cn"></div>
+                  <div class="col-4 col-md-4"> <img src="../img/steamlogo50.png" alt="" class="img_info"></div>
                   <div class="col-4 col-md-4 txt_info">23 Juegos</div>
                   <div class="col-4 col-md-4 txt_info">$3200</div>
               </div>
+
           </div>
-      </a>
+
+          <div class="txt-top">
+            <div class="container-fluid">
+              <div class="row btn_centrar_row">
+                <div class="col-md-2"></div>
+                <div class="col-6 col-md-4 btn_centrar_c">
+                  <form action="../../pago/src/pago.html">
+                    <button class="btn_size_c"> Ver Cuenta</button>
+                  </form>
+                </div>
+                <div class="col-6 col-md-4 btn_centrar_c">
+                  <button class="btn_size_c">Agregar Al Carro</button>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+            </div>
+            
+            
+          </div>
+
+      </div>
       </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-12 col-md-9">
-          <a href="#" class="search_result_row ds_collapse_flag ">
-          <div class="container-fluid">
+        <div class="card bg_wh">
+          <div class="img_crd">
               <div class="row">
-                <div class="col-4 col-md-4 img_info"> <img src="../img/steamlogo.png" alt="" width="40" class="img_cn"></div>
+                  <div class="col-4 col-md-4"> <img src="../img/steamlogo50.png" alt="" class="img_info"></div>
                   <div class="col-4 col-md-4 txt_info">23 Juegos</div>
                   <div class="col-4 col-md-4 txt_info">$3200</div>
               </div>
 
           </div>
-      </a>
+
+          <div class="txt-top">
+            <div class="container-fluid">
+              <div class="row btn_centrar_row">
+                <div class="col-md-2"></div>
+                <div class="col-6 col-md-4 btn_centrar_c">
+                  <form action="../../pago/src/pago.html">
+                    <button class="btn_size_c"> Ver Cuenta</button>
+                  </form>
+                </div>
+                <div class="col-6 col-md-4 btn_centrar_c">
+                  <button class="btn_size_c">Agregar Al Carro</button>
+                </div>
+                <div class="col-md-2"></div>
+              </div>
+            </div>
+            
+            
+          </div>
+
+      </div>
       </div>
     </div>
 </div>

@@ -164,8 +164,9 @@ html.responsive .leftcol, html.responsive {
 
 }
 
-.bg_filtro{
-    background-color: rgba(174, 254, 255, 0.7);
+.bg_filtro {
+    background-color: rgba(7, 35, 39, 0.9);
+    color: white;
 }
 
 
@@ -456,4 +457,15 @@ a:-webkit-any-link {
     .rightcol{
         right: 0% !important;
     }
+}
+
+
+.fil_inf{
+    text-align: center !important;
+}
+
+.img_info{
+    position: relative;
+    top: 20%;
+    left: 10%;
 }
