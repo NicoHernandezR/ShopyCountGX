@@ -1,0 +1,21 @@
+.btn_ini_s{
+    width: 150px;
+    height: 50px;
+    font-size: 18px;
+    background-color: inherit;
+    border-radius: 5px;
+    border: solid;
+}
+
+.btn_div{
+    right: 50px;
+    position: relative;
+}
+
+@media (max-width:992px){
+    .btn_div{
+        right: 0px;
+        position: relative;
+        padding-bottom: 8px;
+    }
+}
