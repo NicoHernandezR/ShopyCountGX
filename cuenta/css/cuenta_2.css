@@ -91,6 +91,21 @@ body{
 }
 
 
+@media (max-width:370px) {
+    .in_cn{
+        width: 50% !important;
+        color: black;
+        float: right;
+        left: 20%;
+        position: relative;
+        font-size: 11px;
+    }
+    
+    .inf_cn{
+        font-size: 11px;
+    }
+}
+
 
 .in_cn{
     color: black;
