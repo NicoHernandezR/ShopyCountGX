@@ -1,0 +1,132 @@
+.navbar_bg{
+    --bs-bg-opacity: 1;
+    background-color: #1b3039;
+
+}
+
+@media screen and (max-width: 720px){
+    html.responsive .search_result_row {
+        padding: 5px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 460px){
+    html.responsive .search_result_row .col.search_capsule {
+        width: 108px;
+    }
+}
+.search_result_row:hover {
+    border: 1px solid rgba( 139, 185, 224, 0.2 );
+    background: rgba( 0, 0, 0, 0.4 );
+}
+.search_result_row, .search_result_row:hover {
+    position: relative;
+    background: #000000;
+    background: rgba( 0, 0, 0, 0.5 );
+    margin-bottom: 5px;
+    display: block;
+    text-decoration: none;
+    color: #c6d4df;
+    font-family: "Motiva Sans", Sans-serif;
+    font-weight: 300;
+}
+a:hover {
+    text-decoration: none;
+    color: #66c0f4;
+}
+.search_result_row {
+    height: 70px;
+    overflow: hidden;
+    transition: height 0.25s, margin 0.25s;
+}
+.search_result_row {
+    border: 1px  rgba( 139, 185, 224, 0.2 );
+    border-radius: 5px;
+}
+a {
+    text-decoration: none;
+    color: #ffffff;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    color: white;
+}
+body{
+    background-color: #6C3483
+}
+
+
+.img_cuenta{
+    padding: 1%;
+}
+
+
+.search_result_row .col_s {
+    height: 45px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.responsive_search_name_combined {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.title {
+    margin-top: 5px;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: #c7d5e0;
+}
+
+.top_p{
+    padding-top: 1%;
+}
+
+
+.btn_ini_s{
+    width: 150px;
+    height: 50px;
+    font-size: 18px;
+    background-color: inherit;
+    border-radius: 5px;
+    border: solid;
+    border-color: black !important;
+    color: black !important;
+}
+
+.btn_div{
+    right: 50px;
+    position: relative;
+}
+
+@media (max-width:992px){
+    .btn_div{
+        right: 0px;
+        position: relative;
+        padding-bottom: 8px;
+    }
+}
+
+
+@media (min-width:1420px) {
+    .img_cn{
+        bottom: 30px;
+        position: relative;
+    }
+
+}
+
+
