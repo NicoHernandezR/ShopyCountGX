@@ -52,6 +52,10 @@
 .header .nav-links li a:hover{
     color: #ffbc0e;
 }
+.btn_div {
+    right: 50px;
+    position: relative;
+}
 
 .btn_ini_s{
     width: 150px;
