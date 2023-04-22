@@ -13,13 +13,18 @@ const opcionesCuenta = {
 let opcionesCuentas = document.getElementById("opcionesCuenta");
 
 window.onload  = function() {
+
+
     let tipoCuenta = document.getElementById("tipoCuenta");
+    tipoCuenta.innerHTML = ''
         
+
     tiposCuenta.forEach(function(tipo, index) {
         let option = document.createElement("option");
-        option.value = index + 1;
+        option.value = index ;
         option.text = tipo;
         tipoCuenta.appendChild(option);
+
       });
  
 };
@@ -29,7 +34,7 @@ tipoCuenta.addEventListener("change", function() {
     let tipoCuentaSeleccionada = tipoCuenta.value;
     opcionesCuentas.innerHTML = ""
     // Obtener las opciones correspondientes del objeto opcionesCuenta
-    let opcionesCuentaSeleccionada = opcionesCuenta[tiposCuenta[tipoCuentaSeleccionada - 1]];
+    let opcionesCuentaSeleccionada = opcionesCuenta[tiposCuenta[tipoCuentaSeleccionada]];
 
   
     // Crear el segundo select
@@ -42,9 +47,10 @@ tipoCuenta.addEventListener("change", function() {
       
       lbl.textContent = option[0];
       inp.type = "number"
-      inp.name = option[0];
+      inp.id = option[0];
       inp.min = option[1];
       inp.max = option[2];
+      inp.value = inp.min;
   
       lbl.classList.add("col-12")
       inp.classList.add("col-12")
