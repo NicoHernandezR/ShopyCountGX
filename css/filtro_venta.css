@@ -235,9 +235,25 @@ section {
 	padding:20px;
 }
 
+.inp_form{
+    background-color: rgba(7, 35, 39, 0.7);
+}
+
+.inp_color{
+    color: black;
+}
+
+.row{
+    margin-right: 0px;
+}
+
+.row>*{
+
+    padding-right: 0px !important;
+}
+
 @media screen and (max-width:1250px ) {
 	.menu_filtro #nv {
-		width:auto;
 		height:100%;
 		right: -100%;
 		margin:0;
@@ -441,6 +457,9 @@ a:-webkit-any-link {
 
 }
 
+.pad-bot-opt{
+    padding-bottom: 15px;
+}
 
 
 

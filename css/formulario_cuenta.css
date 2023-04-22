@@ -21,6 +21,9 @@ body{
     font-size: 20px !important;
     margin: 4px 2px;
     cursor: pointer;
+    background-color: rgba(7, 35, 39, 0.9);
+    border-radius: 3px;
+    border-color: rgba( 104, 157, 221, 1 );
 }
 
 
@@ -38,7 +41,46 @@ body{
 }
 
 .pad-bot-opt{
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+}
+
+.pad-side{
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    background-color: rgba( 80, 130, 200, 1 );
+    color: black;
+    height: 1.7em;
+}
+
+
+.js_center {
+    justify-content: center!important;
+    display: flex;
+}
+
+.inp_form{
+    border: 5px solid rgba( 104, 157, 221, 1 );
+    border-radius: 10px;
+    background-color: rgba( 104, 157, 221, 1 );
+    padding-left: 0px !important;
+}
+
+textarea{
+    resize: none;
+}
+
+textarea:focus, input:focus {
+    outline: 10px solid rgba( 80, 130, 200, 1 );
+}
+
+.wh{
+    color: white !important;
 }
 
 h3{

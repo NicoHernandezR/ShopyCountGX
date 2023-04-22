@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/formulario_cuenta.css">
     <link rel="stylesheet" href="../css/card_venta.css">
-    <script src="../js/formulario_cuenta.js"></script>
+
     <title>Document</title>
 </head>
 <body>
@@ -66,7 +66,7 @@
 
         <div class="row pad-row pad-top">
           <h3 class="col-12 col-md-6" >Tipo De Cuenta</h3>
-          <select class="col-12 col-md-6"  name="tipoCuenta" id="tipoCuenta">
+          <select class="col-12 col-md-6 inp_form"  name="tipoCuenta" id="tipoCuenta">
 
           </select>
         </div>
@@ -75,24 +75,32 @@
 
         </div>
 
+        
         <div class="row pad-row pad-top pad-bot-opt hidden" id="precio_dv">
-          <label for="precio" class="col-12 col-md-6">Precio</label>
-          <input type="number" class="col-12 col-md-6" id="precio">
-        </div>
+          <label for="precio" class="col-12 col-md-6 form-label">Precio</label>
+          <input type="number" name="precio" class="col-12 col-md-6 inp_form" id="precio"></div>
 
         <div class="row pad-row pad-top pad-bot-opt">
-          <textarea class="hidden " name="info_extra" id="textArea" cols="25" rows="10">
-            
-          </textarea>
+          <textarea class="inp_form hidden" name="info_extra" id="textArea" cols="25" rows="10"></textarea>
         </div>
 
 
         <div class="row justify-content-center">
-      <input type="file" id="input-file" multiple style="display:none;">
-      <button class="btn_size_c btnImg  hidden" onclick="event.preventDefault(); document.getElementById('input-file').click()" id="btn_img">Seleccionar archivo</button>
+      <input type="file" id="input-file" name="imgs" multiple style="display:none;">
+      <button class="btnImg hidden" onclick="event.preventDefault(); document.getElementById('input-file').click()" id="btn_img">Seleccionar archivo</button>
     </div>
 
-    
+
+
+        <div class="row pad-row  ">
+          <div class="col-12 col-md-6 js_center pad-top">
+            <button type="submit" class="btn_size_c wh">Vender</button>
+          </div>
+          <div class="col-12 col-md-6 js_center pad-top">
+            <button onclick="event.preventDefault()" class="btn_size_c wh">Cancelar</button>
+          </div>
+      </div>
+
 
 
     </form>
@@ -134,6 +142,7 @@
         </div>
       </footer>
 
+      <script src="../js/formulario_cuenta.js"></script>
       <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
 
 

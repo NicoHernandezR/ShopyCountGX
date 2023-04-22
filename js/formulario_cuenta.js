@@ -1,6 +1,7 @@
 
 let selectedImages = []; 
 
+
 const tiposCuenta = ["Seleccionar","Steam", "CSGO", "Epic", "PlayStation","Xbox Live"];
 const opcionesCuenta = {
   "Seleccionar": [],
@@ -36,14 +37,14 @@ window.onload = function() {
 
     let primerSelect = document.getElementById("tipoCuenta");
     let opcionesCuentas = document.getElementById("opcionesCuenta");
-    let txtExtra = document.getElementById("textArea");
+    let txtExtra = document.getElementById("textArea")
     let btn_img = document.getElementById("btn_img");
     let precio = document.getElementById("precio")
     let precio_dv = document.getElementById("precio_dv")
-    
+    console.log(txtExtra)
     
     tiposCuenta.forEach(function(tipo, index) {
-      const option = document.createElement("option");
+      let option = document.createElement("option");
       option.value = index + 1;
       option.text = tipo;
       primerSelect.appendChild(option);
@@ -51,10 +52,10 @@ window.onload = function() {
 
     primerSelect.addEventListener("change", function() {
       // Obtener la opción seleccionada en el primer select
-      const tipoCuentaSeleccionada = primerSelect.value;
+      let tipoCuentaSeleccionada = primerSelect.value;
       opcionesCuentas.innerHTML = ""
       // Obtener las opciones correspondientes del objeto opcionesCuenta
-      const opcionesCuentaSeleccionada = opcionesCuenta[tiposCuenta[tipoCuentaSeleccionada - 1]];
+      let opcionesCuentaSeleccionada = opcionesCuenta[tiposCuenta[tipoCuentaSeleccionada - 1]];
       console.log(opcionesCuentaSeleccionada)
     
       // Crear el segundo select
@@ -67,11 +68,14 @@ window.onload = function() {
         
         lbl.textContent = option;
         inp.type = "number"
+        inp.name = option;
     
         lbl.classList.add("col-12")
         inp.classList.add("col-12")
         lbl.classList.add("col-md-6")
         inp.classList.add("col-md-6")
+        inp.classList.add("inp_form")
+
 
         div.appendChild(lbl);
         div.appendChild(inp);
@@ -91,6 +95,8 @@ window.onload = function() {
         txtExtra.classList.remove("hidden")
         btn_img.classList.remove("hidden")
         precio_dv.classList.remove("hidden")
+        contador = contador + 1;
+        console.log(contador)
       } else {
         txtExtra.value = ""
         precio.value = ""
@@ -123,11 +129,13 @@ window.onload = function() {
         }
         let fileSizeKB = file.size / 1024; // Convertir el tamaño del archivo a kilobytes
         if (fileSizeKB > 500) {
-          alert("Por favor, seleccione imágenes de tamaño inferior a 500 KB.");
-          inputFile.value = ""; // Limpiar la selección de archivos
+          alert("Por favor, seleccione imágenes de tamaño inferior a 500 KB."); 
+          // Limpiar la selección de archivos
           return;
         }
-        selectedImages.push(file); // Agregar el archivo a la matriz de imágenes seleccionadas
+        selectedImages.push(file);
+         // Agregar el archivo a la matriz de imágenes seleccionadas
+
       }
       console.log(selectedImages); // Mostrar las imágenes seleccionadas en la consola
       // Aquí puedes enviar las imágenes al servidor o hacer lo que necesites con ellas.
