@@ -500,3 +500,8 @@ a:-webkit-any-link {
     left: 10%;
 }
 
+
+.btn_row{
+    justify-content: center;
+    display: flex;
+}
