@@ -1,5 +1,4 @@
 
-let selectedImages = []; 
 
 
 const tiposCuenta = ["Seleccionar","Steam", "CSGO", "Epic", "PlayStation","Xbox Live"];
@@ -61,6 +60,7 @@ window.onload = function() {
       // Agregar las opciones al segundo select
       opcionesCuentaSeleccionada.forEach(function(option, index) {
         let lbl = document.createElement("label");
+        let lblError = document.createElement("label");
         let inp = document.createElement("input");
         let div = document.createElement("div");
         
@@ -70,18 +70,25 @@ window.onload = function() {
         inp.name = option[0];
         inp.min = option[1];
         inp.max = option[2];
-        inp.value = inp.min;
+        inp.placeholder = 0;
     
+        lblError.id = 'error' + option[0];
     
         lbl.classList.add("col-12")
         inp.classList.add("col-12")
         lbl.classList.add("col-md-6")
         inp.classList.add("col-md-6")
         inp.classList.add("inp_form")
+        lblError.classList.add('col-12')
+        //lblError.classList.add('col-md-6')
+        lblError.classList.add('hidden')
+        lblError.classList.add('rigth')
+        lblError.style.color = 'red'
 
 
         div.appendChild(lbl);
         div.appendChild(inp);
+        div.appendChild(lblError);
 
         div.classList.add("container-fluid")
         div.classList.add("pad-bot-opt")
@@ -100,7 +107,7 @@ window.onload = function() {
         precio_dv.classList.remove("hidden")
       } else {
         txtExtra.value = ""
-        precio.value = ""
+        precio.value= ''
         txtExtra.classList.add("hidden")
         btn_img.classList.add("hidden")
         precio_dv.classList.add("hidden")
@@ -111,7 +118,7 @@ window.onload = function() {
   
   
   
-  
+    /*
     inputFile.addEventListener("change", function() {
       let files = inputFile.files;
       if (files.length > 5) {
@@ -141,6 +148,7 @@ window.onload = function() {
        // Mostrar las imágenes seleccionadas en la consola
       // Aquí puedes enviar las imágenes al servidor o hacer lo que necesites con ellas.
     });
+    */
 
 
   };
@@ -156,9 +164,6 @@ function validarFormulario() {
   let arrayDatos = opcionesCuenta[tcuenta2]
   let arrayErrores = []
   
-  console.log(tCuenta.value)
-  console.log(tiposCuenta[tCuenta.value - 1])
-  console.log(arrayDatos)
 
 
   if (arrayDatos.length < 1){
@@ -168,6 +173,22 @@ function validarFormulario() {
 
   arrayDatos.forEach(function(e, ix) {
 
+    let hname = e[0]
+    let html_comp = document.getElementById(hname)
+    let hvalue = html_comp.value;
+    let hmin = parseInt(html_comp.min) 
+    let hmax = parseInt(html_comp.max)
+    let hid = html_comp.id; 
+    let val = validarCampos(hvalue, hmin, hmax, hid)
+    console.log(val)
+
+    if (val === false){
+      let hid = html_comp.id;
+      let lblError = document.getElementById('error'+hid);
+      lblError.classList.remove('hidden')
+    }
+
+    /*
     let hname = e[0]
     let html_comp = document.getElementById(hname)
     let hvalue = parseInt(html_comp.value); 
@@ -180,12 +201,18 @@ function validarFormulario() {
     }else if(hvalue > hmax){
       arrayErrores.push('El valor de ' + hname + ' no puede ser mayor a ' + hmax);
     }
+    */
   });
 
-  if (parseInt(precio.value) <= parseInt(precio.min)){
-    arrayErrores.push('El valor del precio no puede ser menor a ' + precio.min);
-  }else if(parseInt(precio.value)  > parseInt(precio.max)){
-    arrayErrores.push('El valor del precio no puede ser mayor a ' + precio.max);
+  let hvalue = precio.value;
+  let hmin = parseInt(precio.min) 
+  let hmax = parseInt(precio.max)
+  let hid = 'precio'; 
+  let val = validarCampos(hvalue, hmin, hmax, hid)
+
+  if (val === false){
+    let lblError = document.getElementById('error'+hid);
+    lblError.classList.remove('hidden')
   }
 
   if (infoExtra.value === ''){
@@ -227,7 +254,7 @@ function limpiarFormulario() {
 
   });
 
-  precio.value = precio.min;
+  //precio.value = precio.min;
   infoExtra.value = ''
   selectedImages = []
   tCuenta.value = 1
@@ -235,5 +262,48 @@ function limpiarFormulario() {
   btn_img.classList.add("hidden")
   precio_dv.classList.add("hidden")
   opCuenta.innerHTML = ''
+
+}
+
+function validarCampos(hvalue, hmin, hmax, hid) {
+
+  let hvalueStr = hvalue.toString()
+
+  console.log(hid)
+  console.log(hmin)
+  console.log(hmax)
+
+  let lblError = document.getElementById('error'+hid);
+
+  if (hvalue === ''){
+    lblError.textContent = 'Formato Incorrecto.';
+    return false;
+  }
+
+  if (hvalueStr.includes('e') || hvalueStr.includes('E')){
+    lblError.textContent = 'No puede incluir la letra e.';
+    return false;
+  }
+
+  if (hvalueStr.startsWith('0') && hvalueStr.length > 1){
+    lblError.textContent = 'No puede empezar con 0.';
+    return false;
+  }
+
+  let hvalueInt = parseInt(hvalue);
+  console.log(hvalueInt)
+
+  if (hvalueInt < hmin){
+    lblError.textContent = 'No puede ser menor a ' + hmin;
+    return false
+  }
+  
+  if (hvalueInt > hmax){
+    lblError.textContent = 'No puede ser mayor a ' + hmax;
+    return false
+  }
+
+  lblError.classList.add('hidden')
+  return true;
 
 }
