@@ -29,6 +29,32 @@ function crearSelect(opciones) {
   return select;
 }
 
+function cargarPlaceHolder(i) {
+  let carruselInner = carrusel.querySelector('.carousel-inner');
+  let img = document.createElement('img');
+  img.classList.add('d-block', 'img_size');
+  img.src = '../img/placeholderCarusel.jpg';
+  img.id = i
+  img.style.width = calcularAnchoImagen();
+  img.style.height = calcularLargoImagen();
+  
+  let item = document.createElement('div');
+  item.classList.add('carousel-item');
+  item.classList.add('active');
+  item.appendChild(img);
+  carruselInner.appendChild(item);
+
+}
+
+function limpiarCarusel() {
+  let carImg = document.getElementById('cinner');
+  let imgs = document.querySelectorAll('.carousel-item')
+  //console.log(imgs)
+  for (let i = 0; i < imgs.length; i++) {
+    carImg.removeChild(imgs[i]);
+    
+  }
+}
 
 window.onload = function() {
     const inputFile = document.getElementById("input-file");
@@ -39,11 +65,14 @@ window.onload = function() {
     let info_extra_lbl = document.getElementById('info_extra_lbl');
     let info_extra = document.getElementById('info_extra')
     let btn_img = document.getElementById("btn_img");
+    let btnimgdiv = document.getElementById("btnimgdiv");
     let precio = document.getElementById("precio")
     let precio_dv = document.getElementById("precio_dv")
     let precio_lbl = document.getElementById("precio_lbl")
     let carousel = document.getElementById('carousel')
     let cont = 0;
+    cargarPlaceHolder(1)
+
 
 
     tiposCuenta.forEach(function(tipo, index) {
@@ -54,6 +83,7 @@ window.onload = function() {
     });
 
     primerSelect.addEventListener("change", function() {
+      
       // Obtener la opción seleccionada en el primer select
       let tipoCuentaSeleccionada = primerSelect.value;
       opcionesCuentas.innerHTML = ""
@@ -113,52 +143,62 @@ window.onload = function() {
       // Mostrar el segundo select en el contenedor correspondiente
       if (opcionesCuentaSeleccionada.length > 0) {
       //  segundoSelectContainer.style.display = 'block';
+        let errortipocuenta = document.getElementById("errortipocuenta")
+        errortipocuenta.classList.add('hidden')
         txtExtra.classList.remove("hidden")
         btn_img.classList.remove("hidden")
         precio_dv.classList.remove("hidden")
         carousel.classList.remove("hidden")
 
       } else {
+        limpiarFormulario() 
+        /*
         txtExtra.value = ""
         precio.value= ''
         txtExtra.classList.add("hidden")
         btn_img.classList.add("hidden")
         precio_dv.classList.add("hidden")
         carousel.classList.add("hidden")
-        let carImg = document.getElementById('cinner');
-        let imgs = document.querySelectorAll('.carousel-item')
-        console.log(imgs)
-        for (let i = 0; i < imgs.length; i++) {
-          carImg.removeChild(imgs[i]);
-          
-        }
+        esconderMensajesError()
+        limpiarCarusel()
+        cargarPlaceHolder()
+        */
         //carruselInner.innerHTML = ''; 
 
 
       //  segundoSelectContainer.style.display = 'none';
       }
+      
 
       if (cont === 0){
         precio_lbl.classList.remove("reload")
         precio.classList.remove("reload")
         info_extra_lbl.classList.remove("reloadextra")
         info_extra.classList.remove("reloadextratxt")
+        carousel.classList.remove("reloadcarusel")
+        btnimgdiv.classList.remove("reloadbtnimg")
 
         precio_lbl.classList.add("load")
         precio.classList.add("load")
         info_extra_lbl.classList.add("loadextra")
         info_extra.classList.add("loadextratxt")
+        carousel.classList.add("loadcarusel")
+        btnimgdiv.classList.add("loadbtnimg")
         cont = 1;
       }else{
         precio_lbl.classList.remove("load")
         precio.classList.remove("load")
         info_extra_lbl.classList.remove("loadextra")
         info_extra.classList.remove("loadextratxt")
+        carousel.classList.remove("loadcarusel")
+        btnimgdiv.classList.remove("loadbtnimg")
 
         precio_lbl.classList.add("reload")
         precio.classList.add("reload")
         info_extra_lbl.classList.add("reloadextra")
         info_extra.classList.add("reloadextratxt")
+        carousel.classList.add("reloadcarusel")
+        btnimgdiv.classList.add("reloadbtnimg")
         
         cont = 0;
       }
@@ -203,6 +243,14 @@ window.onload = function() {
 
   };
 
+function esconderMensajesError() {
+  let lblErrorExtra = document.getElementById('errorextra');
+  let lblError = document.getElementById('errorprecio');
+  let lblErrorImg = document.getElementById('errorImg');
+  lblErrorExtra.classList.add('hidden')
+  lblError.classList.add('hidden')
+  lblErrorImg.classList.add('hidden')
+}
 
 
 function validarFormulario() {
@@ -212,13 +260,16 @@ function validarFormulario() {
   let precio = document.getElementById('precio');
   let infoExtra = document.getElementById('info_extra');
   let arrayDatos = opcionesCuenta[tcuenta2]
-  let arrayErrores = []
+  let errores = 0
   
 
-
+  let errortipocuenta = document.getElementById("errortipocuenta")
   if (arrayDatos.length < 1){
-    alert("Seleccione algun tipo de cuenta a vender.");
+    errortipocuenta.textContent = "Seleccione algun tipo de cuenta a vender.";
+    errortipocuenta.classList.remove('hidden')
     return false;
+  }else{
+    errortipocuenta.classList.add('hidden')
   }
 
   arrayDatos.forEach(function(e, ix) {
@@ -263,18 +314,29 @@ function validarFormulario() {
   if (val === false){
     let lblError = document.getElementById('error'+hid);
     lblError.classList.remove('hidden')
+    errores = errores + 1;
   }
 
-  if (infoExtra.value === ''){
-    arrayErrores.push('Tiene que proporcionar informacion extra acerca de la cuenta');
+  let lblErrorExtra = document.getElementById('errorextra');
+  if (infoExtra.value.trim() === ''){
+    lblErrorExtra.textContent = 'Tiene que proporcionar informacion extra acerca de la cuenta.';
+    lblErrorExtra.classList.remove('hidden')
+    errores = errores + 1;
+  }else{
+    lblErrorExtra.classList.add('hidden')
   }
 
+  let lblErrorImg = document.getElementById('errorImg');
   if (selectedImages.length < 1){
-    arrayErrores.push('Suba entre 1 a 5 imagenes para dar informacion sobre la cuenta')
+
+    lblErrorImg.textContent = 'Suba entre 1 a 5 imagenes para dar informacion sobre la cuenta.';
+    lblErrorImg.classList.remove('hidden')
+    errores = errores + 1;
+  }else{
+    lblErrorImg.classList.add('hidden')
   }
 
-  if (arrayErrores.length > 0){
-    alert(arrayErrores.join('. \n'))
+  if (errores > 0){
     return false;
   }
 
@@ -288,6 +350,7 @@ function limpiarFormulario() {
   let tcuenta2 = tiposCuenta[tCuenta.value - 1]
   let precio = document.getElementById('precio');
   let infoExtra = document.getElementById('info_extra');
+  let carousel = document.getElementById('carousel')
   let arrayDatos = opcionesCuenta[tcuenta2]
 
   let txtExtra = document.getElementById("textArea")
@@ -311,17 +374,18 @@ function limpiarFormulario() {
   txtExtra.classList.add("hidden")
   btn_img.classList.add("hidden")
   precio_dv.classList.add("hidden")
+  carousel.classList.add("hidden")
   opCuenta.innerHTML = ''
+  esconderMensajesError()
+  limpiarCarusel()
+  cargarPlaceHolder(2)
+  borrarArchivosMalos(null)
 
 }
 
 function validarCampos(hvalue, hmin, hmax, hid) {
 
   let hvalueStr = hvalue.toString()
-
-  console.log(hid)
-  console.log(hmin)
-  console.log(hmax)
 
   let lblError = document.getElementById('error'+hid);
 
@@ -341,15 +405,14 @@ function validarCampos(hvalue, hmin, hmax, hid) {
   }
 
   let hvalueInt = parseInt(hvalue);
-  console.log(hvalueInt)
 
   if (hvalueInt < hmin){
-    lblError.textContent = 'No puede ser menor a ' + hmin;
+    lblError.textContent = 'No puede ser menor a ' + hmin + '.';
     return false
   }
   
   if (hvalueInt > hmax){
-    lblError.textContent = 'No puede ser mayor a ' + hmax;
+    lblError.textContent = 'No puede ser mayor a ' + hmax + '.';
     return false
   }
 

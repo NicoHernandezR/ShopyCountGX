@@ -69,6 +69,7 @@
           <select class="col-12 col-md-6 inp_form"  name="tipoCuenta" id="tipoCuenta">
 
           </select>
+          <label for="errortipocuenta" class="col-12 rigth hidden" style="color: red;" id="errortipocuenta"></label>
         </div>
 
         <div class="row pad-row pad-top" id="opcionesCuenta">
@@ -84,6 +85,7 @@
         <div class="row pad-row pad-top pad-bot-opt hidden" id="textArea">
           <label for="detalle" class="pad-bot-opt r_area" id="info_extra_lbl">Informacion Extra</label>
           <textarea class="inp_form " name="info_extra"  cols="25" rows="10" id="info_extra"></textarea>
+          <label for="errorextra" class="col-12 rigth hidden" style="color: red;" id="errorextra"></label>
         </div>
 
 
@@ -101,9 +103,11 @@
               </button>
             </div>
           </div>
+          <label for="errorImg" class="col-12 center hidden" style="color: red;" id="errorImg"></label>
         </div>
+        
         <div class="row">
-        <div class="col-12 centrar">
+        <div class="col-12 centrar" id="btnimgdiv">
       <input type="file" id="input-file" name="imgs" multiple style="display:none;">
       <button class="btnImg hidden" onclick="event.preventDefault(); document.getElementById('input-file').click()" id="btn_img">Seleccionar archivo</button>
     </div>

@@ -8,7 +8,7 @@
 
 body{
     background-color: #202220;
-    color: #6C1CED;
+    color: #F7A211;
 }
 
 .img_size{
@@ -28,6 +28,10 @@ body{
     align-items: center;
 }
 
+.center{
+    text-align: center;
+}
+
 
 .btnImg {
 
@@ -39,7 +43,7 @@ body{
     font-size: 20px !important;
     margin: 4px 2px;
     cursor: pointer;
-    background-color: rgba(7, 35, 39, 0.9);
+    background-color: #6C1CED;
     border-radius: 3px;
     border-color: rgba( 104, 157, 221, 1 );
     align-content: end;
@@ -73,7 +77,7 @@ input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
     background-color: rgba( 130, 130, 200, 1 );
-    color: black;
+    color: #202220 ;
     height: 1.7em;
 }
 
@@ -87,6 +91,7 @@ input[type=number]::-webkit-outer-spin-button {
     border: 5px solid #0FAAD6;
     border-radius: 8px;
     background-color: #0FAAD6;
+    color: #202220 ;
     padding-left: 0px !important;
 }
 
@@ -99,7 +104,8 @@ textarea:focus, input:focus {
 }
 
 .wh{
-    color: white !important;
+    color: white  !important;
+    background-color: #6C1CED !important;
 }
 
 h3{
@@ -238,6 +244,72 @@ h3{
     }
     100% {
         height: 200px;
+        ;
+    }
+}
+
+
+.loadcarusel{
+    animation-name: showCarusel;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+.reloadcarusel{
+    animation-name: reshowCarusel;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes showCarusel {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 304px;
+        ;
+    }
+}
+
+@keyframes reshowCarusel {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 304px;
+        ;
+    }
+}
+
+
+.loadbtnimg{
+    animation-name: showBtnImg;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+.reloadbtnimg{
+    animation-name: reshowBtnImg;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes showBtnImg {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+        ;
+    }
+}
+
+@keyframes reshowBtnImg {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
         ;
     }
 }
