@@ -77,36 +77,38 @@
 
         
         <div class="row pad-row pad-top pad-bot-opt hidden" id="precio_dv">
-          <label for="precio" class="col-12 col-md-6 form-label" >Precio</label>
-          <input type="number" name="precio" class="col-12 col-md-6 inp_form" id="precio" min="1" max="100000" placeholder="0">
+          <label for="precio" class="col-6 col-md-6 form-label r_lbl" id="precio_lbl">Precio</label>
+          <input type="number" name="precio" class="col-6 col-md-6 inp_form" id="precio" min="1" max="100000" placeholder="0">
           <label for="errorprecio" class="col-12 rigth" style="color: red;" id="errorprecio"></label></div>
 
         <div class="row pad-row pad-top pad-bot-opt hidden" id="textArea">
-          <label for="detalle" class="pad-bot-opt">Informacion Extra</label>
+          <label for="detalle" class="pad-bot-opt r_area" id="info_extra_lbl">Informacion Extra</label>
           <textarea class="inp_form " name="info_extra"  cols="25" rows="10" id="info_extra"></textarea>
         </div>
 
 
         <div class="row justify-content-center">
-          <div class="col-12 col-md-6">
-            <div id="carousel" class="carousel slide">
-              <div class="carousel-inner"></div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+          <div class="col-12 md-start-2 col-md-6">
+            <div id="carousel" class="carousel slide hidden">
+              <div class="carousel-inner" id="cinner"></div>
+              <button class="carousel-control-prev" id="fl_iz" type="button" data-bs-target="#carousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+              <button class="carousel-control-next" id="fl_dr" type="button" data-bs-target="#carousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
           </div>
-
-        <div class="col-12 col-md-6">
+        </div>
+        <div class="row">
+        <div class="col-12 centrar">
       <input type="file" id="input-file" name="imgs" multiple style="display:none;">
       <button class="btnImg hidden" onclick="event.preventDefault(); document.getElementById('input-file').click()" id="btn_img">Seleccionar archivo</button>
     </div>
-    </div>
+  </div>
+
 
 
 

@@ -36,9 +36,15 @@ window.onload = function() {
     let primerSelect = document.getElementById("tipoCuenta");
     let opcionesCuentas = document.getElementById("opcionesCuenta");
     let txtExtra = document.getElementById("textArea")
+    let info_extra_lbl = document.getElementById('info_extra_lbl');
+    let info_extra = document.getElementById('info_extra')
     let btn_img = document.getElementById("btn_img");
     let precio = document.getElementById("precio")
     let precio_dv = document.getElementById("precio_dv")
+    let precio_lbl = document.getElementById("precio_lbl")
+    let carousel = document.getElementById('carousel')
+    let cont = 0;
+
 
     tiposCuenta.forEach(function(tipo, index) {
       let option = document.createElement("option");
@@ -74,15 +80,20 @@ window.onload = function() {
     
         lblError.id = 'error' + option[0];
     
-        lbl.classList.add("col-12")
-        inp.classList.add("col-12")
+        lbl.classList.add("load")
+        inp.classList.add("load")
+        lbl.classList.add("col-6")
+        inp.classList.add("col-6")
         lbl.classList.add("col-md-6")
         inp.classList.add("col-md-6")
         inp.classList.add("inp_form")
+
+
         lblError.classList.add('col-12')
         //lblError.classList.add('col-md-6')
         lblError.classList.add('hidden')
         lblError.classList.add('rigth')
+        lbl.classList.add("r_lbl")
         lblError.style.color = 'red'
 
 
@@ -105,15 +116,54 @@ window.onload = function() {
         txtExtra.classList.remove("hidden")
         btn_img.classList.remove("hidden")
         precio_dv.classList.remove("hidden")
+        carousel.classList.remove("hidden")
+
       } else {
         txtExtra.value = ""
         precio.value= ''
         txtExtra.classList.add("hidden")
         btn_img.classList.add("hidden")
         precio_dv.classList.add("hidden")
+        carousel.classList.add("hidden")
+        let carImg = document.getElementById('cinner');
+        let imgs = document.querySelectorAll('.carousel-item')
+        console.log(imgs)
+        for (let i = 0; i < imgs.length; i++) {
+          carImg.removeChild(imgs[i]);
+          
+        }
+        //carruselInner.innerHTML = ''; 
+
 
       //  segundoSelectContainer.style.display = 'none';
       }
+
+      if (cont === 0){
+        precio_lbl.classList.remove("reload")
+        precio.classList.remove("reload")
+        info_extra_lbl.classList.remove("reloadextra")
+        info_extra.classList.remove("reloadextratxt")
+
+        precio_lbl.classList.add("load")
+        precio.classList.add("load")
+        info_extra_lbl.classList.add("loadextra")
+        info_extra.classList.add("loadextratxt")
+        cont = 1;
+      }else{
+        precio_lbl.classList.remove("load")
+        precio.classList.remove("load")
+        info_extra_lbl.classList.remove("loadextra")
+        info_extra.classList.remove("loadextratxt")
+
+        precio_lbl.classList.add("reload")
+        precio.classList.add("reload")
+        info_extra_lbl.classList.add("reloadextra")
+        info_extra.classList.add("reloadextratxt")
+        
+        cont = 0;
+      }
+
+
     });
   
   
@@ -254,7 +304,7 @@ function limpiarFormulario() {
 
   });
 
-  //precio.value = precio.min;
+  precio.value = '';
   infoExtra.value = ''
   selectedImages = []
   tCuenta.value = 1

@@ -7,9 +7,27 @@
 }
 
 body{
-    background-color: rgba(7 , 35, 39, 0.9);
-    color: white;
+    background-color: #202220;
+    color: #6C1CED;
 }
+
+.img_size{
+    width: 60%;
+    height: 60%;
+}
+
+.carousel-item-next, .carousel-item-prev, .carousel-item.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .btnImg {
 
@@ -66,9 +84,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .inp_form{
-    border: 5px solid rgba( 104, 157, 221, 1 );
+    border: 5px solid #0FAAD6;
     border-radius: 8px;
-    background-color: rgba( 104, 157, 221, 1 );
+    background-color: #0FAAD6;
     padding-left: 0px !important;
 }
 
@@ -96,7 +114,130 @@ h3{
     text-align: end;
 }
 
-.img_size{
-    width: 200px;
+.r_lbl{
+    text-align: end;
+    right: 30px;
+    position: relative;
+}
+
+.r_area{
+    text-align: center;
+    right: 30px;
+    position: relative;
+}
+
+@media (max-width:768px) {
+    .r_lbl{
+        text-align: center;
+        right: 0;
+        position: relative;
+    }
+    .r_area{
+        text-align: center;
+        right: 0px;
+        position: relative;
+    }
+}
+
+
+
+.load{
+    animation-name: show;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+.reload{
+    animation-name: reshow;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes show {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 50%;
+        ;
+    }
+}
+
+@keyframes reshow {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 50%;
+        ;
+    }
+}
+
+.loadextra{
+    animation-name: showExtra;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+
+.reloadextra{
+    animation-name: reshowExtra;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes reshowExtra {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+        ;
+    }
+}
+
+@keyframes showExtra {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+        ;
+    }
+}
+
+#info_extra {
     height: 200px;
+}
+
+.loadextratxt{
+    animation-name: showExtratxt;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+.reloadextratxt{
+    animation-name: reshowExtratxt;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes showExtratxt {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 200px;
+        ;
+    }
+}
+
+@keyframes reshowExtratxt {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 200px;
+        ;
+    }
 }
