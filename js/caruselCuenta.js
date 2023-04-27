@@ -47,8 +47,8 @@ inputImagen.addEventListener('change', function() {
             let img = document.createElement('img');
             img.classList.add('d-block', 'img_size');
             img.src = reader.result;
-            img.style.width = calcularAnchoImagen();
-            img.style.height = calcularLargoImagen();
+            //img.style.width = calcularAnchoImagen();
+            //img.style.height = calcularLargoImagen();
 
 
             let item = document.createElement('div');
@@ -179,7 +179,8 @@ function calcularPosFlechas() {
   let screenWidthMax = 1100
   let screenWidthMin = 768
   let contVuelta = 0
-
+  fl_iz.style.left = '0px'
+  fl_dr.style.right = '0px'
 if (screenWidth <= 480) {
   fl_iz.style.left = '0px'
   fl_dr.style.right = '0px'
@@ -223,10 +224,12 @@ if (screenWidth >= 718 && screenWidth <= 770) {
 
 window.addEventListener("resize", function (){
   let imgs = document.querySelectorAll('.img_size')
-  calcularPosFlechas()
 
+  //calcularPosFlechas()
+
+  /*
   for (let i = 0; i < imgs.length; i++) {
     imgs[i].style.width = calcularAnchoImagen();
     imgs[i].style.height = calcularLargoImagen();
-  }
+  }*/
 });

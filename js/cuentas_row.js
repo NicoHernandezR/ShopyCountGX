@@ -1,4 +1,4 @@
-
+let cantMostradas = 0
 // Formato:
 // Id cuenta : [TipoCuenta, [Carac Principal, Cant], Precio] 
 let cuentas_filas = {
@@ -37,7 +37,7 @@ function limparCuentas() {
 }
 
 function mostrarCuentas(filtros) {
-
+    cantMostradas = 0
 
     limparCuentas()
     
@@ -70,6 +70,12 @@ function mostrarCuentas(filtros) {
 
 
 
+    }
+
+    if (cantMostradas < 2){
+        cambiarMgrPag('0')
+    }else{
+        cambiarMgrPag('1')
     }
     
 
@@ -121,7 +127,7 @@ function cuentasNoFiltro(i) {
 
     card.appendChild(divs[0])
     card.appendChild(div_card)
-
+    cantMostradas = cantMostradas + 1
     
 }
 
@@ -177,6 +183,7 @@ function cuentasConFiltroTipoCuenta(i, td_id) {
 
     card.appendChild(divs[0])
     card.appendChild(div_card)
+    cantMostradas = cantMostradas + 1
     
 }
 
@@ -247,6 +254,7 @@ function cuentasConFiltroValores(i, t_id) {
             
                 card.appendChild(divs[0])
                 card.appendChild(div_card)
+                cantMostradas = cantMostradas + 1
             }
             
         }

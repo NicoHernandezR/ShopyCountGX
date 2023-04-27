@@ -56,6 +56,8 @@ function limpiarCarusel() {
   }
 }
 
+
+
 window.onload = function() {
     const inputFile = document.getElementById("input-file");
 
@@ -83,7 +85,9 @@ window.onload = function() {
     });
 
     primerSelect.addEventListener("change", function() {
-      
+
+      cambiarMgrPag('1')
+      esconderMensajesError()
       // Obtener la opción seleccionada en el primer select
       let tipoCuentaSeleccionada = primerSelect.value;
       opcionesCuentas.innerHTML = ""
@@ -131,7 +135,7 @@ window.onload = function() {
         div.appendChild(inp);
         div.appendChild(lblError);
 
-        div.classList.add("container-fluid")
+        div.classList.add("container-fluid", "cont_imp")
         div.classList.add("pad-bot-opt")
 
         opcionesCuentas.appendChild(div);
@@ -252,6 +256,12 @@ function esconderMensajesError() {
   lblErrorImg.classList.add('hidden')
 }
 
+function temblar() {
+  document.body.classList.add('shake');
+  setTimeout(() => {
+    document.body.classList.remove('shake');
+  }, 500);
+}
 
 function validarFormulario() {
 
@@ -267,6 +277,7 @@ function validarFormulario() {
   if (arrayDatos.length < 1){
     errortipocuenta.textContent = "Seleccione algun tipo de cuenta a vender.";
     errortipocuenta.classList.remove('hidden')
+    temblar()
     return false;
   }else{
     errortipocuenta.classList.add('hidden')
@@ -337,6 +348,7 @@ function validarFormulario() {
   }
 
   if (errores > 0){
+    temblar()
     return false;
   }
 
@@ -346,6 +358,7 @@ function validarFormulario() {
   }
 
 function limpiarFormulario() {
+  cambiarMgrPag('0')
   let tCuenta = document.getElementById('tipoCuenta');
   let tcuenta2 = tiposCuenta[tCuenta.value - 1]
   let precio = document.getElementById('precio');
