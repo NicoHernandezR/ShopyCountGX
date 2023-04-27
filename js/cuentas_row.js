@@ -8,6 +8,33 @@ let cuentas_filas = {
     3 : [4, ["Suscripciones", 7], 10000],
     4 : [5, ["Suscripciones", 9], 10000],
     5 : [1, ["Nivel Cuenta", 200], 25000],
+    6 : [1, ["Juegos", 23], 32000],
+    7 : [2, ["Faceit", 10], 50000],
+    8 : [3, ["Juegos", 50], 25000],
+    9 : [4, ["Suscripciones", 7], 10000],
+    10 : [5, ["Suscripciones", 9], 10000],
+    11 : [1, ["Nivel Cuenta", 200], 25000],
+    12 : [1, ["Juegos", 23], 32000],
+    13 : [2, ["Faceit", 10], 50000],
+    14 : [3, ["Juegos", 50], 25000],
+    15 : [4, ["Suscripciones", 7], 10000],
+    16 : [5, ["Suscripciones", 9], 10000],
+    17 : [1, ["Nivel Cuenta", 200], 25000],
+    18 : [1, ["Juegos", 23], 32000],
+    19 : [2, ["Faceit", 10], 50000],
+    20 : [3, ["Juegos", 50], 25000],
+    21 : [4, ["Suscripciones", 7], 10000],
+    22 : [5, ["Suscripciones", 9], 10000],
+    23 : [1, ["Nivel Cuenta", 200], 25000],
+    24 : [1, ["Juegos", 23], 32000],
+    25 : [1, ["Juegos", 23], 32000],
+    26 : [1, ["Juegos", 23], 32000],
+    27 : [1, ["Juegos", 23], 32000],
+    28 : [1, ["Juegos", 23], 32000],
+    29 : [1, ["Juegos", 23], 32000],
+    30 : [1, ["Juegos", 23], 32000],
+    31 : [1, ["Juegos", 23], 32000],
+    32 : [1, ["Juegos", 23], 32000],
 }
 
 const tiposDeCuenta = {
@@ -28,6 +55,23 @@ let clases_cont = [ "justify-content-center", "card-content", "container-fluid"]
 
 let clases_otro = ["card", "bg_wh",  "img_crd", "txt_info", "img_info",]
 
+let cantMostrar = 5;
+let cantGrupos = 1
+let contActual = 0
+let indexGroup = 0;
+
+function showGroup(index) {
+    let groups = document.querySelectorAll('.group');
+    for (let i = 0; i < groups.length; i++) {
+      if (i === index) {
+        groups[i].style.display = 'block';
+      } else {
+        groups[i].style.display = 'none';
+      }
+    }
+  }
+
+
 window.onload(mostrarCuentas(null))
 
 function limparCuentas() {
@@ -38,13 +82,15 @@ function limparCuentas() {
 
 function mostrarCuentas(filtros) {
     cantMostradas = 0
+    indexGroup = 0
 
     limparCuentas()
     
-
-
+    cantGrupos = 1
+    contActual = 0
     
     let cant_cuentas = Object.keys(cuentas_filas).length
+    console.log(cant_cuentas)
 
     for (let i = 1; i <= 5; i++) {
         let fila = cuentas_filas[i];
@@ -53,18 +99,30 @@ function mostrarCuentas(filtros) {
     
     for (let i = 0; i < cant_cuentas; i++) {
 
+        
+        if (contActual === cantMostrar){
+            cantGrupos = cantGrupos + 1
+            contActual = 0
+        }
+        
+
         if (filtros === null){
-            cuentasNoFiltro(i)
+            console.log('filtros === null')
+            cuentasNoFiltro(i, cantGrupos)
+            contActual = contActual + 1
             continue
         }
 
         if (filtros.value === '0'){
-            cuentasNoFiltro(i)
+            console.log('filtros.value === 0')
+            cuentasNoFiltro(i, cantGrupos)
+            contActual = contActual + 1
             continue
         }  
 
-
-        cuentasConFiltroValores(i, filtros.value);
+        console.log('cuentasConFiltroValores')
+        cuentasConFiltroValores(i, filtros.value, cantGrupos);
+        
         
 
 
@@ -72,17 +130,35 @@ function mostrarCuentas(filtros) {
 
     }
 
-    if (cantMostradas < 2){
+    if (cantMostradas < 5){
         cambiarMgrPag('0')
     }else{
         cambiarMgrPag('1')
     }
-    
+
 
 }
 
-function cuentasNoFiltro(i) {
-    let div_prin = document.getElementById("cuenta");
+function crearDivGrupos(numGrup) {
+    
+    let div_pri = document.getElementById("cuenta");
+    let divExistenteGroup = document.getElementById('group' + numGrup)
+    console.log(divExistenteGroup)
+    console.log(cantGrupos + ' :cantGrupos')
+    console.log(contActual + ' :contActual')
+    if (divExistenteGroup === null){
+        let divGroup = document.createElement('div')
+        divGroup.id = 'group' + numGrup;
+        divGroup.classList.add('group')
+        div_pri.appendChild(divGroup)
+        return divGroup;
+    }
+    return divExistenteGroup
+
+}
+
+function cuentasNoFiltro(i, num) {
+    let div_prin = crearDivGrupos(num);
     let cuenta_tipo_id = cuentas_filas[i][0].toString();
     let div_main = crearDivMain(i);
     let div_card = crearBtnFront();
@@ -131,14 +207,14 @@ function cuentasNoFiltro(i) {
     
 }
 
-function cuentasConFiltroTipoCuenta(i, td_id) {
+function cuentasConFiltroTipoCuenta(i, td_id, num) {
 
     let cuenta_tipo_id = cuentas_filas[i][0].toString();
     if (cuenta_tipo_id.toString() !== td_id.toString()){
         return null;
     }
 
-    let div_prin = document.getElementById("cuenta");
+    let div_prin = crearDivGrupos(num);
     
     let div_main = crearDivMain(i);
     let div_card = crearBtnFront();
@@ -184,10 +260,11 @@ function cuentasConFiltroTipoCuenta(i, td_id) {
     card.appendChild(divs[0])
     card.appendChild(div_card)
     cantMostradas = cantMostradas + 1
+    contActual = contActual + 1
     
 }
 
-function cuentasConFiltroValores(i, t_id) {
+function cuentasConFiltroValores(i, t_id, num) {
 
 
     let arrayInfo = tiposDeCuenta[t_id];
@@ -198,18 +275,17 @@ function cuentasConFiltroValores(i, t_id) {
     
     arrayInfo.forEach(function(e, ix) {
         let html_carac = document.getElementById(e[0])
-        if (html_carac.value === html_carac.min){
-            console.log(contArray)
+        if (html_carac.value === html_carac.min || html_carac.value === ''){
             contArray = contArray + parseInt(1);
         }
 
         if (maxContArray === contArray){
-            cuentasConFiltroTipoCuenta(i, t_id);
+            cuentasConFiltroTipoCuenta(i, t_id, cantGrupos);
         }
         if (e[0] === carac_imp[0]){
             if (html_carac.value === carac_imp[1].toString()){
 
-                let div_prin = document.getElementById("cuenta");
+                let div_prin = crearDivGrupos(num);
                 let cuenta_tipo_id = cuentas_filas[i][0].toString();
                 let div_main = crearDivMain(i);
                 let div_card = crearBtnFront();
@@ -255,6 +331,7 @@ function cuentasConFiltroValores(i, t_id) {
                 card.appendChild(divs[0])
                 card.appendChild(div_card)
                 cantMostradas = cantMostradas + 1
+                contActual = contActual + 1
             }
             
         }
@@ -326,3 +403,16 @@ function crearDivMain(index) {
 
     return divs[0]
 }
+
+
+document.querySelector('#prev').addEventListener('click', () => {
+
+    indexGroup = (indexGroup > 0) ? indexGroup - 1 : 0;
+    showGroup(indexGroup);
+  });
+  
+  document.querySelector('#next').addEventListener('click', () => {
+    let groups = document.querySelectorAll('.group');
+    indexGroup = (indexGroup < groups.length - 1) ? indexGroup + 1 : groups.length - 1;
+    showGroup(indexGroup);
+  });

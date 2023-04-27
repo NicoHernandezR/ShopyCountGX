@@ -50,7 +50,7 @@ tipoCuenta.addEventListener("change", function() {
       inp.id = option[0];
       inp.min = option[1];
       inp.max = option[2];
-      inp.value = inp.min;
+      inp.placeholder = inp.min;
   
       lbl.classList.add("col-12")
       inp.classList.add("col-12")
