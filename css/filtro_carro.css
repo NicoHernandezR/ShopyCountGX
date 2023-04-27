@@ -37,8 +37,10 @@ body.v6 {
 }
 
 body{
-    background-color: rgba(7, 35, 39, 0.9);
+    background-color: #202220;
+    color: #F7A211;
 }
+
 
 .block_content {
     border: 1px solid rgba( 255, 255, 255, 0.1);
@@ -138,8 +140,11 @@ html.responsive .leftcol, html.responsive {
     }
 
     .contenedor_cuenta{
-        padding-left: 0%;
-        width: 100%;
+        padding-left: 5% !important;
+        padding-right: 5%;
+        width: 100% !important;
+        padding-top: 10px !important;
+
     }
 }
 
@@ -150,17 +155,21 @@ html.responsive .leftcol, html.responsive {
     margin-left: 14px;
     float: right;
     position:relative;
-    background-color: rgba(80, 189, 186, 0.7);
+    background-color: #0a4657 !important;
     opacity: 1;
     z-index: 4;
+    border: solid;
+    border-color: white;
+    border-radius: 5px;
 
 
 }
 
-.bg_filtro{
-    background-color: rgba(7, 35, 39, 0.9);
-    color: white;
+.bg_filtro {
+    background-color: #0a4657 !important;
+    color: #F7A211;
 }
+
 
 
 
@@ -411,6 +420,7 @@ a:-webkit-any-link {
 
 .txt_info, .pd_1st_r{
     padding-top: 4%;
+    color: #F7A211;
 }
 
 .pd_1st_r{
@@ -469,3 +479,12 @@ a:-webkit-any-link {
     }
 
 }
+
+.group {
+    display: none;
+  }
+
+.group:first-of-type {
+    display: block;
+  }
+  
