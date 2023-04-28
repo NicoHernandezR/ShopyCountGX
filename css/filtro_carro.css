@@ -487,4 +487,51 @@ a:-webkit-any-link {
 .group:first-of-type {
     display: block;
   }
-  
+  .btn_pag{
+    width: 8%;
+    background-color: transparent;
+    border: solid;
+    border-color: #67c1f5;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+@media (max-width:770px) {
+    .btn_pag{
+        width: 8%;
+    }
+}
+
+@media (max-width:450px) {
+    .btn_pag{
+        width: 8%;
+    }
+}
+
+
+.btn_flechas{
+    width: 50px;
+    height: 50px;
+    background-color: #6C1CED;
+    border-radius: 3px;
+    border-color: rgba( 104, 157, 221, 1 );;
+}
+
+
+  .flip-horizontal-bottom {
+	animation: flip-horizontal-bottom 1s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+}
+
+@keyframes flip-horizontal-bottom {
+    0% {
+      transform: rotateX(0);
+    }
+    50% {
+
+      transform: rotateY(180deg);
+    }
+    100% {
+
+        transform: rotateY(360deg);
+      }
+  }

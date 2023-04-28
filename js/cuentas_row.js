@@ -56,17 +56,23 @@ let clases_cont = [ "justify-content-center", "card-content", "container-fluid"]
 let clases_otro = ["card", "bg_wh",  "img_crd", "txt_info", "img_info",]
 
 let cantMostrar = 5;
+let mostrarGrupos = 5
+let gruposTotales = 0
 let cantGrupos = 1
 let contActual = 0
 let indexGroup = 0;
+let arrayGruposRango = [1,6]
+let arrayCuentasRango = [1,26]
 
 function showGroup(index) {
     let groups = document.querySelectorAll('.group');
     for (let i = 0; i < groups.length; i++) {
       if (i === index) {
         groups[i].style.display = 'block';
+        groups[i].classList.add('flip-horizontal-bottom')
       } else {
         groups[i].style.display = 'none';
+        groups[i].classList.remove('flip-horizontal-bottom')
       }
     }
   }
@@ -80,12 +86,56 @@ function limparCuentas() {
     div_prin.innerHTML = ""
 }
 
+function mostrarGrupoN2() {
+    
+}
+
+function crearBtnPaginacion(){
+    let div_prin = document.getElementById('btnPag')
+    div_prin.innerHTML = ''
+    let btnAtras = document.createElement('button')
+    btnAtras.classList.add('btn_flechas')
+    btnAtras.id = 'prev'
+    div_prin.appendChild(btnAtras)
+    for (let i = 1; i < cantGrupos + 1; i++) {
+        let btn = document.createElement('button')
+        btn.textContent = i
+        btn.onclick = function () {
+            mostrarGrupoN(btn)  
+        } 
+        btn.classList.add('btn_pag')        
+        div_prin.appendChild(btn)
+    } 
+
+    function mostrarGrupoN(btn) {
+        console.log(btn.textContent)
+        showGroup(parseInt(btn.textContent) - 1)
+    }
+
+    let btnNext = document.createElement('button')
+    btnNext.classList.add('btn_flechas')
+    btnNext.id = 'next'
+    div_prin.appendChild(btnNext)
+}
+
+function calcularRangoCuentasMostrar() {
+    arrayCuentasRango = []
+    arrayGruposRango.forEach(function (i,e) {
+        if (e === 1){
+            arrayCuentasRango.push(e)
+        }else{
+            arrayCuentasRango.push(e * cantMostrar)
+        }
+
+    })
+}
+
 function mostrarCuentas(filtros) {
-    cantMostradas = 0
-    indexGroup = 0
 
     limparCuentas()
-    
+    cantMostradas = 0
+    indexGroup = 0
+    totalCuentas = cuentas_filas.length
     cantGrupos = 1
     contActual = 0
     
@@ -99,6 +149,7 @@ function mostrarCuentas(filtros) {
     
     for (let i = 0; i < cant_cuentas; i++) {
 
+        //if (i >= arrayCuentasRango[0] && i <= arrayCuentasRango[1] ){}
         
         if (contActual === cantMostrar){
             cantGrupos = cantGrupos + 1
@@ -107,20 +158,20 @@ function mostrarCuentas(filtros) {
         
 
         if (filtros === null){
-            console.log('filtros === null')
+
             cuentasNoFiltro(i, cantGrupos)
             contActual = contActual + 1
             continue
         }
 
         if (filtros.value === '0'){
-            console.log('filtros.value === 0')
+
             cuentasNoFiltro(i, cantGrupos)
             contActual = contActual + 1
             continue
         }  
 
-        console.log('cuentasConFiltroValores')
+
         cuentasConFiltroValores(i, filtros.value, cantGrupos);
         
         
@@ -135,7 +186,8 @@ function mostrarCuentas(filtros) {
     }else{
         cambiarMgrPag('1')
     }
-
+    crearBtnPaginacion()
+    showGroup(0)
 
 }
 
@@ -143,9 +195,7 @@ function crearDivGrupos(numGrup) {
     
     let div_pri = document.getElementById("cuenta");
     let divExistenteGroup = document.getElementById('group' + numGrup)
-    console.log(divExistenteGroup)
-    console.log(cantGrupos + ' :cantGrupos')
-    console.log(contActual + ' :contActual')
+
     if (divExistenteGroup === null){
         let divGroup = document.createElement('div')
         divGroup.id = 'group' + numGrup;
@@ -404,7 +454,7 @@ function crearDivMain(index) {
     return divs[0]
 }
 
-
+/*
 document.querySelector('#prev').addEventListener('click', () => {
 
     indexGroup = (indexGroup > 0) ? indexGroup - 1 : 0;
@@ -416,3 +466,4 @@ document.querySelector('#prev').addEventListener('click', () => {
     indexGroup = (indexGroup < groups.length - 1) ? indexGroup + 1 : groups.length - 1;
     showGroup(indexGroup);
   });
+*/

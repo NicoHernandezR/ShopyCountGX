@@ -56,7 +56,26 @@ function limpiarCarusel() {
   }
 }
 
+function cargarDestacar(i, nom) {
+  let sectionDestacar = document.getElementById('destacar')
+  let op =  document.createElement('option')
+  op.value = i + 1;
+  op.text = nom
+  sectionDestacar.appendChild(op)
+}
 
+function limpiarDestacar() {
+  let sectionDestacar = document.getElementById('destacar')
+  sectionDestacar.innerHTML = ''
+}
+
+function cargarDestacarDefault() {
+  let sectionDestacar = document.getElementById('destacar')
+  let op =  document.createElement('option')
+  op.value = 0;
+  op.text = 'Ninguna'
+  sectionDestacar.appendChild(op)
+}
 
 window.onload = function() {
     const inputFile = document.getElementById("input-file");
@@ -68,6 +87,11 @@ window.onload = function() {
     let info_extra = document.getElementById('info_extra')
     let btn_img = document.getElementById("btn_img");
     let btnimgdiv = document.getElementById("btnimgdiv");
+    let destacar_div = document.getElementById('destacar_div')
+
+
+    let destacar_lbl =     document.getElementById('destacar_lbl')
+    let destacar_select = document.getElementById('destacar')
     let precio = document.getElementById("precio")
     let precio_dv = document.getElementById("precio_dv")
     let precio_lbl = document.getElementById("precio_lbl")
@@ -88,6 +112,8 @@ window.onload = function() {
 
       cambiarMgrPag('1')
       esconderMensajesError()
+      limpiarDestacar()
+      cargarDestacarDefault()
       // Obtener la opción seleccionada en el primer select
       let tipoCuentaSeleccionada = primerSelect.value;
       opcionesCuentas.innerHTML = ""
@@ -104,6 +130,9 @@ window.onload = function() {
         let inp = document.createElement("input");
         let div = document.createElement("div");
         
+        cargarDestacar(index, option[0])
+
+
         lbl.textContent = option[0];
         inp.type = "number"
         inp.id = option[0];
@@ -153,24 +182,10 @@ window.onload = function() {
         btn_img.classList.remove("hidden")
         precio_dv.classList.remove("hidden")
         carousel.classList.remove("hidden")
+        destacar_div.classList.remove("hidden")
 
       } else {
         limpiarFormulario() 
-        /*
-        txtExtra.value = ""
-        precio.value= ''
-        txtExtra.classList.add("hidden")
-        btn_img.classList.add("hidden")
-        precio_dv.classList.add("hidden")
-        carousel.classList.add("hidden")
-        esconderMensajesError()
-        limpiarCarusel()
-        cargarPlaceHolder()
-        */
-        //carruselInner.innerHTML = ''; 
-
-
-      //  segundoSelectContainer.style.display = 'none';
       }
       
 
@@ -181,6 +196,8 @@ window.onload = function() {
         info_extra.classList.remove("reloadextratxt")
         carousel.classList.remove("reloadcarusel")
         btnimgdiv.classList.remove("reloadbtnimg")
+        destacar_lbl.classList.remove("reload")
+        destacar_select.classList.remove("reload")
 
         precio_lbl.classList.add("load")
         precio.classList.add("load")
@@ -188,6 +205,9 @@ window.onload = function() {
         info_extra.classList.add("loadextratxt")
         carousel.classList.add("loadcarusel")
         btnimgdiv.classList.add("loadbtnimg")
+        destacar_lbl.classList.add("load")
+        destacar_select.classList.add("load")
+        
         cont = 1;
       }else{
         precio_lbl.classList.remove("load")
@@ -196,6 +216,8 @@ window.onload = function() {
         info_extra.classList.remove("loadextratxt")
         carousel.classList.remove("loadcarusel")
         btnimgdiv.classList.remove("loadbtnimg")
+        destacar_lbl.classList.remove("load")
+        destacar_select.classList.remove("load")
 
         precio_lbl.classList.add("reload")
         precio.classList.add("reload")
@@ -203,6 +225,8 @@ window.onload = function() {
         info_extra.classList.add("reloadextratxt")
         carousel.classList.add("reloadcarusel")
         btnimgdiv.classList.add("reloadbtnimg")
+        destacar_lbl.classList.add("reload")
+        destacar_select.classList.add("reload")
         
         cont = 0;
       }
@@ -211,38 +235,6 @@ window.onload = function() {
     });
   
   
-  
-    /*
-    inputFile.addEventListener("change", function() {
-      let files = inputFile.files;
-      if (files.length > 5) {
-        alert("Por favor, seleccione no más de 5 archivos.");
-        inputFile.value = ""; // Limpiar la selección de archivos
-        return;
-      }
-      for (let i = 0; i < files.length; i++) {
-        let file = files[i];
-        let fileName = file.name;
-        let fileExt = fileName.split('.').pop().toLowerCase(); // Obtener la extensión del archivo
-        if (fileExt !== 'jpg' && fileExt !== 'jpeg' && fileExt !== 'png') {
-          alert("Por favor, seleccione solo imágenes (JPG, JPEG, PNG).");
-          inputFile.value = ""; // Limpiar la selección de archivos
-          return;
-        }
-        let fileSizeKB = file.size / 1024; // Convertir el tamaño del archivo a kilobytes
-        if (fileSizeKB > 500) {
-          alert("Por favor, seleccione imágenes de tamaño inferior a 500 KB."); 
-          // Limpiar la selección de archivos
-          return;
-        }
-        selectedImages.push(file);
-         // Agregar el archivo a la matriz de imágenes seleccionadas
-
-      }
-       // Mostrar las imágenes seleccionadas en la consola
-      // Aquí puedes enviar las imágenes al servidor o hacer lo que necesites con ellas.
-    });
-    */
 
 
   };
@@ -263,13 +255,78 @@ function temblar() {
   }, 500);
 }
 
+async function getCuentas() {
+  let url = '../json/cuentasVender.json';
+  let response = await fetch(url);
+  let data = await response.json();
+  let cuentas = data.Cuentas;
+  //let LastCuenta = cuentas[cuentas.length - 1].id;
+  return cuentas;
+}
+
+async function InsertarCuenta(t_id, arrayCarac, arrayDatos, desc, precio, infoExtra, arrayImgs){
+  let cuentas = await getCuentas();
+  let lastId = cuentas[cuentas.length - 1].id;
+  let caracteristicas = {}
+  for (let i = 0; i < arrayCarac.length; i++) {
+    let nombre = arrayCarac[i]
+    let valor = arrayDatos[i]
+    caracteristicas[nombre] = valor
+    
+  }
+  let nuevaCuenta = {
+    "id": parseInt(lastId) + 1,
+    "tipoCuenta": t_id,
+    "Caracteristicas": caracteristicas,
+    "Carac Desc": desc,
+    "Precio": precio,
+    "InfoExtra": infoExtra,
+    "Imgs": arrayImgs
+  }
+  cuentas.push(nuevaCuenta)
+  let contenidoActualizado = JSON.stringify(cuentas, null, 2);
+  let archivoNuevo = new File([contenidoActualizado], 'cuentas2.json', {
+    type: 'application/json'
+  })
+  localStorage.setItem('cuentas', JSON.stringify(cuentas))
+  let fs = window.requestFileSystemSync(window.TEMPORARY, 1024*1024);
+
+  let cuentasJson = JSON.stringify(cuentas);
+
+  let blob = new Blob([cuentasJson], {type: "application/json"});
+
+  let fileName = "../cuentasVender.json";
+
+  fs.root.getFile(fileName, {create: true}, function(fileEntry) {
+    fileEntry.createWriter(function(fileWriter) {
+      fileWriter.write(blob);
+      console.log("El archivo JSON se ha creado exitosamente.");
+    }, function(error) {
+      console.log("Error al escribir en el archivo:", error);
+    });
+  }, function(error) {
+    console.log("Error al crear el archivo:", error);
+  });
+    console.log('Actualizado :D')
+    
+  }
+/*
+async function llamarLastId() {
+  let lastId = await getLastId();
+
+}
+*/
+
+
 function validarFormulario() {
 
   let tCuenta = document.getElementById('tipoCuenta');
   let tcuenta2 = tiposCuenta[tCuenta.value - 1]
   let precio = document.getElementById('precio');
   let infoExtra = document.getElementById('info_extra');
+  let caracDesc = document.getElementById('destacar')
   let arrayDatos = opcionesCuenta[tcuenta2]
+  let arrayDatos2 = []
   let errores = 0
   
 
@@ -278,6 +335,7 @@ function validarFormulario() {
     errortipocuenta.textContent = "Seleccione algun tipo de cuenta a vender.";
     errortipocuenta.classList.remove('hidden')
     temblar()
+
     return false;
   }else{
     errortipocuenta.classList.add('hidden')
@@ -292,28 +350,16 @@ function validarFormulario() {
     let hmax = parseInt(html_comp.max)
     let hid = html_comp.id; 
     let val = validarCampos(hvalue, hmin, hmax, hid)
-    console.log(val)
 
     if (val === false){
       let hid = html_comp.id;
       let lblError = document.getElementById('error'+hid);
       lblError.classList.remove('hidden')
+    }else{
+      arrayDatos2.push(hvalue)
     }
 
-    /*
-    let hname = e[0]
-    let html_comp = document.getElementById(hname)
-    let hvalue = parseInt(html_comp.value); 
-    let hmin = parseInt(html_comp.min) 
-    let hmax = parseInt(html_comp.max) 
 
-    console.log(hvalue)
-    if (hvalue < hmin){
-      arrayErrores.push('El valor de ' + hname + ' no puede ser menor a ' + hmin);
-    }else if(hvalue > hmax){
-      arrayErrores.push('El valor de ' + hname + ' no puede ser mayor a ' + hmax);
-    }
-    */
   });
 
   let hvalue = precio.value;
@@ -352,6 +398,8 @@ function validarFormulario() {
     return false;
   }
 
+
+ 
   return true;
 
 
@@ -365,6 +413,8 @@ function limpiarFormulario() {
   let infoExtra = document.getElementById('info_extra');
   let carousel = document.getElementById('carousel')
   let arrayDatos = opcionesCuenta[tcuenta2]
+  let sectionDestacar = document.getElementById('destacar')
+  let destacar_div = document.getElementById('destacar_div')
 
   let txtExtra = document.getElementById("textArea")
   let btn_img = document.getElementById("btn_img");
@@ -381,6 +431,7 @@ function limpiarFormulario() {
   });
 
   precio.value = '';
+  sectionDestacar.value = "0"
   infoExtra.value = ''
   selectedImages = []
   tCuenta.value = 1
@@ -388,6 +439,7 @@ function limpiarFormulario() {
   btn_img.classList.add("hidden")
   precio_dv.classList.add("hidden")
   carousel.classList.add("hidden")
+  destacar_div.classList.add("hidden")
   opCuenta.innerHTML = ''
   esconderMensajesError()
   limpiarCarusel()

@@ -76,11 +76,19 @@
 
         </div>
 
-        
+        <div class="row pad-row pad-top pad-bot-opt hidden" id="destacar_div">
+          <label for="destacar" class="col-6 col-md-6 form-label r_lbl" id="destacar_lbl">Caracteristica a Destacar</label>
+          <select name="destacar" class="col-6 col-md-6 inp_form" id="destacar"> 
+            <option value="0">Ninguna</option>
+          </select>
+          <label for="errordestacar" class="col-12 rigth" style="color: red;" id="errordestacar"></label>
+        </div>
+
         <div class="row pad-row pad-top pad-bot-opt hidden" id="precio_dv">
           <label for="precio" class="col-6 col-md-6 form-label r_lbl" id="precio_lbl">Precio</label>
           <input type="number" name="precio" class="col-6 col-md-6 inp_form" id="precio" min="1" max="100000" placeholder="0">
-          <label for="errorprecio" class="col-12 rigth" style="color: red;" id="errorprecio"></label></div>
+          <label for="errorprecio" class="col-12 rigth" style="color: red;" id="errorprecio"></label>
+        </div>
 
         <div class="row pad-row pad-top pad-bot-opt hidden" id="textArea">
           <label for="detalle" class="pad-bot-opt r_area" id="info_extra_lbl">Informacion Extra</label>

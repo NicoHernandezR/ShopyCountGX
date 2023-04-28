@@ -1,0 +1,16 @@
+{
+    "Cuentas" : [
+        {
+            "id" : 0,
+            "tipoCuenta": "steam",
+            "Caracteristicas": {
+                "Juegos": 0,
+                "Nivel Cuenta": 23
+            },
+            "Caract Desc": "Ninguna",
+            "Precio": 10000,
+            "InfoExtra": "Manzana",
+            "Imgs": ["",""]
+        }
+    ]
+}

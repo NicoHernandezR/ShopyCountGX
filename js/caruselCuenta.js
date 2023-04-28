@@ -11,7 +11,7 @@ inputImagen.addEventListener('change', function() {
   let arrayEliminar = [];
   let fileLenght = files.length
   let lblError = document.getElementById('errorImg');
-
+  selectedImages = []
   limpiarCarusel()
   if (fileLenght > 0 && fileLenght <= 5) {
 
