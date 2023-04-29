@@ -4,11 +4,10 @@
     box-sizing: border-box;
     font-family: 'Nunito', sans-serif;
     font-size: 18px;
-    color: black;
 }
 
 body{
-    background-color: rgba(7 , 35, 39, 0.9);
+    background-color: #202220;
 }
 
 
@@ -18,21 +17,21 @@ body{
 
 .inf_cn{
     width: 20% !important;
-    color: black;
+
 
 }
 
 @media (max-width:900px) {
     .in_cn{
         width: 70% !important;
-        color: black;
+
     }
 }
 
 @media (max-width:840px) {
     .in_cn{
         width: 50% !important;
-        color: black;
+
         float: right;
         left: 10%;
         position: relative;
@@ -42,7 +41,7 @@ body{
 @media (max-width:580px) {
     .in_cn{
         width: 50% !important;
-        color: black;
+
         float: right;
         left: 20%;
         position: relative;
@@ -52,7 +51,7 @@ body{
 @media (max-width:580px) {
     .in_cn{
         width: 50% !important;
-        color: black;
+
         float: right;
         left: 20%;
         position: relative;
@@ -63,7 +62,7 @@ body{
 @media (max-width:580px) {
     .in_cn{
         width: 50% !important;
-        color: black;
+
         float: right;
         left: 20%;
         position: relative;
@@ -78,7 +77,7 @@ body{
 @media (max-width:580px) {
     .in_cn{
         width: 50% !important;
-        color: black;
+
         float: right;
         left: 20%;
         position: relative;
@@ -94,7 +93,7 @@ body{
 @media (max-width:370px) {
     .in_cn{
         width: 50% !important;
-        color: black;
+
         float: right;
         left: 20%;
         position: relative;
@@ -108,36 +107,39 @@ body{
 
 
 .in_cn{
-    color: black;
+
     display: inline;
     width: 70%;
     margin-bottom: 10px;
-    background-color: rgba(160, 189, 186,1);
+    background-color: #0FAAD6;
 
 }
 
 
 .br_info{
     padding-top: 2%;
+    color: #F7A211;    
     border-color: black;
-    border: 1px;
     border-style: solid;
     width: 100%;
     height: auto;
-    background-color: rgba(80, 189, 186, 1);
+    background-color: #6d726dec;
+
 }
 
 @media (max-width:767px) {
     .br_info{
         padding-top: 2%;
-        border-color: black;
-        border: 1px;
-        border-style: solid;
         width: 100%;
         height: auto;
-        background-color: rgba(80, 189, 186, 1);
     }
     
+}
+
+@media (max-width:841px) {
+    .col_info{
+        width: 100% !important;
+    }
 }
 
 .col_info{
@@ -160,7 +162,7 @@ body{
 .btn_size{
     width: 200px;
     height: 50px;
-    background-color: rgba( 104, 157, 221, 0.5 );
+    background-color: #6C1CED;
     border-radius: 3px;
     border-color: rgba( 104, 157, 221, 1 );;
 }
@@ -169,7 +171,7 @@ body{
 .btn_size_m{
     width: 200px;
     height: 50px;
-    background-color: rgba( 104, 157, 221, 0.5 );
+    background-color: #6C1CED;
     border-radius: 3px;
     border-color: rgba( 104, 157, 221, 1 );;
 }
@@ -177,10 +179,8 @@ body{
 @media (max-width:760px) {
     .btn_size_m{
         width: 150px;
-        height: 35px;
-        background-color: rgba( 104, 157, 221, 0.5 );
+        height: 35px;;
         border-radius: 3px;
-        border-color: rgba( 104, 157, 221, 1 );;
     }
     
 }
@@ -188,10 +188,8 @@ body{
 @media (max-width:360px) {
     .btn_size_m{
         width: 120px;
-        height: 35px;
-        background-color: rgba( 104, 157, 221, 0.5 );
+        height: 35px;;
         border-radius: 3px;
-        border-color: rgba( 104, 157, 221, 1 );;
     }
     
 }
@@ -214,7 +212,7 @@ body{
     width: 100%;
     color: var(--bs-modal-color);
     pointer-events: auto;
-    background-color: rgba(80, 189, 186, 1);
+    background-color: #0FAAD6;
     background-clip: padding-box;
     border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
     border-radius: var(--bs-modal-border-radius);
@@ -268,4 +266,8 @@ body{
         position: relative;
         padding-bottom: 8px;
     }
+}
+
+.pad_top{
+    padding-top: 30px;
 }
