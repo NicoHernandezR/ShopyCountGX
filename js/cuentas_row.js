@@ -211,7 +211,7 @@ function cuentasNoFiltro(i, num) {
     let div_prin = crearDivGrupos(num);
     let cuenta_tipo_id = cuentas_filas[i][0].toString();
     let div_main = crearDivMain(i);
-    let div_card = crearBtnFront();
+    let div_card = crearBtnFront(cuenta_tipo_id);
 
     div_prin.appendChild(div_main)
 
@@ -267,7 +267,7 @@ function cuentasConFiltroTipoCuenta(i, td_id, num) {
     let div_prin = crearDivGrupos(num);
     
     let div_main = crearDivMain(i);
-    let div_card = crearBtnFront();
+    let div_card = crearBtnFront(cuenta_tipo_id);
 
     div_prin.appendChild(div_main)
 
@@ -338,7 +338,7 @@ function cuentasConFiltroValores(i, t_id, num) {
                 let div_prin = crearDivGrupos(num);
                 let cuenta_tipo_id = cuentas_filas[i][0].toString();
                 let div_main = crearDivMain(i);
-                let div_card = crearBtnFront();
+                let div_card = crearBtnFront(cuenta_tipo_id);
             
                 div_prin.appendChild(div_main)
             
@@ -392,7 +392,7 @@ function cuentasConFiltroValores(i, t_id, num) {
 }
 
 
-function crearBtnFront() {
+function crearBtnFront(idCuenta) {
 
     let divs = [];
 
@@ -404,9 +404,15 @@ function crearBtnFront() {
     button_ver.classList.add(clases_btn[2])
     button_ver.textContent = 'Ver Cuenta'
 
+    let inp = document.createElement('input')
+    inp.style.display = 'none'
+    inp.value = idCuenta;
+    inp.name = 'tipo'
+
     let form = document.createElement('form');
     form.action = "pago.html"
     form.appendChild(button_ver)
+    form.appendChild(inp)
 
     for (let i = 0; i < 7; i++) {   
         divs.push(document.createElement('div'))

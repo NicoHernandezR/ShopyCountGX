@@ -7,7 +7,7 @@
 }
 
 body{
-    background-color: rgb(76, 28, 143);
+    background-color: #202220;
 }
 
 
@@ -81,8 +81,8 @@ body{
     top: 0;
     left: 0;
     position: absolute;
-    background-color: wheat;
-    color: black;
+    background-color: #0FAAD6;
+    color: #F7A211;
     border-radius: 6px;
     opacity: 0;
     visibility: hidden;
@@ -93,6 +93,8 @@ body{
 
 .btn{
     height: 100%;
+    font-size: 20px;
+    text-shadow: 2px black;
 }
 
 .card-content .btn:disabled {
@@ -178,7 +180,7 @@ body{
     z-index: 99;
     width: 100%;
     height: 100%;
-    background-color: wheat;
+    background-color: #0FAAD6;
 }
 
 .txt-top{
@@ -190,14 +192,15 @@ body{
     display: inline;
     width: 100%;
     height: 100%;
-    background-color: wheat;
+    background-color: #0FAAD6;
 }
 
 
 .card:hover{
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0, 4);
     transform: translateY(-3%);
-    color: black;
+    color: #F7A211;
+    font-size: 20px;
 }
 .card img{
     width: 100%;
@@ -210,7 +213,7 @@ body{
     
 }
 .bg_wh{
-    background-color: wheat;
+    background-color: #0FAAD6;
 }
 
 .card .contenido p{
