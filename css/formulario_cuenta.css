@@ -1,0 +1,403 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+}
+
+body{
+    background-color: #202220;
+    color: #F7A211;
+}
+
+.img_size{
+    width: 50%;
+    height: 50%;
+    min-height: 304px;
+    min-width: 360px;
+}
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: scroll;
+}
+
+.carousel-item {
+    width: 100%;
+    height: 100%;
+    max-height: 304px;
+}
+
+.carousel-item img{
+    max-width: 100%;
+    height: 304px;
+}
+
+
+
+.carousel-control-next {
+    width: auto !important;
+    right: 15px;
+}
+
+.carousel-control-prev {
+    width: auto !important;
+    left: 15px;
+}
+
+.carousel-control-next-icon {
+    background-image: url('../img/caruselFlecha/flecha.png');
+
+    width: 75px;
+    height: 75px;
+    fill: #F7A211 !important;
+}
+
+
+.carousel-control-prev-icon{
+    background-image: url('../img/caruselFlecha/flecha.png');
+    transform: rotate(180deg);
+    width: 75px;
+    height: 75px;
+    fill: #F7A211;
+}
+
+@media screen and (max-width: 375px) {
+    .carousel-control-next-icon {
+      width: 50px;
+      height: 50px;
+    }
+    .carousel-control-prev-icon{
+        width: 50px;
+        height: 50px;
+      }
+  }
+
+.carousel-item-next, .carousel-item-prev, .carousel-item.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center{
+    text-align: center;
+}
+
+.border_car{
+    border-color: #F7A211;
+    border-radius: 5px;
+    border: solid;
+}
+
+.btnImg {
+
+    width: 250px !important;
+    height: 100px !important;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px !important;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: #6C1CED;
+    border-radius: 3px;
+    border-color: rgba( 104, 157, 221, 1 );
+    align-content: end;
+}
+
+
+#opcionesCuentaContainer {
+    display: none;
+  }
+
+.pad-row{
+    margin-left: 12.5%;
+    margin-right: 12.5%;
+}
+
+.cont_imp{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+@media screen and (max-width: 500px) {
+    .pad-row {
+      margin-left: 1.5%;
+      margin-right: 1.5%;
+    }
+  }
+
+.pad-top{
+    padding-top: 30px;
+}
+
+.pad-bot-opt{
+    padding-bottom: 15px;
+}
+
+.pad-side{
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    background-color: rgba( 130, 130, 200, 1 );
+    color: #202220 ;
+    height: 1.7em;
+}
+
+
+.js_center {
+    justify-content: center!important;
+    display: flex;
+}
+
+.inp_form{
+    border: 5px solid #0FAAD6;
+    border-radius: 8px;
+    background-color: #0FAAD6;
+    color: #202220 ;
+    padding-left: 0px !important;
+}
+
+textarea{
+    resize: none;
+}
+
+textarea:focus, input:focus {
+    outline: 5px solid rgba( 130, 130, 200, 1 );
+}
+
+.wh{
+    color: white  !important;
+    background-color: #6C1CED !important;
+}
+
+h3{
+    text-align: center;
+}
+
+.hidden{
+    display: none;
+}
+
+.rigth{
+    text-align: end;
+}
+
+.r_lbl{
+    text-align: end;
+    right: 30px;
+    position: relative;
+}
+
+.r_area{
+    text-align: center;
+    right: 30px;
+    position: relative;
+}
+
+@media (max-width:768px) {
+    .r_lbl{
+        text-align: center;
+        right: 0;
+        position: relative;
+    }
+    .r_area{
+        text-align: center;
+        right: 0px;
+        position: relative;
+    }
+}
+
+
+
+.load{
+    animation-name: show;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+.reload{
+    animation-name: reshow;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes show {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 50%;
+        ;
+    }
+}
+
+@keyframes reshow {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 50%;
+        ;
+    }
+}
+
+.loadextra{
+    animation-name: showExtra;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+
+.reloadextra{
+    animation-name: reshowExtra;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes reshowExtra {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+        ;
+    }
+}
+
+@keyframes showExtra {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+        ;
+    }
+}
+
+#info_extra {
+    height: 200px;
+}
+
+.loadextratxt{
+    animation-name: showExtratxt;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+.reloadextratxt{
+    animation-name: reshowExtratxt;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes showExtratxt {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 200px;
+        ;
+    }
+}
+
+@keyframes reshowExtratxt {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 200px;
+        ;
+    }
+}
+
+
+.loadcarusel{
+    animation-name: showCarusel;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+.reloadcarusel{
+    animation-name: reshowCarusel;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes showCarusel {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 304px;
+        ;
+    }
+}
+
+@keyframes reshowCarusel {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 304px;
+        ;
+    }
+}
+
+
+.loadbtnimg{
+    animation-name: showBtnImg;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+.reloadbtnimg{
+    animation-name: reshowBtnImg;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes showBtnImg {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+        ;
+    }
+}
+
+@keyframes reshowBtnImg {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+        ;
+    }
+}
+
+.shake {
+    animation: shake 0.5s;
+  }
+  
+  @keyframes shake {
+    0% { transform: translate(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translate(-5px, 5px); }
+    20%, 40%, 60%, 80%, 100% { transform: translate(5px, -5px); }
+  }
+
