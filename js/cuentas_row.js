@@ -64,6 +64,14 @@ let indexGroup = 0;
 let arrayGruposRango = [1,6]
 let arrayCuentasRango = [1,26]
 
+function changeColorBtnPagTr() {
+    let allBtn = document.querySelectorAll('.btn_pag')
+    allBtn.forEach(function (i,e) {
+        i.style.backgroundColor = 'transparent'
+
+    })
+}
+
 function showGroup(index) {
     let groups = document.querySelectorAll('.group');
     for (let i = 0; i < groups.length; i++) {
@@ -93,28 +101,46 @@ function mostrarGrupoN2() {
 function crearBtnPaginacion(){
     let div_prin = document.getElementById('btnPag')
     div_prin.innerHTML = ''
+
+    if (cantGrupos === 1){
+        return null;
+    }
+
     let btnAtras = document.createElement('button')
     btnAtras.classList.add('btn_flechas')
+    btnAtras.classList.add('prev-icon')
     btnAtras.id = 'prev'
     div_prin.appendChild(btnAtras)
+
+
     for (let i = 1; i < cantGrupos + 1; i++) {
         let btn = document.createElement('button')
         btn.textContent = i
+        btn.id = 'btn' + i
         btn.onclick = function () {
             mostrarGrupoN(btn)  
         } 
+
+        if (i === 1){
+            btn.style.backgroundColor = 'red'
+        }
+
         btn.classList.add('btn_pag')        
         div_prin.appendChild(btn)
     } 
 
     function mostrarGrupoN(btn) {
-        console.log(btn.textContent)
-        showGroup(parseInt(btn.textContent) - 1)
+        changeColorBtnPagTr() 
+        //allBtn.style.backgroundColor = 'none'
+        indexGroup = parseInt(btn.textContent) - 1
+        btn.style.backgroundColor = 'red'
+        showGroup(indexGroup)
     }
 
     let btnNext = document.createElement('button')
     btnNext.classList.add('btn_flechas')
     btnNext.id = 'next'
+    btnNext.classList.add('next-icon')
     div_prin.appendChild(btnNext)
 }
 
@@ -187,7 +213,10 @@ function mostrarCuentas(filtros) {
         cambiarMgrPag('1')
     }
     crearBtnPaginacion()
-    showGroup(0)
+    if (cantGrupos > 1){
+        
+        showGroup(0)
+    }
 
 }
 
@@ -460,16 +489,25 @@ function crearDivMain(index) {
     return divs[0]
 }
 
-/*
+
 document.querySelector('#prev').addEventListener('click', () => {
 
     indexGroup = (indexGroup > 0) ? indexGroup - 1 : 0;
+    console.log((parseInt(indexGroup) + 1))
+    let btn = document.getElementById('btn' + (parseInt(indexGroup) + 1))
+    
+    changeColorBtnPagTr()
+    btn.style.backgroundColor = 'red'
     showGroup(indexGroup);
   });
   
   document.querySelector('#next').addEventListener('click', () => {
     let groups = document.querySelectorAll('.group');
     indexGroup = (indexGroup < groups.length - 1) ? indexGroup + 1 : groups.length - 1;
+    changeColorBtnPagTr()
+    console.log((parseInt(indexGroup) + 1))
+    let btn = document.getElementById('btn' + (parseInt(indexGroup) + 1))
+    
+    btn.style.backgroundColor = 'red'
     showGroup(indexGroup);
   });
-*/
