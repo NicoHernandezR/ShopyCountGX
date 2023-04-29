@@ -52,10 +52,12 @@ body{
     max-width: 500px;
 }
 
+.pad_top{
+    padding-top: 30px;
+}
+
 .card{
     width: 250px;
-    top: 20%;
-    left: 17%;
     margin: 20px;
     border-radius: 6px;
     overflow: hidden;
@@ -103,6 +105,12 @@ body{
     cursor: not-allowed;
 }
 
+.justify-content-center {
+    justify-content: center!important;
+    display: flex;
+}
+
+/*
 @media (max-width:1200px){
     .card{
         left: 10%;
@@ -163,7 +171,7 @@ body{
         width: 210px;
     }
 }
-
+*/
 
 
 
