@@ -61,6 +61,13 @@
     position: relative;
 }
 
+@media (max-width:991px) {
+    .btn_div {
+        right: 0px;
+    }
+    
+}
+
 .btn_ini_s{
     width: 150px;
     height: 50px;

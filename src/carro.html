@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/filtro_carro.css">
     <link rel="stylesheet" href="../css/card_carro.css">
     <link rel="stylesheet" href="../css/piedepagina.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../js/card.js"></script>
 
     <title>Carro</title>
@@ -76,9 +77,9 @@
                   <div class="rightcol small responsive_local_menu autocollapse_enabled bg_filtro">
                       <div class="block search_collapse_block">
                           <div class="block_header labs_block_header">
-                              <div class="carro_inf">Cantidad Cuentas: 3</div>
-                              <div class="carro_inf">Precio Total: $9600</div>
-                              <div class="carro_inf">Tipos De Cuentas: Steam</div>
+                              <div class="carro_inf"> <p id="txtCant"> </p></div>
+                              <div class="carro_inf"> <p id="txtPrec">  </p> </div>
+                              <div class="carro_inf"> <p id="txtTp">  </p></div>
                           </div>
                       </div>
                   </div>
@@ -119,10 +120,10 @@
         <div class="row btn_centrar_row">
   
           <div class="col-12 col-md-6 btn_centrar">
-            <button class="btn_size"> Vaciar Carro</button>
+            <button class="btn_size" onclick="vaciarCarro()"> Vaciar Carro</button>
           </div>
           <div class="col-12 col-md-6 btn_centrar">
-            <button class="btn_size"> Comprar</button>
+            <button class="btn_size" onclick="calcularTotal()"> Comprar</button>
           </div>
 
         </div>
@@ -167,7 +168,32 @@
           <script src="http://code.jquery.com/jquery-latest.js"></script>
           <script src="../js/modificarMgrPag.js"></script>
           <script src="../js/menu.js"></script>  
+          <script>
+            $(document).ready(main);
+        
+            var contador = 1;
+        
+            function main() {
+              $('.menu_bar').click(function() {
+                if (contador == 1) {
+                  $('#nv').animate({
+                    right: '0'
+                  });
+                  $('#l').css('display', 'block');
+                  contador = 0;
+                } else {
+                  contador = 1;
+                  $('#nv').animate({
+                    right: '-100%'
+                  });
+                  $('#l').css('display', 'none');
+                }
+              });
+            }
+          </script>
+          <script src="../js/carro.js"></script>
           <script src="../js/cuentas_row.js"></script>
+          
      
 
 

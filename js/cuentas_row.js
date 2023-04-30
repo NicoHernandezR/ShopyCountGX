@@ -37,6 +37,8 @@ let cuentas_filas = {
     32 : [1, ["Juegos", 23], 32000],
 }
 
+let arrayIgnorar = []
+
 const tiposDeCuenta = {
     "Seleccionar": [],
     "1": [["Juegos",0,3000], ["Nivel Cuenta",0,1000]],
@@ -122,7 +124,7 @@ function crearBtnPaginacion(){
         } 
 
         if (i === 1){
-            btn.style.backgroundColor = 'red'
+            btn.style.backgroundColor = 'blue'
         }
 
         btn.classList.add('btn_pag')        
@@ -133,7 +135,7 @@ function crearBtnPaginacion(){
         changeColorBtnPagTr() 
         //allBtn.style.backgroundColor = 'none'
         indexGroup = parseInt(btn.textContent) - 1
-        btn.style.backgroundColor = 'red'
+        btn.style.backgroundColor = 'blue'
         showGroup(indexGroup)
     }
 
@@ -168,9 +170,7 @@ function mostrarCuentas(filtros) {
     let cant_cuentas = Object.keys(cuentas_filas).length
     console.log(cant_cuentas)
 
-    for (let i = 1; i <= 5; i++) {
-        let fila = cuentas_filas[i];
-      }
+
 
     
     for (let i = 0; i < cant_cuentas; i++) {
@@ -182,6 +182,10 @@ function mostrarCuentas(filtros) {
             contActual = 0
         }
         
+
+        if (arrayIgnorar.includes(i.toString())){
+            continue
+        }
 
         if (filtros === null){
 
@@ -217,6 +221,10 @@ function mostrarCuentas(filtros) {
         
         showGroup(0)
     }
+    if (document.URL.includes("carro.html")){
+        calcularTotal()
+    }
+
 
 }
 
@@ -240,7 +248,7 @@ function cuentasNoFiltro(i, num) {
     let div_prin = crearDivGrupos(num);
     let cuenta_tipo_id = cuentas_filas[i][0].toString();
     let div_main = crearDivMain(i);
-    let div_card = crearBtnFront(cuenta_tipo_id);
+    let div_card = crearBtnFront(cuenta_tipo_id, i);
 
     div_prin.appendChild(div_main)
 
@@ -296,7 +304,7 @@ function cuentasConFiltroTipoCuenta(i, td_id, num) {
     let div_prin = crearDivGrupos(num);
     
     let div_main = crearDivMain(i);
-    let div_card = crearBtnFront(cuenta_tipo_id);
+    let div_card = crearBtnFront(cuenta_tipo_id, i);
 
     div_prin.appendChild(div_main)
 
@@ -367,7 +375,7 @@ function cuentasConFiltroValores(i, t_id, num) {
                 let div_prin = crearDivGrupos(num);
                 let cuenta_tipo_id = cuentas_filas[i][0].toString();
                 let div_main = crearDivMain(i);
-                let div_card = crearBtnFront(cuenta_tipo_id);
+                let div_card = crearBtnFront(cuenta_tipo_id, i);
             
                 div_prin.appendChild(div_main)
             
@@ -420,14 +428,30 @@ function cuentasConFiltroValores(i, t_id, num) {
 
 }
 
+function eliminarCuenta(x) {
+    arrayIgnorar.push(x)
+    console.log(x)
+    mostrarCuentas(null)
 
-function crearBtnFront(idCuenta) {
+}
+
+function crearBtnFront(idCuenta, x) {
 
     let divs = [];
 
     let button_del = document.createElement('button')
     button_del.classList.add(clases_btn[2])
-    button_del.textContent = 'Agregar al Carro'
+    if (document.URL.includes("carro.html")){
+        button_del.textContent = 'Eliminar del Carro'
+        button_del.value = x
+        button_del.onclick = function() {
+            eliminarCuenta(button_del.value )
+        } ;
+    }else{
+        
+        button_del.textContent = 'Agregar al Carro'
+    }
+
 
     let button_ver = document.createElement('button')
     button_ver.classList.add(clases_btn[2])
@@ -490,6 +514,18 @@ function crearDivMain(index) {
 }
 
 
+function vaciarCarro(){
+    let cant_cuentas = Object.keys(cuentas_filas).length
+    for (let i = 0; i < cant_cuentas; i++) {
+        if (!arrayIgnorar.includes(i.toString())){
+            arrayIgnorar.push(i.toString())
+            console.log(arrayIgnorar)
+        }
+
+    }
+    mostrarCuentas(null)
+}
+
 document.querySelector('#prev').addEventListener('click', () => {
 
     indexGroup = (indexGroup > 0) ? indexGroup - 1 : 0;
@@ -497,7 +533,7 @@ document.querySelector('#prev').addEventListener('click', () => {
     let btn = document.getElementById('btn' + (parseInt(indexGroup) + 1))
     
     changeColorBtnPagTr()
-    btn.style.backgroundColor = 'red'
+    btn.style.backgroundColor = 'blue'
     showGroup(indexGroup);
   });
   
@@ -508,6 +544,6 @@ document.querySelector('#prev').addEventListener('click', () => {
     console.log((parseInt(indexGroup) + 1))
     let btn = document.getElementById('btn' + (parseInt(indexGroup) + 1))
     
-    btn.style.backgroundColor = 'red'
+    btn.style.backgroundColor = 'blue'
     showGroup(indexGroup);
   });

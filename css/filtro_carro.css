@@ -496,6 +496,19 @@ a:-webkit-any-link {
     padding-right: 0px;
 }
 
+.next-icon{
+    background-image: url('../img/caruselFlecha/flecha.png');
+    background-repeat: no-repeat;
+    background-size: 50px;
+}
+
+.prev-icon{
+    background-image: url('../img/caruselFlecha/flecha.png');
+    transform: rotate(180deg);
+    background-repeat: no-repeat;
+    background-size: 50px;
+}
+
 @media (max-width:770px) {
     .btn_pag{
         width: 8%;
@@ -510,8 +523,8 @@ a:-webkit-any-link {
 
 
 .btn_flechas{
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     background-color: #6C1CED;
     border-radius: 3px;
     border-color: rgba( 104, 157, 221, 1 );;

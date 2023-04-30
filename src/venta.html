@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
     <title>Venta</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style_venta.css">
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/card_venta.css">
     <link rel="stylesheet" href="../css/piedepagina.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../js/card.js"></script>
 
 </head>
@@ -194,6 +196,35 @@
       <script src="../js/modificarMgrPag.js"></script>
       <script src="http://code.jquery.com/jquery-latest.js"></script>
       <script src="../js/menu.js"></script>
+      <script>
+        $(document).ready(main);
+    
+        var contador = 1;
+    
+        function main() {
+          $('.menu_bar').click(function() {
+            if (contador == 1) {
+              $('#nv').animate({
+                right: '0'
+              });
+              $('#l').css('display', 'block');
+              contador = 0;
+            } else {
+              contador = 1;
+              $('#nv').animate({
+                right: '-100%'
+              });
+              $('#l').css('display', 'none');
+            }
+          });
+        }
+      </script>
+  
+    
+    
+    
+    
+    
       <script src="../js/filtro.js"></script>
       <script src="../js/cuentas_row.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
