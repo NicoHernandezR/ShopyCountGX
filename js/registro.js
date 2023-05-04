@@ -1,29 +1,60 @@
-  var form = document.getElementById("myForm");
-  var nombre = document.getElementById("nombre");
-  var apellido = document.getElementById("apellido");
-  var username = document.getElementById("username");
-  var correo = document.getElementById("correo");
-  var contraseña1 = document.getElementById("contraseña1");
-  var contraseña2 = document.getElementById("contraseña2");
-  error.style.color = "red";
+const nombre = document.getElementById("name")
+const email = document.getElementById("email")
+const pass = document.getElementById("password")
+const passs = document.getElementById("password2")
+const form = document.getElementById("form")
+const parrafo = document.getElementById("warnings")
 
-  form.addEventListener("submit", function(event) {
-    event.preventDefault(); // evita el envío del formulario por defecto
-
-    var MensajeError = [];
-
-    if (nombre.value === null || nombre.value ===""){
-      MensajeError.push("Ingrese su nombre");
-      return;
+form.addEventListener("submit", e=>{
+    e.preventDefault()
+    let warnings = ""
+    let entrar = false
+    let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/
+    parrafo.innerHTML = ""
+    if(nombre.value.length <6){
+        warnings += `El nombre no es valido <br>`
+        entrar = true
+    }
+    if(!regexEmail.test(email.value)){
+        warnings += `El email no es valido <br>`
+        entrar = true
+    }
+    if (pass.value !== passs.value){
+        warnings += `Las contraseñas no coinciden <br>`
+        entrar = true
+    }
+    if(pass.value.length < 8){
+        warnings += `La contraseña no es valida no puede ser menor de 8 caracteres<br>`
+        entrar = true
     }
 
-    if (contraseña1.value !== contraseña2.value) {
-      alert("Las contraseñas no coinciden. Por favor, inténtelo de nuevo.");
-    return;
+    if(entrar){
+        parrafo.innerHTML = warnings
+    }else{
+        parrafo.innerHTML = "Enviado"
     }
+})
+  
+  //error.style.color = "red";
 
-   error.innerHTML= MensajeError.join(",");
+  //form.addEventListener("submit", function(event) {
+    //event.preventDefault(); // evita el envío del formulario por defecto
+
+   // var MensajeError = [];
+
+    //if (nombre.value === null || nombre.value ===""){
+      //MensajeError.push("Ingrese su nombre");
+     // return;
+    //}
+
+   // if (contrasena1.value !== contrasena2.value) n
+    //  alert("Las contraseñas no coinciden. Por favor, inténtelo de nuevo.");
+    //return;
+    //}
+
+   //error.innerHTML= MensajeError.join(",");
     // Si llegamos aquí, todo está validado correctamente y podemos enviar el formulario.
-    form.submit();
-  });
+   // form.submit();
+  //});
+
 
