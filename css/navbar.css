@@ -96,3 +96,8 @@
 .nv_bg{
     background:  linear-gradient(150deg, #6C3483, #58D68D);
 }
+
+.ct{
+    justify-content: center !important;
+    text-align:  center;
+}

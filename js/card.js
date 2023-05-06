@@ -7,7 +7,7 @@ window.onload = function() {
         content.style.opacity = 1;
         content.style.visibility = 'visible';
         buttons.forEach(button => button.disabled = true);
-        setTimeout(() => buttons.forEach(button => button.disabled = false),100);
+        setTimeout(() => buttons.forEach(button => button.disabled = false),300);
       });
       card.addEventListener('mouseleave', () => {
         content.style.opacity = 0;

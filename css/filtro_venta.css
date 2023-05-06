@@ -548,9 +548,8 @@ a:-webkit-any-link {
 .btn_flechas{
     width: 55px;
     height: 55px;
-    background-color: #6C1CED;
-    border-radius: 3px;
-    border-color: rgba( 104, 157, 221, 1 );;
+    background-color: transparent;
+    border: none;
 }
 
 .next-icon{

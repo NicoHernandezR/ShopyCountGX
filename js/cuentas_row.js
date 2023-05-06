@@ -65,13 +65,20 @@ let contActual = 0
 let indexGroup = 0;
 let arrayGruposRango = [1,6]
 let arrayCuentasRango = [1,26]
+let bulUrl = true;
 
 function changeColorBtnPagTr() {
     let allBtn = document.querySelectorAll('.btn_pag')
     allBtn.forEach(function (i,e) {
         i.style.backgroundColor = 'transparent'
+        i.style.color = 'white'
 
     })
+}
+
+function changeColorBtnPag(btn){
+    btn.style.backgroundColor = 'rgb(89,206,140)'
+    btn.style.color = 'rgb(108,58,132)'
 }
 
 function showGroup(index) {
@@ -112,6 +119,16 @@ function crearBtnPaginacion(){
     btnAtras.classList.add('btn_flechas')
     btnAtras.classList.add('prev-icon')
     btnAtras.id = 'prev'
+    btnAtras.addEventListener('click', () => {
+
+        indexGroup = (indexGroup > 0) ? indexGroup - 1 : 0;
+        console.log((parseInt(indexGroup) + 1))
+        let btn = document.getElementById('btn' + (parseInt(indexGroup) + 1))
+        
+        changeColorBtnPagTr()
+        changeColorBtnPag(btn)
+        showGroup(indexGroup);
+      })
     div_prin.appendChild(btnAtras)
 
 
@@ -124,7 +141,7 @@ function crearBtnPaginacion(){
         } 
 
         if (i === 1){
-            btn.style.backgroundColor = 'blue'
+            changeColorBtnPag(btn)
         }
 
         btn.classList.add('btn_pag')        
@@ -135,7 +152,7 @@ function crearBtnPaginacion(){
         changeColorBtnPagTr() 
         //allBtn.style.backgroundColor = 'none'
         indexGroup = parseInt(btn.textContent) - 1
-        btn.style.backgroundColor = 'blue'
+        changeColorBtnPag(btn)
         showGroup(indexGroup)
     }
 
@@ -143,9 +160,18 @@ function crearBtnPaginacion(){
     btnNext.classList.add('btn_flechas')
     btnNext.id = 'next'
     btnNext.classList.add('next-icon')
+    btnNext.addEventListener('click', () => {
+        let groups = document.querySelectorAll('.group');
+        indexGroup = (indexGroup < groups.length - 1) ? indexGroup + 1 : groups.length - 1;
+        changeColorBtnPagTr()
+        console.log((parseInt(indexGroup) + 1))
+        let btn = document.getElementById('btn' + (parseInt(indexGroup) + 1))
+        
+        changeColorBtnPag(btn)
+        showGroup(indexGroup);
+      })
     div_prin.appendChild(btnNext)
 }
-
 function calcularRangoCuentasMostrar() {
     arrayCuentasRango = []
     arrayGruposRango.forEach(function (i,e) {
@@ -156,6 +182,18 @@ function calcularRangoCuentasMostrar() {
         }
 
     })
+}
+
+
+function mostrarMensajeVacio(){
+    let div_pri = document.getElementById("cuenta");
+    let lblMsj = document.createElement('label')
+    let div = document.createElement('div')
+    div.classList.add('row', 'ct')
+    lblMsj.textContent = 'No se Encontraron Resultados'
+    div.appendChild(lblMsj)
+    div_pri.appendChild(div)
+    cambiarMgrPag(null);
 }
 
 function mostrarCuentas(filtros) {
@@ -169,7 +207,22 @@ function mostrarCuentas(filtros) {
     
     let cant_cuentas = Object.keys(cuentas_filas).length
     console.log(cant_cuentas)
+    let val = ''
+    if (filtros === null){
+        val = ''
+    }else{
+        val = filtros.value;
+    }
 
+
+    let urlParams = new URLSearchParams(window.location.search);
+    let num = urlParams.get('num');
+    console.log(num)
+
+
+    // Mostrar el valor en la página
+
+    
 
 
     
@@ -181,20 +234,26 @@ function mostrarCuentas(filtros) {
             cantGrupos = cantGrupos + 1
             contActual = 0
         }
-        
+
 
         if (arrayIgnorar.includes(i.toString())){
             continue
         }
 
-        if (filtros === null){
+        
+        if (num !== null && bulUrl === true){
+            cuentasConFiltroTipoCuenta(i,num,cantGrupos)
+            continue
+        }
+
+        if (filtros === null && val === ''){
 
             cuentasNoFiltro(i, cantGrupos)
             contActual = contActual + 1
             continue
         }
-
-        if (filtros.value === '0'){
+        
+        if (val === '0'){
 
             cuentasNoFiltro(i, cantGrupos)
             contActual = contActual + 1
@@ -202,7 +261,8 @@ function mostrarCuentas(filtros) {
         }  
 
 
-        cuentasConFiltroValores(i, filtros.value, cantGrupos);
+
+        cuentasConFiltroValores(i, val, cantGrupos);
         
         
 
@@ -211,7 +271,9 @@ function mostrarCuentas(filtros) {
 
     }
 
-    if (cantMostradas < 5){
+    if (cantMostradas === 0){
+        mostrarMensajeVacio()
+    }else if (cantMostradas < 5){
         cambiarMgrPag('0')
     }else{
         cambiarMgrPag('1')
@@ -223,6 +285,10 @@ function mostrarCuentas(filtros) {
     }
     if (document.URL.includes("carro.html")){
         calcularTotal()
+    }
+
+    if (num !== null && bulUrl === true){
+        bulUrl = false
     }
 
 
@@ -526,6 +592,7 @@ function vaciarCarro(){
     mostrarCuentas(null)
 }
 
+/*
 document.querySelector('#prev').addEventListener('click', () => {
 
     indexGroup = (indexGroup > 0) ? indexGroup - 1 : 0;
@@ -547,3 +614,4 @@ document.querySelector('#prev').addEventListener('click', () => {
     btn.style.backgroundColor = 'blue'
     showGroup(indexGroup);
   });
+*/
