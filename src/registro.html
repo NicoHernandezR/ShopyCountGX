@@ -19,26 +19,31 @@
 
     <form action="" method="POST" id="form">
         <div class="form">
-            <h1>Registraste</h1>
+            <h1>Registrate</h1>
             <div class="grupo">
                 <input type="text" name="" id="name" ><span class="barra"></span>
-                <label for="">Nombre</label>
+                <label for="">Nombre de usuario</label>
+                <p class="error" id="error"></p>
             </div>
             <div class="grupo">
                 <input type="email" name="" id="email" ><span class="barra"></span>
                 <label for="">Email</label>
+                <p class="mensaje" id="mensaje"></p>
+               
             </div>
             <div class="grupo">
                 <input type="password" name="" id="password" ><span class="barra"></span>
                 <label for="">Ingrese contraseña</label>
+                <p class="incorrecto" id="incorrecto"></p>
+            
             </div>
             <div class="grupo">
                 <input type="password" name="" id="password2" ><span class="barra"></span>
                 <label for="">Repita la contraseña</label>
+                <p class="warnings" id="warnings"></p>
             </div>
             
             <button type="submit">Confirmar</button>
-            <p class="warnings" id="warnings"></p>
         </div>
     </form>
 

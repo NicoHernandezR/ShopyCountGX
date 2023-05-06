@@ -138,8 +138,7 @@ body {
     font-family: 'Roboto';
     background: #eb0cdc;
     background: linear-gradient(150deg, #6C3483, #58D68D);
-    background: linear-gradient(150deg, #6C3483, #58D68D);
-    height: 750px;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -225,11 +224,27 @@ input:focus~.barra::before{
 
 .warnings{
     width: 200px;
-    text-align: center;
-    margin: auto;
     color: #f90202;
-    padding-top: 20px;
 }
+
+.error{
+    width: 200px;
+    color: #f90202;
+    
+}
+
+.mensaje{
+    width: 200px;
+    color: #f90202;
+   
+}
+
+.incorrecto{
+    width: 200px;
+    color: #f90202;
+   
+}
+
 
 button{
     font-family: 'roboto';

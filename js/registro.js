@@ -1,30 +1,44 @@
-const nombre = document.getElementById("name")
-const email = document.getElementById("email")
-const pass = document.getElementById("password")
-const passs = document.getElementById("password2")
-const form = document.getElementById("form")
-const parrafo = document.getElementById("warnings")
+let nombre = document.getElementById("name")
+let email = document.getElementById("email")
+let pass = document.getElementById("password")
+let passs = document.getElementById("password2")
+let form = document.getElementById("form")
+let parrafo = document.getElementById("warnings")
+let errorNomb = document.getElementById("error")
+let errorEm = document.getElementById("mensaje")
+let errorPass = document.getElementById("incorrecto")
+
+
 
 form.addEventListener("submit", e=>{
     e.preventDefault()
     let warnings = ""
+    let error = ""
+    let mensaje = ""
+    let incorrecto = ""
     let entrar = false
     let regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/
     parrafo.innerHTML = ""
+    errorNomb.innerHTML = ""
+    errorEm.innerHTML = ""
+
     if(nombre.value.length <6){
-        warnings += `El nombre no es valido <br>`
+        error += `El nombre no es valido <br>`
+        errorNomb.textContent = `El nombre no es valido`
         entrar = true
     }
     if(!regexEmail.test(email.value)){
-        warnings += `El email no es valido <br>`
+        mensaje += `El email no es valido <br>`
+        errorEm.textContent = `El email no es valido`
         entrar = true
     }
     if (pass.value !== passs.value){
-        warnings += `Las contraseñas no coinciden <br>`
+        incorrecto += `Las contraseñas no coinciden <br>`
+        errorPass.textContent = `Las contraseñas no coinciden `
         entrar = true
     }
     if(pass.value.length < 8){
-        warnings += `La contraseña no es valida no puede ser menor de 8 caracteres<br>`
+        warnings += `La contraseña no es valida<br>`
         entrar = true
     }
 
