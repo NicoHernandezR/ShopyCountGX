@@ -4,35 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <title>Inicio Sesion</title>
     <link rel="stylesheet" href="../css/iniciodesesion.css">
 </head>
-
 <body id="fb">
   <div class="row size_h">
       <div class="col-xs-12 col-sm-6 col-md-2 col-lg-1">
           <div class="login-box">
                   <img src="../img/mando.logo.jpg" class="avatar" alt="Avatar Image">
                   <h1>Iniciar Sesion</h1>
-                  <form id="form">
+                  <form id="form" onsubmit="return validateForm()">
                     <!-- USERNAME INPUT -->
                     <label for="username" id="user">Nombre de Usuario</label>
-                    <input type="text" placeholder="Nombre de usuario">
+                    <input type="text" placeholder="Nombre de usuario" required>
                     <!-- PASSWORD INPUT -->
                     <label for="password" id="password">Contraseña</label>
-                    <input type="password" placeholder="Ingrese Contraseña">
+                    <input type="password" placeholder="Ingrese Contraseña" required>
                     <input type="submit" value="Iniciar Sesion">
                     <a href="#">¿Olvido su contraseña?</a><br>
                     <a href="../src/registro.html">Registrarse</a>
-                    
                   </form>
           </div>
       </div>
   </div>
-
-
-  
 </body>
 </html>
