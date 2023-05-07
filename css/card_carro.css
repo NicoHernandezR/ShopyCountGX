@@ -21,11 +21,12 @@
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0px 1px 10px rgba(0, 0, 0, 0,2);
-    transition: transform 0.3s ease-in-out;
+    transition: opacity 200ms ease-in-out 400ms;
     position: relative;
     display: inline-block;
 }
 
+/*
 .card:hover {
     cursor: pointer;
 }
@@ -34,6 +35,8 @@
     opacity: 1;
     visibility: visible;
 }
+*/
+
 
 .card-content {
     display: flex;
@@ -60,7 +63,11 @@
     cursor: not-allowed;
 }
 
-
+.card:hover{
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0, 4);
+    transform: translateY(-3%);
+    color: black;
+}
 
 
 .contenido{
@@ -101,7 +108,17 @@
     color: #fff;
 
 }
+.card .contenido a{
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    margin-top: 10px;
+    color: #2fb4cc;
+    border: 1px solid #2fb4cc;
+    border-radius: 4px;
+    transition: all 400ms ease;
 
+}
 
 
 .crd_txt{

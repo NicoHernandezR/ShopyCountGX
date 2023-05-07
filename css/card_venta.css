@@ -25,7 +25,7 @@
     display: inline-block;
     color: white;
 }
-
+/*
 .card:hover {
     cursor: pointer;
 }
@@ -37,6 +37,7 @@
     opacity: 1;
     visibility: visible;
 }
+*/
 
 .card-content {
     display: flex;

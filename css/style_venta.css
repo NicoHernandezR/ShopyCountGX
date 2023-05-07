@@ -57,7 +57,8 @@ a {
     color: white;
 }
 body{
-    background-color: #6C3483
+    background-color: #6C3483;
+    height: 100vh;
 }
 
 

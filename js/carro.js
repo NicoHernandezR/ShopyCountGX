@@ -1,4 +1,4 @@
-let tpCuenta = ["Seleccionar","Steam", "CSGO", "Epic", "PlayStation","Xbox Live"];
+let tpCuenta = ["Seleccionar","Steam", "CSGO", "Epic", "PlayStation","Xbox Live", "Switch", "Microsoft", "Riot","Battle Net"];
 
 function calcularTotal() {
     let cantCuentas = Object.keys(cuentas_filas).length
@@ -9,8 +9,8 @@ function calcularTotal() {
         if (arrayIgnorar.includes(i.toString())){
             continue
         }
-        sum = sum +cuentas_filas[i][2];
-        let tip = cuentas_filas[i][0]
+        sum = sum +cuentas_filas[i].precio;
+        let tip = cuentas_filas[i].tipo
         if (!arrayTipoCuentas.includes(tip)){
             arrayTipoCuentas.push(tip)
         }

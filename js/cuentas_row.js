@@ -1,7 +1,7 @@
 let cantMostradas = 0
 // Formato:
 // Id cuenta : [TipoCuenta, [Carac Principal, Cant], Precio] 
-let cuentas_filas = {
+let cuentas_filas_v1 = {
     0 : [1, ["Juegos", 23], 32000],
     1 : [2, ["Faceit", 10], 50000],
     2 : [3, ["Juegos", 50], 25000],
@@ -37,6 +37,16 @@ let cuentas_filas = {
     32 : [1, ["Juegos", 23], 32000],
 }
 
+let cuentas_filas = []
+
+async function leerCuentas() {
+    let url = 'https://nicohernandezr.github.io/shopyCountGxApi/cuentas_vender.json';
+    let response = await fetch(url);
+    let data = await response.json();
+    let cuentas = data.cuentas;
+    return cuentas;
+}
+
 let arrayIgnorar = []
 
 const tiposDeCuenta = {
@@ -45,8 +55,13 @@ const tiposDeCuenta = {
     "2": [["MM", 0, 18], ["GC",0,21], ["Faceit",0,10]],
     "3": [["Juegos",0,3000]],
     "4": [["Juegos",0,3000], ["Suscripciones",0,12]],
-    "5": [["Juegos",0,3000], ["Suscripciones",0,12]]
+    "5": [["Juegos",0,3000], ["Suscripciones",0,12]],
+    "6": [["Juegos",0,3000], ["Suscripciones",0,12]],
+    "7": [["Juegos",0,3000], ],
+    "8": [["Juegos",0,3000], ], 
+    "9": [["Juegos",0,3000], ]
   };
+
 
 
 let clases_row = ["row", "col-12", "col-md-9",  "pd_tp",  "col-4",  "col-md-4", "col-md-2", "col-6"]
@@ -124,7 +139,11 @@ function crearBtnPaginacion(){
         indexGroup = (indexGroup > 0) ? indexGroup - 1 : 0;
         console.log((parseInt(indexGroup) + 1))
         let btn = document.getElementById('btn' + (parseInt(indexGroup) + 1))
-        
+        let g = document.getElementById('group' + (parseInt(indexGroup) + 1))
+        let cant_cuent = g.querySelectorAll('.row')
+        if ((cant_cuent.length / 3) > 2){
+            cambiarMgrPag('2')
+        } 
         changeColorBtnPagTr()
         changeColorBtnPag(btn)
         showGroup(indexGroup);
@@ -153,6 +172,11 @@ function crearBtnPaginacion(){
         //allBtn.style.backgroundColor = 'none'
         indexGroup = parseInt(btn.textContent) - 1
         changeColorBtnPag(btn)
+        let g = document.getElementById('group' + (parseInt(indexGroup) + 1))
+        let cant_cuent = g.querySelectorAll('.row')
+        if ((cant_cuent.length / 3) < 2){
+            cambiarMgrPag('0')
+        } 
         showGroup(indexGroup)
     }
 
@@ -166,7 +190,11 @@ function crearBtnPaginacion(){
         changeColorBtnPagTr()
         console.log((parseInt(indexGroup) + 1))
         let btn = document.getElementById('btn' + (parseInt(indexGroup) + 1))
-        
+        let g = document.getElementById('group' + (parseInt(indexGroup) + 1))
+        let cant_cuent = g.querySelectorAll('.row')
+        if ((cant_cuent.length / 3) < 2){
+            cambiarMgrPag('0')
+        } 
         changeColorBtnPag(btn)
         showGroup(indexGroup);
       })
@@ -196,12 +224,16 @@ function mostrarMensajeVacio(){
     cambiarMgrPag(null);
 }
 
-function mostrarCuentas(filtros) {
 
+
+async function mostrarCuentas(filtros) {
+
+    cuentas_filas = await leerCuentas();
     limparCuentas()
     cantMostradas = 0
     indexGroup = 0
     totalCuentas = cuentas_filas.length
+    console.log(totalCuentas + ' totalCuentas')
     cantGrupos = 1
     contActual = 0
     
@@ -217,7 +249,7 @@ function mostrarCuentas(filtros) {
 
     let urlParams = new URLSearchParams(window.location.search);
     let num = urlParams.get('num');
-    console.log(num)
+
 
 
     // Mostrar el valor en la página
@@ -238,6 +270,11 @@ function mostrarCuentas(filtros) {
 
         if (arrayIgnorar.includes(i.toString())){
             continue
+        }else{
+            if (contActual === cantMostrar){
+                cantGrupos = cantGrupos + 1
+                contActual = 0
+            }    
         }
 
         
@@ -291,6 +328,7 @@ function mostrarCuentas(filtros) {
         bulUrl = false
     }
 
+    cards()
 
 }
 
@@ -312,7 +350,8 @@ function crearDivGrupos(numGrup) {
 
 function cuentasNoFiltro(i, num) {
     let div_prin = crearDivGrupos(num);
-    let cuenta_tipo_id = cuentas_filas[i][0].toString();
+    
+    let cuenta_tipo_id = cuentas_filas[i].tipo.toString();
     let div_main = crearDivMain(i);
     let div_card = crearBtnFront(cuenta_tipo_id, i);
 
@@ -321,8 +360,9 @@ function cuentasNoFiltro(i, num) {
     
     let divs = [];
 
-    let carac_imp = cuentas_filas[i][1]
-    let precio = cuentas_filas[i][2]
+    let carac_imp = cuentas_filas[i].caracteristicas.join(' ')
+    let precio = cuentas_filas[i].precio
+
 
     let src_img = '../img/cuenta_icon/icon' + cuenta_tipo_id + '.png'
     let img = document.createElement('img')
@@ -342,7 +382,7 @@ function cuentasNoFiltro(i, num) {
 
     
     divs[2].appendChild(img)
-    divs[3].textContent = carac_imp.join(' ') 
+    divs[3].textContent = carac_imp
     divs[4].textContent = "$ " + precio.toString();
 
     divs[1].appendChild(divs[2])
@@ -358,11 +398,12 @@ function cuentasNoFiltro(i, num) {
     card.appendChild(div_card)
     cantMostradas = cantMostradas + 1
     
+    
 }
 
 function cuentasConFiltroTipoCuenta(i, td_id, num) {
 
-    let cuenta_tipo_id = cuentas_filas[i][0].toString();
+    let cuenta_tipo_id = cuentas_filas[i].tipo.toString();
     if (cuenta_tipo_id.toString() !== td_id.toString()){
         return null;
     }
@@ -377,8 +418,8 @@ function cuentasConFiltroTipoCuenta(i, td_id, num) {
     
     let divs = [];
 
-    let carac_imp = cuentas_filas[i][1]
-    let precio = cuentas_filas[i][2]
+    let carac_imp = cuentas_filas[i].caracteristicas.join(' ')
+    let precio = cuentas_filas[i].precio
 
     let src_img = '../img/cuenta_icon/icon' + cuenta_tipo_id + '.png'
     let img = document.createElement('img')
@@ -398,7 +439,7 @@ function cuentasConFiltroTipoCuenta(i, td_id, num) {
 
     
     divs[2].appendChild(img)
-    divs[3].textContent = carac_imp.join(' ') 
+    divs[3].textContent = carac_imp
     divs[4].textContent = "$ " + precio.toString();
 
     divs[1].appendChild(divs[2])
@@ -421,7 +462,8 @@ function cuentasConFiltroValores(i, t_id, num) {
 
 
     let arrayInfo = tiposDeCuenta[t_id];
-    let carac_imp = cuentas_filas[i][1]
+    let carac_imp = cuentas_filas[i].caracteristicas
+
 
     let maxContArray = arrayInfo.length;
     let contArray = 0;
@@ -439,7 +481,7 @@ function cuentasConFiltroValores(i, t_id, num) {
             if (html_carac.value === carac_imp[1].toString()){
 
                 let div_prin = crearDivGrupos(num);
-                let cuenta_tipo_id = cuentas_filas[i][0].toString();
+                let cuenta_tipo_id = cuentas_filas[i].tipo.toString();;
                 let div_main = crearDivMain(i);
                 let div_card = crearBtnFront(cuenta_tipo_id, i);
             
@@ -449,7 +491,7 @@ function cuentasConFiltroValores(i, t_id, num) {
                 let divs = [];
             
                 
-                let precio = cuentas_filas[i][2]
+                let precio = cuentas_filas[i].precio
             
                 let src_img = '../img/cuenta_icon/icon' + cuenta_tipo_id + '.png'
                 let img = document.createElement('img')

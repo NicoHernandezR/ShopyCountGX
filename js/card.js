@@ -1,8 +1,12 @@
-window.onload = function() {
+function cards() {
     const cards = document.querySelectorAll('.card');
+
     cards.forEach(card => {
       const content = card.querySelector('.card-content');
+
+
       const buttons = content.querySelectorAll('button');
+
       card.addEventListener('mouseenter', () => {
         content.style.opacity = 1;
         content.style.visibility = 'visible';

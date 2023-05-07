@@ -1,13 +1,17 @@
 
 
-const tiposCuenta = ["Seleccionar","Steam", "CSGO", "Epic", "PlayStation","Xbox Live"];
+const tiposCuenta = ["Seleccionar","Steam", "CSGO", "Epic", "PlayStation","Xbox Live", "Switch", "Microsoft", "Riot","Battle Net"];
 const opcionesCuenta = {
   "Seleccionar": [],
   "Steam": [["Juegos",0,3000], ["Nivel Cuenta",0,1000]],
   "CSGO": [["MM", 0, 18], ["GC",0,21], ["Faceit",0,10]],
   "Epic": [["Juegos",0,3000]],
   "PlayStation": [["Juegos",0,3000], ["Suscripciones",0,12]],
-  "Xbox Live": [["Juegos",0,3000], ["Suscripciones",0,12]]
+  "Xbox Live": [["Juegos",0,3000], ["Suscripciones",0,12]],
+  "Switch": [["Juegos",0,3000], ["Suscripciones",0,12]],
+  "Microsoft": [["Juegos",0,3000]],
+  "Riot": [["Juegos",0,3000]],
+  "Battle Net": [["Juegos",0,3000], ]
 };
 
 let opcionesCuentas = document.getElementById("opcionesCuenta");
@@ -26,6 +30,8 @@ window.onload  = function() {
         tipoCuenta.appendChild(option);
 
       });
+
+      cards()
  
 };
 
