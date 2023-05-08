@@ -53,19 +53,8 @@
     color: #ffbc0e;
 }
 .btn_div {
-    position: relative;
-}
-
-.btn_div {
     right: 50px;
     position: relative;
-}
-
-@media (max-width:991px) {
-    .btn_div {
-        right: 0px;
-    }
-    
 }
 
 .btn_ini_s{
@@ -94,10 +83,5 @@
 }
 
 .nv_bg{
-    background:  linear-gradient(150deg, #6C3483, #58D68D);
-}
-
-.ct{
-    justify-content: center !important;
-    text-align:  center;
+    background:  linear-gradient(150deg,#58D68D, #6C3483);
 }

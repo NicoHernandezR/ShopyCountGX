@@ -3,12 +3,12 @@ body {
     padding: 0;
     background:  linear-gradient(150deg, #6C3483, #58D68D);
     font-family: sans-serif;
-    height: 100vh;
+    height: 100vh !important;
   }
   
   .login-box {
     width: 320px;
-    height: 420px;
+    height: 450px;
     background: #f9f9f9;
     color: #1f1e1e;
     top: 50%;
@@ -42,7 +42,7 @@ body {
     display: block;
   }
   
-  .login-box input {
+  .login-box input, .Cancelar {
     width: 100%;
     margin-bottom: 20px;
   }
@@ -57,22 +57,29 @@ body {
     font-size: 16px;
   }
   
-  .login-box input[type="submit"] {
+  .login-box input[type="submit"], .Cancelar {
     border: none;
     outline: none;
     height: 40px;
-    background: #d405c09c;
+    background: #6C3483;
     color: #fff;
     font-size: 18px;
     border-radius: 20px;
   
   }
   
-  .login-box input[type="submit"]:hover {
+  .login-box input[type="submit"]:hover{
     cursor: pointer;
-    background: #0aee8f;
+    background: #58D68D;
     color: #000;
   }
+
+  .Cancelar:hover{
+    cursor: pointer;
+    background: #58D68D;
+    color: #000;
+  }
+
   
   .login-box a {
     text-decoration: none;
@@ -84,6 +91,16 @@ body {
   .login-box a:hover {
     color: #0199f8;
   }
+
+  .btn{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #6C3483;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
 
 @media (max-height:525px){
   .avatar {
@@ -112,6 +129,12 @@ body {
     font-size: 12px !important;
   }
 
+  input[type="submit"]{
+    height: 20px !important;
+    margin-bottom: 10px;
+  }
+
+  
   input[type="submit"]{
     height: 20px !important;
     margin-bottom: 10px;
