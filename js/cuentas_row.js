@@ -137,7 +137,7 @@ function crearBtnPaginacion(){
     btnAtras.addEventListener('click', () => {
 
         indexGroup = (indexGroup > 0) ? indexGroup - 1 : 0;
-        console.log((parseInt(indexGroup) + 1))
+
         let btn = document.getElementById('btn' + (parseInt(indexGroup) + 1))
         let g = document.getElementById('group' + (parseInt(indexGroup) + 1))
         let cant_cuent = g.querySelectorAll('.row')
@@ -188,7 +188,7 @@ function crearBtnPaginacion(){
         let groups = document.querySelectorAll('.group');
         indexGroup = (indexGroup < groups.length - 1) ? indexGroup + 1 : groups.length - 1;
         changeColorBtnPagTr()
-        console.log((parseInt(indexGroup) + 1))
+
         let btn = document.getElementById('btn' + (parseInt(indexGroup) + 1))
         let g = document.getElementById('group' + (parseInt(indexGroup) + 1))
         let cant_cuent = g.querySelectorAll('.row')
@@ -233,12 +233,12 @@ async function mostrarCuentas(filtros) {
     cantMostradas = 0
     indexGroup = 0
     totalCuentas = cuentas_filas.length
-    console.log(totalCuentas + ' totalCuentas')
+
     cantGrupos = 1
     contActual = 0
     
     let cant_cuentas = Object.keys(cuentas_filas).length
-    console.log(cant_cuentas)
+
     let val = ''
     if (filtros === null){
         val = ''
@@ -538,7 +538,7 @@ function cuentasConFiltroValores(i, t_id, num) {
 
 function eliminarCuenta(x) {
     arrayIgnorar.push(x)
-    console.log(x)
+
     mostrarCuentas(null)
 
 }
@@ -627,7 +627,7 @@ function vaciarCarro(){
     for (let i = 0; i < cant_cuentas; i++) {
         if (!arrayIgnorar.includes(i.toString())){
             arrayIgnorar.push(i.toString())
-            console.log(arrayIgnorar)
+
         }
 
     }

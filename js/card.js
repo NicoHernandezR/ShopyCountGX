@@ -1,6 +1,5 @@
 function cards() {
     const cards = document.querySelectorAll('.card');
-
     cards.forEach(card => {
       const content = card.querySelector('.card-content');
 

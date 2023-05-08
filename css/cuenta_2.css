@@ -158,7 +158,8 @@ body{
     height: 50px;
     background-color: #6C1CED;
     border-radius: 3px;
-    border-color: rgba( 104, 157, 221, 1 );;
+    border-color: rgba( 104, 157, 221, 1 );
+    color: white;
 }
 
 

@@ -27,7 +27,6 @@ function calcularTotal() {
     txtCant.textContent = 'Cantidad Cuentas: ' + (parseInt(cantCuentas) - parseInt(cantIg))
     let txtTp = document.getElementById('txtTp')
     txtTp.textContent = 'Tipos De Cuentas: ' + arrayTipoCuentas.join(', ')
-    console.log(arrayTipoCuentas)
 
 }
 

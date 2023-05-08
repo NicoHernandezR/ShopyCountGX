@@ -32,7 +32,7 @@ inputImagen.addEventListener('change', function() {
         }
         let fileSizeKB = file.size / 1024; // Convertir el tamaño del archivo a kilobytes
         if (fileSizeKB > 500) {
-          lblError.textContent ="Por favor, seleccione imágenes de tamaño inferior a 500 KB."
+          lblError.textContent ="Por favor, seleccione imágenes de tamaño inferior a 501 KB."
           lblError.classList.remove('hidden')
           // Limpiar la selección de archivos
 
@@ -193,7 +193,7 @@ if (screenWidth >= 718 && screenWidth <= 770) {
   return null
   
 } else if (parseInt(screenWidth) < parseInt(screenWidthMax) && parseInt(screenWidth) > parseInt(screenWidthMin)){
-    console.log('screenMax')
+
     
     fl_iz.style.left = '-' + cantMulMax + 'px'
     fl_dr.style.right = '-' + cantMulMax + 'px'
@@ -201,19 +201,19 @@ if (screenWidth >= 718 && screenWidth <= 770) {
     contVuelta = 0
 }else if (screenWidth <= screenWidthMin) {
     if (contVuelta === 0){
-      console.log('Poniendolo en 0')
+
       fl_iz.style.left = '0px';
       fl_dr.style.right = '0px'
       contVuelta = 1
     }
-    console.log('screenMin')
+
     
     fl_iz.style.left = cantMulMin + 'px'
     fl_dr.style.right = cantMulMin + 'px'
     cantMulMin = ((screenWidthMin - screenWidth) / 100) * cantAum
 
   }else{
-    console.log('else')
+
     fl_iz.style.left = '0px';
     fl_dr.style.right = '0px'
   }
