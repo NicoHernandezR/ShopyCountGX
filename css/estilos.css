@@ -245,6 +245,15 @@ input:focus~.barra::before{
    
 }
 
+.enviado{
+    width: 200px;
+    color: #d802f9;
+    text-align: center;
+    margin: auto;
+    padding-top: 20px;
+   
+}
+
 
 button{
     font-family: 'roboto';

@@ -7,6 +7,7 @@ let parrafo = document.getElementById("warnings")
 let errorNomb = document.getElementById("error")
 let errorEm = document.getElementById("mensaje")
 let errorPass = document.getElementById("incorrecto")
+let enviado = document.getElementById("enviado")
 
 
 
@@ -21,31 +22,35 @@ form.addEventListener("submit", e=>{
     parrafo.innerHTML = ""
     errorNomb.innerHTML = ""
     errorEm.innerHTML = ""
-
+    errorPass.innerHTML = ""
+    enviado.textContent = ""
     if(nombre.value.length <6){
         error += `El nombre no es valido <br>`
-        errorNomb.textContent = `El nombre no es valido`
+        errorNomb.textContent = `El nombre debe tener mas de 6 caracteres`
         entrar = true
     }
-    if(!regexEmail.test(email.value)){
+    if(email.value.trim().length < 8){
+        errorEm.textContent = `El email debe tener mas de 8 caracteres`
+    }
+    else if (!regexEmail.test(email.value)){
         mensaje += `El email no es valido <br>`
         errorEm.textContent = `El email no es valido`
         entrar = true
     }
     if (pass.value !== passs.value){
-        incorrecto += `Las contraseñas no coinciden <br>`
+
         errorPass.textContent = `Las contraseñas no coinciden `
         entrar = true
     }
     if(pass.value.length < 8){
-        warnings += `La contraseña no es valida<br>`
+        warnings += `La contraseña debe tener mas de 8 caracteres<br>`
         entrar = true
     }
 
     if(entrar){
         parrafo.innerHTML = warnings
     }else{
-        parrafo.innerHTML = "Enviado"
+        enviado.textContent = "Enviado"
     }
 })
   
