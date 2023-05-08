@@ -141,5 +141,15 @@ body {
   }
 
 }
+@media (max-width:991px) {
+    .btn_div {
+        right: 0px;
+    }
+    
+}
 
+.ct{
+    justify-content: center !important;
+    text-align:  center;
+}
 
