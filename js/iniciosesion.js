@@ -52,3 +52,25 @@ function validateForm() {
           form.submit();
       }
   });*/
+
+  /*const form = document.getElementById('form');
+  const alert = document.getElementById('alert');
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault(); 
+    const username = event.target[0].value;
+    const password = event.target[1].value;
+
+    
+    if (!username || !password) {
+      alert.innerHTML = '<p class="error">Por favor, ingrese su nombre de usuario y contraseña.</p>';
+      return;
+    }
+
+    if (username.length < 6 || password.length < 8) {
+      alert.innerHTML = '<p class="error">El nombre de usuario debe tener al menos 6 caracteres y la contraseña debe tener al menos 8 caracteres.</p>';
+      return;
+    }
+
+    form.submit();
+  });*/

@@ -138,7 +138,7 @@ body {
     font-family: 'Roboto';
     background: #eb0cdc;
     background: linear-gradient(150deg, #6C3483, #58D68D);
-    height: 100vh;
+    height: 110vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -181,7 +181,7 @@ input{
 
 input:focus{ 
     outline: none;
-    color: #5e5d5d;
+    color: #f90707;
 }
 
 label{
@@ -256,6 +256,21 @@ input:focus~.barra::before{
 
 
 button{
+    font-family: 'roboto';
+    background: #4568DC;
+    background: -webkit-linear-gradient( 150deg, #6C3483, #58D68D);
+    background: linear-gradient( 150deg, #6C3483, #58D68D);
+    border: none;
+    display: block;
+    width: 80%;
+    margin: 10px auto;
+    color: #fff;
+    height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn{
     font-family: 'roboto';
     background: #4568DC;
     background: -webkit-linear-gradient( 150deg, #6C3483, #58D68D);

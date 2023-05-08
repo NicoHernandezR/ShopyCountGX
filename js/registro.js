@@ -27,6 +27,7 @@ form.addEventListener("submit", e=>{
     if(nombre.value.length <6){
         error += `El nombre no es valido <br>`
         errorNomb.textContent = `El nombre debe tener mas de 6 caracteres`
+        errorNomb.style.color = "red";
         entrar = true
     }
     if(email.value.trim().length < 8){
@@ -35,6 +36,7 @@ form.addEventListener("submit", e=>{
     else if (!regexEmail.test(email.value)){
         mensaje += `El email no es valido <br>`
         errorEm.textContent = `El email no es valido`
+        errorEm.style.color = "red";
         entrar = true
     }
     if (pass.value !== passs.value){
