@@ -113,14 +113,6 @@ body{
     position: relative;
 }
 
-@media (max-width:992px){
-    .btn_div{
-        right: 0px;
-        position: relative;
-        padding-bottom: 8px;
-    }
-}
-
 
 @media (min-width:1420px) {
     .img_cn{
