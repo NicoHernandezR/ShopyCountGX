@@ -85,3 +85,15 @@
 .nv_bg{
     background:  linear-gradient(150deg,#58D68D, #6C3483);
 }
+
+@media (max-width:991px) {
+    .btn_div {
+        right: 0px;
+    }
+    
+}
+
+.ct{
+    justify-content: center !important;
+    text-align:  center;
+}
