@@ -20,7 +20,7 @@ body{
 .carousel-inner {
     position: relative;
     width: 100%;
-    overflow: scroll;
+    /*overflow: scroll;*/
 }
 
 .carousel-item {
@@ -52,6 +52,12 @@ body{
     width: 75px;
     height: 75px;
     fill: #F7A211 !important;
+}
+
+.placeholderCar{
+    background-image: url('../img/placeholderCarusel.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 

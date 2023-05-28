@@ -37,11 +37,11 @@
         <div class="row pad-row pad-top" id="opcionesCuenta">
             <div class="container-fluid cont_imp pad-bot-opt" name="opcionesCuenta">
             {% for c in carac%}
-            <div class="row" name="{{c.id_tipo_cuenta.id_tipo_cuenta}}">
+            <div class="row hidden" name="{{c.id_carac.nom_carac}}"id="{{c.id_tipo_cuenta.id_tipo_cuenta}}">
                 <label class="load col-6 col-md-6 r_lbl">{{c.id_carac.nom_carac}}</label>
                 <input type="number" id="{{c.id_carac.nom_carac}}" name="{{c.id_carac.nom_carac}}" min="{{c.id_carac.min_carac}}" 
                 max="{{c.id_carac.max_carac}}" placeholder="{{c.id_carac.min_carac}}" class="load col-6 col-md-6 inp_form">
-                <label id="error" class="col-12 hidden rigth" style="color: red;"></label>
+                <label id="{{c.id_tipo_cuenta.id_tipo_cuenta}}error{{c.id_carac.nom_carac}}" class="col-12 hidden rigth" style="color: red;"></label>
             </div>
             {% endfor %}
         </div>
@@ -112,6 +112,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
     <script src="{% static 'Shopy/js/vender.js'%}"></script>
+    <script src="{% static 'Shopy/js/caruselCuenta.js'%}"></script>
     {% include "footer.html" %}
 
 
