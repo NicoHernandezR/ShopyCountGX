@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+    {% if carac %}
+
+{% for c in carac%}
+<div class="row pad-row pad-bot-opt" name="{{c.id_carac.nom_carac}}"id="{{c.id_tipo_cuenta.id_tipo_cuenta}}">
+    <label class="load col-6 col-md-6 r_lbl">{{c.id_carac.nom_carac}}</label>
+    <input type="number" id="{{c.id_carac.nom_carac}}" name="{{c.id_carac.nom_carac}}" min="{{c.id_carac.min_carac}}" 
+    max="{{c.id_carac.max_carac}}" placeholder="{{c.id_carac.min_carac}}" class="load col-6 col-md-6 inp_form">
+    <label id="{{c.id_tipo_cuenta.id_tipo_cuenta}}error{{c.id_carac.nom_carac}}" class="col-12 hidden rigth" style="color: red;"></label>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if carac %}
+<div class="load row pad-row pad-top pad-bot-opt" id="destacar_div">
+    <label for="destacar" class="col-6 col-md-6 form-label r_lbl" id="destacar_lbl">Caracteristica a Destacar</label>
+    <select name="destacar" class="col-6 col-md-6 inp_form" id="destacar"> 
+      <option value="0">Ninguna</option>
+
+
+      {% for c in carac%}
+
+      <option value="{{c.id_carac.id_carac}}">{{c.id_carac.nom_carac}}</option>
+
+      {% endfor %}
+
+    </select>
+    <label for="errordestacar" class="col-12 rigth" style="color: red;" id="errordestacar"></label>
+  </div>
+{% endif %}
+</body>
+</html>
