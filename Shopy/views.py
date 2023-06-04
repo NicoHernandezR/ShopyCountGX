@@ -20,7 +20,7 @@ def vender(request):
                 #'carac' : carac}
         return render(request,'Shopy/vender.html', context)
     else:
-
+        
         archivos = request.FILES.getlist('imgs')
 
         
@@ -56,7 +56,7 @@ def vender(request):
             imgn.save()
         #context={'mensaje':"OK, datos grabados..."}
         #return render(request, 'Shopy/index.html', context)
-
+        print('Cuenta Agregada')
         return render(request,'Shopy/vender.html')
 
 def cargarCarac(request, id):

@@ -141,7 +141,6 @@ function cargarPlaceHolder() {
 
 selectTipo.addEventListener('change', function(event) {
     let val = selectTipo.value;
-    console.log(val)
     if (val === "0"){
         console.log('epico')
         return null
@@ -157,3 +156,105 @@ selectTipo.addEventListener('change', function(event) {
         cont = 0
     }
 });
+
+function validarLetras(string) {
+  // Verificar si el string contiene solo números
+
+  console.log(string)
+  if (string.length === 0) {
+    return true;
+  }
+
+  var numerosValidos = /^[0-9]+$/;
+  if (!numerosValidos.test(string)) {
+    return false;
+  }
+
+  return true;
+}
+
+function validarCantidades(val,min,max,error,nom) {
+  if (isNaN(val)) {
+
+    error.textContent = 'El campo ' + nom + ' no puede quedar en blanco'
+    error.classList.remove('hidden');
+    return false
+    
+  }else if (!(val % 1 === 0)) {
+
+    error.textContent = 'El campo ' + nom + ' no puede ser un decimal'
+    error.classList.remove('hidden');
+    return false
+
+  }else if (!(val >= min)) {
+    
+    error.textContent = 'El campo ' + nom + ' no puede ser menor a ' + min
+    error.classList.remove('hidden');
+    return false
+
+  }else if (!(val <= max)) {
+
+    error.textContent = 'El campo ' + nom + ' no puede ser mayor a ' + max
+    error.classList.remove('hidden');
+    return false
+
+  }
+
+  return true
+
+}
+
+
+function validarFormulario() {
+
+    var selectTPC = document.getElementById('tipoCuenta')
+    var valorTPC = selectTPC.value;
+    var divsCaracs = document.querySelectorAll("[id='" + valorTPC + "']");
+    var cantErrores = 0;
+
+
+    //Aqui valido que cada campo de Caracteristicas del tipo de cuenta este correcto
+    divsCaracs.forEach(function(e) {
+      var input = e.querySelector("input");
+      var min = parseInt(input.min, 10);
+      var max = parseInt(input.max, 10);
+      var valor = input.value;
+      var lblError = e.querySelector("[id='error']")
+      lblError.classList.add('hidden')
+      var nom = input.name
+
+
+
+      if (!validarLetras(valor)){
+        lblError.textContent = 'El campo ' + nom + ' SOLO puede tener NUMEROS'
+        lblError.classList.remove('hidden');
+        cantErrores = cantErrores + 1;
+        return
+        
+      }else{
+        var valor = parseInt(input.value, 10);
+      }
+
+      if (validarCantidades(valor,min,max,lblError,nom)){
+        return
+      }
+
+      cantErrores = cantErrores + 1;
+      
+
+    });
+
+    //Aqui se valida que el precio este correcto
+    var precio = document.getElementById("precio");
+    var errorPrecio = document.getElementById("errorprecio")
+    
+    if (!validarCantidades(precio.value, precio.min, precio.max, errorPrecio, 'Precio')){
+      cantErrores = cantErrores + 1
+    }
+
+
+
+    return false;
+
+    //document.getElementById('formularioCuenta').submit()
+}

@@ -19,7 +19,7 @@
 
     <div class="container-fluid">
 
-        <form action="vender" enctype="multipart/form-data" method="post" name="venderCuenta" >
+        <form action="vender" enctype="multipart/form-data" method="post" name="venderCuenta" id="formularioCuenta" >
           {% csrf_token %}
 
           <div class="row pad-row pad-top">
@@ -83,7 +83,7 @@
 
         <div class="row pad-row  ">
           <div class="col-12 col-md-6 js_center pad-top">
-            <button type="submit" class="btn_size_c wh" value="enviar">Vender</button>
+            <button type="button" class="btn_size_c wh" value="enviar" onclick="validarFormulario()">Vender</button>
           </div>
           <div class="col-12 col-md-6 js_center pad-top">
             <button onclick="event.preventDefault(); limpiarFormulario()" class="btn_size_c wh">Cancelar</button>
