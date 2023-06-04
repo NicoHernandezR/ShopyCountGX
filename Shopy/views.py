@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import TipoCuenta,ConexionTipoCarac
-from .models import CaracTipoCuenta
+from .models import TipoCuenta,ConexionTipoCarac,ImagenCuenta
+from .models import CaracTipoCuenta,Cuenta,CuentaCarac
 
 # Create your views here.
 
@@ -23,18 +23,40 @@ def vender(request):
 
         archivos = request.FILES.getlist('imgs')
 
-            
+        
         idTipo = request.POST['tipoCuenta']
         caracABuscar = ConexionTipoCarac.objects.filter(id_tipo_cuenta=idTipo)
         
-        print(caracABuscar)
+        caracDesc = request.POST['destacar']
+        precio = request.POST['precio']
+        infoExtra = request.POST['info_extra']
+
+        tpCuenta = TipoCuenta.objects.get(id_tipo_cuenta = idTipo)
+        cuenta=Cuenta.objects.create(id_tipo_cuenta = tpCuenta,
+                                  carac_desc = caracDesc,
+                                  precio = precio,
+                                  info_ext = infoExtra)
+        cuenta.save()
+
+        id_cuenta = cuenta.id_cuenta
         
-        """
-        for i in request.POST:
-            for j in caracABuscar:
-                if i == j.nom_carac:
-                    print(i)
-        """
+        for i in caracABuscar:
+            
+            carac = CaracTipoCuenta.objects.get(nom_carac=i.id_carac)
+            valor = request.POST[carac.nom_carac]
+            cuentaCarac = CuentaCarac.objects.create(id_carac = carac,
+                                                     id_cuenta = cuenta,
+                                                     valor = valor)
+            cuentaCarac.save()
+        
+        for i in archivos:
+            print(type(i))
+            imgn = ImagenCuenta.objects.create(id_cuenta = cuenta,
+                                              img = i)
+            imgn.save()
+        #context={'mensaje':"OK, datos grabados..."}
+        #return render(request, 'Shopy/index.html', context)
+
         return render(request,'Shopy/vender.html')
 
 def cargarCarac(request, id):
