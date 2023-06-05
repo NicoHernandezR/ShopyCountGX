@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Usuario(models.Model):
     id_usu = models.AutoField(db_column='id_usu', primary_key=True)
