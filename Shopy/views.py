@@ -86,3 +86,27 @@ def cargarCaracv1(request, id):
 
         print("Error")
     return render(request,'Shopy/vender.html', context)
+
+
+def tienda(request):
+    tipoCuenta = TipoCuenta.objects.all()
+    cuentas = Cuenta.objects.all()
+    cuentasCarac = CuentaCarac.objects.all()
+
+    context = {'tipoCuenta' : tipoCuenta,
+                'cuentas' : cuentas,
+                'cuentasCarac' : cuentasCarac}
+
+    return render(request, 'Shopy/tienda.html', context)
+
+
+def cargarFiltro(request, id):
+    tipoCuenta = TipoCuenta.objects.all()
+    if id == 0:
+        return render(request, 'Shopy/tienda.html', {'tipoCuenta': tipoCuenta})
+    try:
+        carac = ConexionTipoCarac.objects.filter(id_tipo_cuenta=id)
+        return render(request, 'filtro_carac.html', {'carac': carac})
+    except:
+        print("Error")
+    return render(request, 'Shopy/tienda.html', {'tipoCuenta': tipoCuenta})

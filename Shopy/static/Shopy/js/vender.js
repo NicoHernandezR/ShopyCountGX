@@ -248,13 +248,13 @@ function validarFormulario() {
     var precio = document.getElementById("precio");
     var errorPrecio = document.getElementById("errorprecio")
     
-    if (!validarCantidades(precio.value, precio.min, precio.max, errorPrecio, 'Precio')){
+    if (!validarCantidades(parseInt(precio.value), parseInt(precio.min), parseInt(precio.max), errorPrecio, 'Precio')){
       cantErrores = cantErrores + 1
     }
 
 
+    document.getElementById('formularioCuenta').submit()
+    
 
-    return false;
-
-    //document.getElementById('formularioCuenta').submit()
+    
 }
