@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import TipoCuenta,ConexionTipoCarac,ImagenCuenta
 from .models import CaracTipoCuenta,Cuenta,CuentaCarac
+from django.db.models import F
 
 # Create your views here.
 
@@ -89,13 +90,23 @@ def cargarCaracv1(request, id):
 
 
 def tienda(request):
+
+    """    
     tipoCuenta = TipoCuenta.objects.all()
     cuentas = Cuenta.objects.all()
     cuentasCarac = CuentaCarac.objects.all()
 
     context = {'tipoCuenta' : tipoCuenta,
                 'cuentas' : cuentas,
-                'cuentasCarac' : cuentasCarac}
+                'cuentasCarac' : cuentasCarac}"""
+    
+    cuentas = Cuenta.objects.all()
+    carac = CuentaCarac.objects.filter(id_cuenta__in=cuentas, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+
+    context = {
+        'cuentas': cuentas,
+        'cuentas_carac': carac,
+    }
 
     return render(request, 'Shopy/tienda.html', context)
 

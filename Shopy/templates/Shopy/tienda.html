@@ -83,7 +83,6 @@
       </div>
 
       <div class="container-fluid">
-
         {% if cuentas %}
             {% for c in cuentas %}
                 <div class="row justify-content-center pd_tp">
@@ -95,12 +94,10 @@
                                         <img src="../img/cuenta_icon/icon1.png" class="img_info">
                                     </div>
                                     <div class="col-4 txt_info">
-                                        {% for carac in cuentasCarac %}
-                                            {% if c == carac.id_cuenta %}
-                                                {% if c.carac_desc ==  carac.id_carac.nom_carac %}
-                                                    {{ carac.id_carac.nom_carac }}
-                                                    {{ carac.valor }}
-                                                {% endif %}
+                                        {% for carac in cuentas_carac %}
+                                            {% if c.id_cuenta == carac.id_cuenta.id_cuenta and c.carac_desc == carac.id_carac.nom_carac %}
+                                                {{ carac.id_carac.nom_carac }}
+                                                {{ carac.valor }}
                                             {% endif %}
                                         {% endfor %}
                                     </div>
