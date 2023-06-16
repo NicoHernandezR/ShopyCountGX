@@ -1,8 +1,10 @@
-let inputImagen = document.getElementById("input-file");
+const inputImagen = document.getElementById("input-file");
 let carrusel = document.getElementById('carousel');
 let carruselInner = carrusel.querySelector('.carousel-inner');
 
 let selectedImages = []; 
+let carAproved = 0;
+
 
 function limpiarCarusel() {
   let carImg = document.getElementById('cinner');
@@ -33,6 +35,7 @@ inputImagen.addEventListener('change', function() {
           lblError.textContent ="Por favor, seleccione solo imágenes (JPG, JPEG, PNG)."
           lblError.classList.remove('hidden')
           arrayEliminar.push(i)
+          carAproved = 0
 
           //inputFile.value = ""; // Limpiar la selección de archivos
           //limpiarCarusel()
@@ -43,6 +46,7 @@ inputImagen.addEventListener('change', function() {
           lblError.textContent ="Por favor, seleccione imágenes de tamaño inferior a 501 KB."
           lblError.classList.remove('hidden')
           // Limpiar la selección de archivos
+          carAproved = 0
 
           arrayEliminar.push(i)
           limpiarCarusel()
@@ -88,6 +92,7 @@ inputImagen.addEventListener('change', function() {
     lblError.textContent ='Suba entre 1 a 5 imagenes para dar informacion sobre la cuenta.'
     lblError.classList.remove('hidden')
     borrarArchivosMalos(null)
+    carAproved = 0
 
     /*
     for (let x = files.length; x > 0; x--) {
@@ -99,6 +104,7 @@ inputImagen.addEventListener('change', function() {
      // Limpiar la selección de archivos
     return;
   }
+  carAproved = 1
 });
 
 function borrarArchivosMalos(lista) {

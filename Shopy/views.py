@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import TipoCuenta,ConexionTipoCarac,ImagenCuenta
 from .models import CaracTipoCuenta,Cuenta,CuentaCarac
 from django.db.models import F
@@ -10,6 +10,21 @@ def index(request):
 
 def navbar(request):
     return render(request,'Shopy/navbar.html')
+
+def cuenta(request,id):
+
+    cuentaV = Cuenta.objects.get(id_cuenta = id)
+    imagenes = ImagenCuenta.objects.filter(id_cuenta=cuentaV)
+    carac = CuentaCarac.objects.filter(id_cuenta=cuentaV)
+
+    context = {
+        'cuenta':  cuentaV,
+        'imagenes': imagenes,
+        'carac' : carac
+    }
+
+
+    return render(request, 'Shopy/cuenta.html', context)
 
 def vender(request):
     print("Cargando")
@@ -33,32 +48,32 @@ def vender(request):
         infoExtra = request.POST['info_extra']
 
         tpCuenta = TipoCuenta.objects.get(id_tipo_cuenta = idTipo)
-        cuenta=Cuenta.objects.create(id_tipo_cuenta = tpCuenta,
+        cuentaV=Cuenta.objects.create(id_tipo_cuenta = tpCuenta,
                                   carac_desc = caracDesc,
                                   precio = precio,
                                   info_ext = infoExtra)
-        cuenta.save()
+        cuentaV.save()
 
-        id_cuenta = cuenta.id_cuenta
+        id_cuenta = cuentaV.id_cuenta
         
         for i in caracABuscar:
             
             carac = CaracTipoCuenta.objects.get(nom_carac=i.id_carac)
             valor = request.POST[carac.nom_carac]
             cuentaCarac = CuentaCarac.objects.create(id_carac = carac,
-                                                     id_cuenta = cuenta,
+                                                     id_cuenta = cuentaV,
                                                      valor = valor)
             cuentaCarac.save()
         
         for i in archivos:
             print(type(i))
-            imgn = ImagenCuenta.objects.create(id_cuenta = cuenta,
+            imgn = ImagenCuenta.objects.create(id_cuenta = cuentaV,
                                               img = i)
             imgn.save()
         #context={'mensaje':"OK, datos grabados..."}
         #return render(request, 'Shopy/index.html', context)
         print('Cuenta Agregada')
-        return render(request,'Shopy/vender.html')
+        return redirect('cuenta', id=cuentaV.id_cuenta)
 
 def cargarCarac(request, id):
     tipoCuenta = TipoCuenta.objects.all()
@@ -100,12 +115,14 @@ def tienda(request):
                 'cuentas' : cuentas,
                 'cuentasCarac' : cuentasCarac}"""
     
+    tipoCuenta = TipoCuenta.objects.all()
     cuentas = Cuenta.objects.all()
     carac = CuentaCarac.objects.filter(id_cuenta__in=cuentas, id_carac__nom_carac=F('id_cuenta__carac_desc'))
 
     context = {
         'cuentas': cuentas,
         'cuentas_carac': carac,
+        'tipoCuenta' :tipoCuenta
     }
 
     return render(request, 'Shopy/tienda.html', context)
@@ -113,11 +130,15 @@ def tienda(request):
 
 def cargarFiltro(request, id):
     tipoCuenta = TipoCuenta.objects.all()
+    print(type(id))
+    print('type(id)')
     if id == 0:
-        return render(request, 'Shopy/tienda.html', {'tipoCuenta': tipoCuenta})
+        return render(request, 'filtro_carac.html')
     try:
         carac = ConexionTipoCarac.objects.filter(id_tipo_cuenta=id)
         return render(request, 'filtro_carac.html', {'carac': carac})
     except:
         print("Error")
     return render(request, 'Shopy/tienda.html', {'tipoCuenta': tipoCuenta})
+
+

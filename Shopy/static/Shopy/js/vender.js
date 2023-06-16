@@ -253,7 +253,34 @@ function validarFormulario() {
     }
 
 
-    document.getElementById('formularioCuenta').submit()
+    var info_extra = document.getElementById('info_extra');
+    var info_cont = info_extra.value.trim();
+    var errorextra = document.getElementById('errorextra');
+    errorextra.classList.add('hidden')
+
+
+    if (info_cont.length < 25 || info_cont.length > 501){
+      errorextra.classList.remove('hidden')
+      errorextra.textContent = 'La informacion extra tiene que contener entre 25 a 500 caracteres';
+      cantErrores = cantErrores + 1
+    }
+
+    var lblError = document.getElementById('errorImg');
+    lblError.classList.add('hidden')
+
+    if (inputImagen.files.length < 1){
+      lblError.textContent ='Suba entre 1 a 5 imagenes para dar informacion sobre la cuenta.'
+      lblError.classList.remove('hidden')
+      cantErrores = cantErrores + 1
+    }
+
+    console.log(inputImagen.files.length)
+
+    if (cantErrores === 0){
+      document.getElementById('formularioCuenta').submit()
+    }
+    return;
+    
     
 
     

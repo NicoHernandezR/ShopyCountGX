@@ -22,7 +22,7 @@ class TipoCuenta(models.Model):
 
 class CaracTipoCuenta(models.Model):
     id_carac = models.AutoField(db_column='id_carac', primary_key=True)
-    nom_carac = models.CharField(max_length=25, blank=False, null=False)
+    nom_carac = models.CharField(max_length=25, blank=False)
     min_carac = models.IntegerField()
     max_carac = models.IntegerField()
     
