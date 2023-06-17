@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,19 +13,11 @@
       }
   </style>
 </head>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio Sesion</title>
-    <link rel="stylesheet" href="../css/iniciodesesion.css">
-</head>
 <body id="fb">
   <div class="row size_h">
       <div class="col-xs-12 col-sm-6 col-md-2 col-lg-1">
           <div class="login-box">
-                  <img src="../img/mando.logo.jpg" class="avatar" alt="Avatar Image">
+                  <img src="{% static 'Shopy/img/logo.jpg'%}" class="avatar" alt="Avatar Image">
                   <h1>Iniciar Sesion</h1>
                   <form id="form" onsubmit="return validateForm()">
                     <!-- USERNAME INPUT -->
@@ -38,9 +31,9 @@
                   </form>
                   <div class="elmain">
                     <form action="../src/index.html">
-                        <button class="Cancelar"  value="Cancelar">Cancelar</button>
+                        <button class="Cancelar"  value="Cancelar" >Cancelar</button>
                         <a href="#">¿Olvido su contraseña?</a><br>
-                        <a href="{% url 'registrarse'%}">Registrarse</a>
+                        <a href="{% url 'registro'%}">Registrarse</a>
                     </form>
 
                   </div>
