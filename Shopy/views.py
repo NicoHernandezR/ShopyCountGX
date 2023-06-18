@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import TipoCuenta,ConexionTipoCarac,ImagenCuenta
 from .models import CaracTipoCuenta,Cuenta,CuentaCarac
-from django.db.models import F
+from django.db.models import F, Q
 from .forms import CrearUsuario
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -58,17 +58,18 @@ def vender(request):
 
         user = request.user
 
+        maxC = Cuenta.objects.count()
+
         cuentaV = Cuenta.objects.create(
-            id_cuenta=user,  # Asignar el objeto User a id_cuenta
+            id_cuenta=user,
             id_tipo_cuenta=tpCuenta,
             carac_desc=caracDesc,
             precio=precio,
-            info_ext=infoExtra
+            info_ext=infoExtra,
+            id = maxC + 1
         )
         cuentaV.save()
 
-        id_cuenta = cuentaV.id_cuenta
-        
         for i in caracABuscar:
             
             carac = CaracTipoCuenta.objects.get(nom_carac=i.id_carac)
@@ -86,7 +87,7 @@ def vender(request):
         #context={'mensaje':"OK, datos grabados..."}
         #return render(request, 'Shopy/index.html', context)
         print('Cuenta Agregada')
-        return redirect(to='cuenta', id=cuentaV.id_cuenta)
+        return redirect(to='cuenta', id=cuentaV.id)
 
 def cargarCarac(request, id):
     tipoCuenta = TipoCuenta.objects.all()
@@ -128,15 +129,31 @@ def tienda(request):
                 'cuentas' : cuentas,
                 'cuentasCarac' : cuentasCarac}"""
     
+    user = request.user
     tipoCuenta = TipoCuenta.objects.all()
-    cuentas = Cuenta.objects.all()
-    carac = CuentaCarac.objects.filter(id_cuenta__in=cuentas, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+    context = {}
+    context.update({
+        'tipoCuenta' : tipoCuenta,
+    })
 
-    context = {
-        'cuentas': cuentas,
-        'cuentas_carac': carac,
-        'tipoCuenta' :tipoCuenta
-    }
+    if user.is_authenticated:
+        cuentas_usu = Cuenta.objects.filter(id_cuenta = user)
+        cuentas_usu_cant = cuentas_usu.count()
+        carac_usu =  CuentaCarac.objects.filter(id_cuenta__in=cuentas_usu, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+        cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user))
+        carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+        context.update({'cuentas_usu':cuentas_usu})
+        context.update({'cuentas_usu_cant':cuentas_usu_cant})
+        context.update({'carac_usu':carac_usu})
+        context.update({'cuentas_vender':cuentas_vender})
+        context.update({'carac_vender':carac_vender})
+    else:
+        cuentas_vender = Cuenta.objects.all()
+        carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+        context.update({'cuentas_vender':cuentas_vender})
+        context.update({'carac_vender':carac_vender})
+    
+
 
     return render(request, 'Shopy/tienda.html', context)
 
