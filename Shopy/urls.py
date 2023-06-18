@@ -7,5 +7,8 @@ urlpatterns = [
     path('vender/<int:id>', views.cargarCarac, name='cargarCarac'),
     path('tienda',views.tienda, name='tienda'),
     path('tienda/<int:id>',views.cargarFiltro, name='cargarFiltro'),
+    path('registro',views.registro, name='registro'),
     path('cuenta/<int:id>',views.cuenta, name='cuenta'),
+    #path('alumnosList', views.alumnosList, name='alumnosList'),
+    #path('alumnosAdd', views.alumnosAdd, name='alumnosAdd'),
 ]

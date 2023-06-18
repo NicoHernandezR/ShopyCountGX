@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Sesion</title>
+    <link rel="stylesheet" href="{% static 'Shopy/css/iniciosesion.css'%}">
+    <style>
+      .error {
+          color: red;
+      }
+  </style>
+</head>
+<body id="fb">
+  <div class="row size_h">
+      <div class="col-xs-12 col-sm-6 col-md-2 col-lg-1">
+          <div class="login-box">
+                  <img src="{% static 'Shopy/img/logo.jpg'%}" class="avatar" alt="Avatar Image">
+                  <h1>Iniciar Sesion</h1>
+                  <form id="form" onsubmit="return validateForm()">
+                    <!-- USERNAME INPUT -->
+                    <label for="username" id="user">Nombre de Usuario</label>
+                    <input type="text" placeholder="Nombre de usuario" required>
+                    <!-- PASSWORD INPUT -->
+                    <label for="password" id="password">Contraseña</label>
+                    <input type="password" placeholder="Ingrese Contraseña" required>
+                    <p class="warnings" id="warnings"></p>
+                    <input type="submit" value="Iniciar Sesion">
+                  </form>
+                  <div class="elmain">
+                    <form action="../src/index.html">
+                        <button class="Cancelar"  value="Cancelar" >Cancelar</button>
+                        <a href="#">¿Olvido su contraseña?</a><br>
+                        <a href="{% url 'registro'%}">Registrarse</a>
+                    </form>
+
+                  </div>
+          </div>
+      </div>
+  </div>
+  <script src="{% static 'Shopy/js/iniciosesion.js'%}"></script>
+</body>
+</html>
