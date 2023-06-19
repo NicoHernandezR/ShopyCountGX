@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib import messages
 from .models import TipoCuenta,ConexionTipoCarac,ImagenCuenta
 from .models import CaracTipoCuenta,Cuenta,CuentaCarac
 from django.db.models import F, Q
@@ -189,3 +190,19 @@ def registro(request):
         context["form"] = formulario
 
     return render(request, 'Shopy/registro.html', context)
+
+def my_view(request):
+    if request.method == 'POST':
+        form = CrearUsuario(request.POST)
+        if form.is_valid():
+            # Validar la contraseña y determinar que es incorrecta
+            if contraseña_incorrecta:
+                messages.error(request, 'Contraseña incorrecta')
+                return render(request, 'nombre_del_template.html', {'form': form})
+            else:
+                # Lógica para el caso de que la contraseña sea correcta
+                return redirect('index.html')  # Redirigir a otra vista si es necesario
+    else:
+        form = CrearUsuario()
+    
+    return render(request, 'nombre_del_template.html', {'form': form})
