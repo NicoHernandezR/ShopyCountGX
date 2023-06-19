@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    
+    {% if cuentas_vender %}
+    <div class="container-fluid">
+
+      <div class="row mb-3">
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Cuenta</th>
+              <th scope="col" style="text-align: center; vertical-align: middle;">Caracteristica</th>
+              <th scope="col" style="text-align: center; vertical-align: middle;">Precio</th>
+              <th scope="col" style="text-align: center; vertical-align: middle;">Agregar Carro</th>
+
+            </tr>
+          </thead>
+          {% for c in cuentas_vender %}
+          <tr>
+            <td>
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <img src="{% static 'Shopy/img/cuenta_icon/icon' %}{{ c.id_tipo_cuenta.id_tipo_cuenta }}.png" class="" style="margin-right: 10px;">
+               <a style="margin: 0;" href="{% url 'cuenta' id=c.id %}"><strong>Cuenta {{ c.id_tipo_cuenta.nom_tipo_cuenta}}</strong></a>
+              </div>
+          </td>
+          <td style="text-align: center; vertical-align: middle;">           
+              {% if c.carac_desc == "Ninguna" %}
+              Ninguna
+              {% else %}
+                {% for carac in carac_vender %}
+                    {% if c.id_cuenta == carac.id_cuenta.id_cuenta and c.carac_desc == carac.id_carac.nom_carac %}
+                        {{ carac.id_carac.nom_carac }}
+                        {{ carac.valor }}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}</td>
+            <td style="text-align: center; vertical-align: middle;">$ {{ c.precio }}</td>
+            <td style="text-align: center; vertical-align: middle;">
+              <a href="#"><img src="{% static 'Shopy/img/agregarCarritoV.png' %}" alt="" width="50px"></a>
+            </td> 
+          </tr>
+
+          {% endfor %}
+        </table>
+      </div>
+
+
+  </div>
+  {% endif %}
+
+
+
+</body>
+</html>

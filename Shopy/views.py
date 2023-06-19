@@ -160,8 +160,6 @@ def tienda(request):
 
 def cargarFiltro(request, id):
     tipoCuenta = TipoCuenta.objects.all()
-    print(type(id))
-    print('type(id)')
     if id == 0:
         return render(request, 'filtro_carac.html')
     try:
@@ -189,3 +187,23 @@ def registro(request):
         context["form"] = formulario
 
     return render(request, 'Shopy/registro.html', context)
+
+def aplicarFiltro(request, tipo):
+
+    user = request.user
+    context = {}
+
+    if user.is_authenticated:
+        cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user), id_tipo_cuenta=tipo)
+        carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+        
+        context.update({'cuentas_vender':cuentas_vender})
+        context.update({'carac_vender':carac_vender})
+    else:
+        cuentas_vender = Cuenta.objects.filter(id_tipo_cuenta=tipo)
+        carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+
+        context.update({'cuentas_vender':cuentas_vender})
+        context.update({'carac_vender':carac_vender})
+
+    return render(request, 'cuentas_vender.html', context)

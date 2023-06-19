@@ -96,7 +96,7 @@
             <select class="col-12 inp_form"  name="tipoCuenta" id="tipoCuenta">
               <option value="0"> Seleccionar</option>
               {% for tpc in tipoCuenta%}
-              <option value="{{ tpc.id_tipo_cuenta }}" data-url="{% url 'cargarFiltro' id=tpc.id_tipo_cuenta %}">
+              <option value="{{ tpc.id_tipo_cuenta }}" data-url="{% url 'cargarFiltro' id=tpc.id_tipo_cuenta %}" id="tpc.id_tipo_cuenta">
                 {{ tpc.nom_tipo_cuenta }}
               </option>
           
@@ -127,8 +127,9 @@
       <div class="col-0 col-md-12">
         <div class="riglhtcol small responsive_local_menu autocollapse_enabled bg_filtro"> 
           <div class="block search_collapse_block inp_form btn_row">
-            <button class="btn_size_c" onclick="mostrarCuentas(tipoCuenta)">Aplicar Filtro</button>
-  
+              <button class="ventas" type="button" id="btnF">
+                Aplicar Filtro 
+              </button>
           </div>
         </div>
     </div>
@@ -139,52 +140,8 @@
     
     <div class="contenedor_cuenta" id="cuenta">
 
-      {% if cuentas_vender %}
-      <div class="container-fluid">
- 
-        <div class="row mb-3">
-          <table class="table table-bordered">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">Cuenta</th>
-                <th scope="col" style="text-align: center; vertical-align: middle;">Caracteristica</th>
-                <th scope="col" style="text-align: center; vertical-align: middle;">Precio</th>
-                <th scope="col" style="text-align: center; vertical-align: middle;">Agregar Carro</th>
-  
-              </tr>
-            </thead>
-            {% for c in cuentas_vender %}
-            <tr>
-              <td>
-                <div style="display: flex; flex-direction: row; align-items: center;">
-                  <img src="{% static 'Shopy/img/cuenta_icon/icon' %}{{ c.id_tipo_cuenta.id_tipo_cuenta }}.png" class="" style="margin-right: 10px;">
-                 <a style="margin: 0;" href="{% url 'cuenta' id=c.id %}"><strong>Cuenta {{ c.id_tipo_cuenta.nom_tipo_cuenta}}</strong></a>
-                </div>
-            </td>
-            <td style="text-align: center; vertical-align: middle;">           
-                {% if c.carac_desc == "Ninguna" %}
-                Ninguna
-                {% else %}
-                  {% for carac in carac_vender %}
-                      {% if c.id_cuenta == carac.id_cuenta.id_cuenta and c.carac_desc == carac.id_carac.nom_carac %}
-                          {{ carac.id_carac.nom_carac }}
-                          {{ carac.valor }}
-                      {% endif %}
-                  {% endfor %}
-              {% endif %}</td>
-              <td style="text-align: center; vertical-align: middle;">$ {{ c.precio }}</td>
-              <td style="text-align: center; vertical-align: middle;">
-                <a href="#"><img src="{% static 'Shopy/img/agregarCarritoV.png' %}" alt="" width="50px"></a>
-              </td> 
-            </tr>
-  
-            {% endfor %}
-          </table>
-        </div>
+      {% include "cuentas_vender.html" %}
 
-
-    </div>
-    {% endif %}
     </div>
     
     <div class="contenedor_cuenta">
