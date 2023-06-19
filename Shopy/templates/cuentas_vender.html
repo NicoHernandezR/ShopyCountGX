@@ -6,6 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+    {% if caracs_prueba %}
+
+    {% for c in caracs_prueba %}
+    valor : {{ c.valor}}
+    tipo_cuenta : {{ c.id_cuenta.id_tipo_cuenta.id_tipo_cuenta }}
+    precio : {{ c.id_cuenta.precio }}
+    {% endfor %}
+
+    <div class="container-fluid">
+
+      <div class="row mb-3">
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">Cuenta</th>
+              <th scope="col" style="text-align: center; vertical-align: middle;">Caracteristica</th>
+              <th scope="col" style="text-align: center; vertical-align: middle;">Precio</th>
+              <th scope="col" style="text-align: center; vertical-align: middle;">Agregar Carro</th>
+
+            </tr>
+          </thead>
+          {% for c in caracs_prueba %}
+          <tr>
+            <td>
+              <div style="display: flex; flex-direction: row; align-items: center;">
+                <img src="{% static 'Shopy/img/cuenta_icon/icon' %}{{ c.id_cuenta.id_tipo_cuenta.id_tipo_cuenta }}.png" class="" style="margin-right: 10px;">
+               <a style="margin: 0;" href="{% url 'cuenta' id=c.id_cuenta.id %}"><strong>Cuenta {{ c.id_cuenta.id_tipo_cuenta.nom_tipo_cuenta}}</strong></a>
+              </div>
+          </td>
+          <td style="text-align: center; vertical-align: middle;">           
+              {% if c.id_cuenta.carac_desc == "Ninguna" %}
+              Ninguna
+              {% else %}
+                {{ c.id_cuenta.carac_desc }}
+                {{ c.valor }}
+
+            {% endif %}</td>
+            <td style="text-align: center; vertical-align: middle;">$ {{ c.id_cuenta.precio }} </td>
+            <td style="text-align: center; vertical-align: middle;">
+              <a href="#"><img src="{% static 'Shopy/img/agregarCarritoV.png' %}" alt="" width="50px"></a>
+            </td> 
+          </tr>
+
+          {% endfor %}
+        </table>
+      </div>
+
+
+  </div>
+
+    {% endif %}
     
     {% if cuentas_vender %}
     <div class="container-fluid">

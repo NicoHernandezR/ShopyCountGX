@@ -10,11 +10,58 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var btnF = document.getElementById('btnF');
     btnF.addEventListener('click', function(event) {
-      event.preventDefault(); // Prevenir la acción predeterminada del botón
+      event.preventDefault();
       var selectedOption = selectElement.options[selectElement.selectedIndex];
-      value = selectedOption.value
-      url = "aplicarFiltro/"+ value; // Obtener el valor seleccionado del option
-      print(url)
+      var value = selectedOption.value
+      var url = ''
+
+      var divFiltros = document.getElementById("resultado-carac")
+
+      var inputs =  divFiltros.querySelectorAll("input");
+      var cantIn = inputs.length;
+      var cantInIg = 0
+      var ignorar = []
+      var noIgnorar = []
+      var noIgnorarValor = []
+
+      inputs.forEach((input) => {
+
+        var val = input.value
+
+        if (val === ""){
+
+          ignorar.push(input.id)
+          cantInIg = cantInIg + 1
+          return 
+        }
+
+        noIgnorar.push(input.id)
+        noIgnorarValor.push(val)
+
+
+
+      });
+
+      console.log(noIgnorar)
+      console.log(noIgnorarValor)
+
+      if (cantInIg === cantIn){
+        url = "aplicarFiltro/"+ value; 
+      }else{
+
+        text = 'tipo=' + value + '@'
+
+        for (let i = 0; i < noIgnorar.length; i++) {
+          text =  text + noIgnorar[i] + '=' + noIgnorarValor[i] + '@';  
+          console.log(noIgnorar[i] + '=' + noIgnorarValor[i] + '@');
+        }
+        url = "filtroValores/" + text;
+      }
+
+
+
+      
+      console.log(url)
       if (url) {
         cargarFiltro(url);
       }

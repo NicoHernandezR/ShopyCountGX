@@ -192,18 +192,98 @@ def aplicarFiltro(request, tipo):
 
     user = request.user
     context = {}
+    print(type(tipo))
+    print(tipo)
+    print(tipo != 0)
+
+    
 
     if user.is_authenticated:
-        cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user), id_tipo_cuenta=tipo)
-        carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
-        
-        context.update({'cuentas_vender':cuentas_vender})
-        context.update({'carac_vender':carac_vender})
-    else:
-        cuentas_vender = Cuenta.objects.filter(id_tipo_cuenta=tipo)
-        carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
 
-        context.update({'cuentas_vender':cuentas_vender})
-        context.update({'carac_vender':carac_vender})
+        if tipo != 0:
+            cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user), id_tipo_cuenta=tipo)
+            carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+            
+            context.update({'cuentas_vender':cuentas_vender})
+            context.update({'carac_vender':carac_vender})
+        else:
+            cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user))
+            carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+            
+            context.update({'cuentas_vender':cuentas_vender})
+            context.update({'carac_vender':carac_vender})
+
+
+    else:
+
+        if tipo!= 0:
+            cuentas_vender = Cuenta.objects.filter(id_tipo_cuenta=tipo)
+            carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+
+            context.update({'cuentas_vender':cuentas_vender})
+            context.update({'carac_vender':carac_vender})
+
+        else:
+            cuentas_vender = Cuenta.objects.all()
+            carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+
+            context.update({'cuentas_vender':cuentas_vender})
+            context.update({'carac_vender':carac_vender})
+
+    return render(request, 'cuentas_vender.html', context)
+
+
+def filtroValores(request, filtro):
+    
+    print("hola")
+    print(filtro)
+
+    filtrosTupla = []
+    tipo = int()
+    subcadenas = filtro.split('@')
+    for subcadena in subcadenas:
+        if '=' in subcadena:
+            clave, valor = subcadena.split('=')
+            if clave == 'tipo':
+                tipo = int(valor)
+            else:
+                filtrosTupla.append((clave, valor))
+
+    user = request.user
+    context = {}
+
+    listaCuentas = []
+    listaCaracs = []
+
+    if user.is_authenticated:
+        cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user))
+
+        # Filtrar por el tipo de cuenta
+        if tipo:
+            print(tipo)
+            print(cuentas_vender)
+            cuentas_vender = cuentas_vender.filter(id_tipo_cuenta__id_tipo_cuenta=tipo)
+            print(cuentas_vender)
+            carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+
+        # Filtrar por las características destacadas
+        #for clave, valor in filtrosDict.items():
+        #    cuentas_vender = cuentas_vender.filter(cuentacarac__id_carac__nom_carac=clave, cuentacarac__valor=int(valor))
+
+        context.update({'cuentas_vender': cuentas_vender})
+    
+    else:
+
+    
+        consulta_combinada = Q()
+        print(filtrosTupla)
+        print("filtrosTupla")
+        for i in filtrosTupla:
+            consulta_combinada |= Q(valor=i[1], id_cuenta__carac_desc=i[0])
+
+        caracs_vender = CuentaCarac.objects.filter(consulta_combinada)
+        print(caracs_vender)
+
+        context.update({'caracs_prueba': caracs_vender})
 
     return render(request, 'cuentas_vender.html', context)

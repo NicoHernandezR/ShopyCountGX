@@ -8,6 +8,7 @@ urlpatterns = [
     path('tienda',views.tienda, name='tienda'),
     path('tienda/<int:id>',views.cargarFiltro, name='cargarFiltro'),
     path('aplicarFiltro/<int:tipo>', views.aplicarFiltro, name='aplicarFiltro'),
+    path('filtroValores/<str:filtro>', views.filtroValores, name='filtroValores'),
     path('registro',views.registro, name='registro'),
     path('cuenta/<int:id>',views.cuenta, name='cuenta'),
     #path('alumnosList', views.alumnosList, name='alumnosList'),
