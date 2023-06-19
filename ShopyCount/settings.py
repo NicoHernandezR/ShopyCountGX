@@ -28,6 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+LOGIN_REDIRECT_URL = '/Shopy/index'
+LOGOUT_REDIRECT_URL = '/Shopy/index'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,11 +49,24 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    #'django.middleware.locale.LocaleMiddleware'
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+#LANGUAGE_CODE = 'es'
+
+#LANGUAGES = [
+    #('es', 'Spanish'),
+    #('en', 'English'),
+    # Otros idiomas que desees admitir
+#]
+
+#LOCALE_PATHS = [
+ #   os.path.join(BASE_DIR, 'locale')
+#]
 
 ROOT_URLCONF = 'ShopyCount.urls'
 
@@ -104,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -125,3 +143,4 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.db.models import Max
 
 # Create your models here.
 class Usuario(models.Model):
@@ -14,11 +15,12 @@ class Usuario(models.Model):
     
     
 class TipoCuenta(models.Model):
-    id_tipo_cuenta = models.AutoField(db_column='id_tipo_cuenta', primary_key=True)
+    id_tipo_cuenta =  models.IntegerField(db_column='id_tipo_cuenta', primary_key=True, default=0)
     nom_tipo_cuenta = models.CharField(max_length=25, blank=False, null=False)
     
     def __str__(self):
         return str(self.nom_tipo_cuenta) 
+
     
 
 class CaracTipoCuenta(models.Model):
@@ -38,19 +40,21 @@ class ConexionTipoCarac(models.Model):
         return str(self.id_tipo_cuenta) + " " + str(self.id_carac)
       
 class Cuenta(models.Model):
-    id_cuenta = models.AutoField(db_column='id_cuenta', primary_key=True)
-    id_tipo_cuenta = models.ForeignKey('TipoCuenta',on_delete=models.CASCADE, db_column='id_tipo_cuenta')
+    id_cuenta = models.ForeignKey(User, on_delete=models.CASCADE)
+    id_tipo_cuenta = models.ForeignKey('TipoCuenta', on_delete=models.CASCADE, db_column='id_tipo_cuenta')
     carac_desc = models.CharField(max_length=25, blank=False, null=False)
     precio = models.IntegerField()
     info_ext = models.TextField(blank=False, null=False)
+    id = models.AutoField(primary_key=True, default=0)
+
+
     
 class ImagenCuenta(models.Model):
     id_img = models.AutoField(db_column='id_img', primary_key=True)
     id_cuenta = models.ForeignKey('Cuenta',on_delete=models.CASCADE, db_column='id_carac')
     img = models.ImageField(upload_to="ImagenesCuentas", null=True)
 
-    
-    
+
 class CuentaCarac(models.Model):
     id_carac = models.ForeignKey('CaracTipoCuenta',on_delete=models.CASCADE, db_column='id_carac')
     id_cuenta = models.ForeignKey('Cuenta',on_delete=models.CASCADE, db_column='id_cuenta')
@@ -59,5 +63,14 @@ class CuentaCarac(models.Model):
     def __str__(self):
         return str(self.valor)
     
+class CuentaVendida(models.Model):
+    cuenta = models.ForeignKey(Cuenta, db_column='seq_cuenta', on_delete=models.CASCADE)
+    id_cuenta = models.ForeignKey(User, db_column='id_cuenta', on_delete=models.CASCADE)
 
-    
+
+class ImagenUsuario(models.Model):
+    id_cuenta = models.ForeignKey(User, on_delete=models.CASCADE)
+    img = models.ImageField(upload_to="ImagenesUsuario", null=True)
+
+
+
