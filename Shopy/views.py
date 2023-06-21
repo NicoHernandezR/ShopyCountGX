@@ -60,10 +60,18 @@ def vender(request):
 
         maxC = Cuenta.objects.count()
 
+        caracValor = 0
+
+        for i in caracABuscar:
+            carac = CaracTipoCuenta.objects.get(nom_carac=i.id_carac)
+            if caracDesc == carac.nom_carac:
+                caracValor = request.POST[carac.nom_carac]
+
         cuentaV = Cuenta.objects.create(
             id_cuenta=user,
             id_tipo_cuenta=tpCuenta,
             carac_desc=caracDesc,
+            carac_valor=caracValor,
             precio=precio,
             info_ext=infoExtra,
             id = maxC + 1
@@ -139,19 +147,19 @@ def tienda(request):
     if user.is_authenticated:
         cuentas_usu = Cuenta.objects.filter(id_cuenta = user)
         cuentas_usu_cant = cuentas_usu.count()
-        carac_usu =  CuentaCarac.objects.filter(id_cuenta__in=cuentas_usu, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+        
         cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user))
-        carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+
         context.update({'cuentas_usu':cuentas_usu})
         context.update({'cuentas_usu_cant':cuentas_usu_cant})
-        context.update({'carac_usu':carac_usu})
+
         context.update({'cuentas_vender':cuentas_vender})
-        context.update({'carac_vender':carac_vender})
+
     else:
         cuentas_vender = Cuenta.objects.all()
-        carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+
         context.update({'cuentas_vender':cuentas_vender})
-        context.update({'carac_vender':carac_vender})
+
     
 
 
@@ -202,41 +210,32 @@ def aplicarFiltro(request, tipo):
 
         if tipo != 0:
             cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user), id_tipo_cuenta=tipo)
-            carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
-            
+ 
             context.update({'cuentas_vender':cuentas_vender})
-            context.update({'carac_vender':carac_vender})
+
         else:
             cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user))
-            carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
             
             context.update({'cuentas_vender':cuentas_vender})
-            context.update({'carac_vender':carac_vender})
 
 
     else:
 
         if tipo!= 0:
             cuentas_vender = Cuenta.objects.filter(id_tipo_cuenta=tipo)
-            carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
 
             context.update({'cuentas_vender':cuentas_vender})
-            context.update({'carac_vender':carac_vender})
 
         else:
             cuentas_vender = Cuenta.objects.all()
-            carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
 
             context.update({'cuentas_vender':cuentas_vender})
-            context.update({'carac_vender':carac_vender})
 
     return render(request, 'cuentas_vender.html', context)
 
 
 def filtroValores(request, filtro):
     
-    print("hola")
-    print(filtro)
 
     filtrosTupla = []
     tipo = int()
@@ -256,34 +255,61 @@ def filtroValores(request, filtro):
     listaCaracs = []
 
     if user.is_authenticated:
-        cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user))
+        #cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user), id_tipo_cuenta=tipo)
 
         # Filtrar por el tipo de cuenta
         if tipo:
             print(tipo)
-            print(cuentas_vender)
-            cuentas_vender = cuentas_vender.filter(id_tipo_cuenta__id_tipo_cuenta=tipo)
-            print(cuentas_vender)
-            carac_vender = CuentaCarac.objects.filter(id_cuenta__in=cuentas_vender, id_carac__nom_carac=F('id_cuenta__carac_desc'))
+            consulta_combinada = Q()
 
-        # Filtrar por las características destacadas
-        #for clave, valor in filtrosDict.items():
-        #    cuentas_vender = cuentas_vender.filter(cuentacarac__id_carac__nom_carac=clave, cuentacarac__valor=int(valor))
+            for i in filtrosTupla:
+                consulta_combinada |= Q(carac_valor=i[1], carac_desc=i[0])
+            
+            
+            cuentas_vender = Cuenta.objects.filter(consulta_combinada, ~Q(id_cuenta=user), id_tipo_cuenta=tipo)
 
-        context.update({'cuentas_vender': cuentas_vender})
+            context.update({'cuentas_vender': cuentas_vender})
     
     else:
 
     
         consulta_combinada = Q()
-        print(filtrosTupla)
-        print("filtrosTupla")
         for i in filtrosTupla:
-            consulta_combinada |= Q(valor=i[1], id_cuenta__carac_desc=i[0])
+            consulta_combinada |= Q(carac_valor=i[1], carac_desc=i[0])
 
-        caracs_vender = CuentaCarac.objects.filter(consulta_combinada)
-        print(caracs_vender)
+        cuentas_vender = Cuenta.objects.filter(consulta_combinada, id_tipo_cuenta=tipo)
 
-        context.update({'caracs_prueba': caracs_vender})
+        context.update({'cuentas_vender': cuentas_vender})
 
     return render(request, 'cuentas_vender.html', context)
+
+
+
+def eliminarCuenta(request, id):
+
+    user = request.user
+
+    if user.is_authenticated:
+        context = {}
+        try:
+            cuentaV = Cuenta.objects.get(id=id)
+            cuentaV.delete()
+            mensaje = "Los datos fueron eliminados con éxito!!!"
+            cuentas_usu = Cuenta.objects.filter(id_cuenta=user)
+            context = {'cuentas_usu': cuentas_usu, 'mensaje': mensaje}
+        except:
+            mensaje = "Error D:"
+            cuentas_usu = Cuenta.objects.filter(id_cuenta=user)
+            context = {'cuentas_usu': cuentas_usu, 'mensaje': mensaje}
+
+        return render(request, 'cuentas_usu.html', context)
+        # Llamar a la función tienda para actualizar la página
+    else:
+        return render(request, 'cuentas_usu.html')
+     
+
+
+
+
+
+    

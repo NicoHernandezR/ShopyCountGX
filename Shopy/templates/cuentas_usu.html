@@ -3,19 +3,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
+    {% if cuentas_usu %}
 
-
-
-
-
-<div class="contenedor_cuenta"> 
-    {% if cuentas_vender %}
-    <div class="container-fluid">
-
+    <div class="contenedor-cuentas">
+      <div class="div-nav">
+        <a href="#">
+        <div class="ventas float-start">
+         Mis Anuncios Activos
+      </div>
+    </a>
+  
+    <a href="{% url 'vender' %}">
+      <div class="ventas float-end">
+        Vender
+      </div>
+    </a>
+      </div>
+    </div>
+  
+    <div class="contenedor-cuentas" id="cuenta_usu" >
+  
+      
       <div class="row mb-3">
         <table class="table table-bordered">
           <thead class="table-dark">
@@ -23,11 +36,11 @@
               <th scope="col">Cuenta</th>
               <th scope="col" style="text-align: center; vertical-align: middle;">Caracteristica</th>
               <th scope="col" style="text-align: center; vertical-align: middle;">Precio</th>
-              <th scope="col" style="text-align: center; vertical-align: middle;">Agregar Carro</th>
-
+              <th scope="col" style="text-align: center; vertical-align: middle;">Eliminar</th>
+  
             </tr>
           </thead>
-          {% for c in cuentas_vender %}
+          {% for c in cuentas_usu %}
           <tr>
             <td>
               <div style="display: flex; flex-direction: row; align-items: center;">
@@ -39,26 +52,26 @@
               {% if c.carac_desc == "Ninguna" %}
               Ninguna
               {% else %}
-
+  
               {{ c.carac_desc }}
               {{ c.carac_valor }}
+  
+  
             {% endif %}</td>
             <td style="text-align: center; vertical-align: middle;">$ {{ c.precio }}</td>
             <td style="text-align: center; vertical-align: middle;">
-              <a href="#"><img src="{% static 'Shopy/img/agregarCarritoV.png' %}" alt="" width="50px"></a>
-            </td> 
+              <a href="#" data-url="{% url 'eliminarCuenta' id=c.id %}" onclick="eliminarCuenta(event, this.getAttribute('data-url'))"><img src="{% static 'Shopy/img/eliminar.png' %}" alt="" width="50px"></a>
+            </td>
           </tr>
-
+  
           {% endfor %}
         </table>
       </div>
-
-
-  </div>
-  {% endif %}
-</div>
-
-
-
+  
+      
+  
+    </div>
+    {% endif %}
+    
 </body>
 </html>

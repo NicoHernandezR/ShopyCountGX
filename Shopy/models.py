@@ -43,6 +43,7 @@ class Cuenta(models.Model):
     id_cuenta = models.ForeignKey(User, on_delete=models.CASCADE)
     id_tipo_cuenta = models.ForeignKey('TipoCuenta', on_delete=models.CASCADE, db_column='id_tipo_cuenta')
     carac_desc = models.CharField(max_length=25, blank=False, null=False)
+    carac_valor = models.IntegerField()
     precio = models.IntegerField()
     info_ext = models.TextField(blank=False, null=False)
     id = models.AutoField(primary_key=True, default=0)

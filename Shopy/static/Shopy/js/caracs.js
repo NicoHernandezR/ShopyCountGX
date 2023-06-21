@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
       var selectedOption = selectElement.options[selectElement.selectedIndex];
       var url = selectedOption.getAttribute('data-url');
       if (url) {
-        cargarCarac(url);
+        let div = document.getElementById('resultado-carac')
+        cargarURL(url, div);
       }
     });
 
@@ -63,13 +64,28 @@ document.addEventListener('DOMContentLoaded', function() {
       
       console.log(url)
       if (url) {
-        cargarFiltro(url);
+        let div = document.getElementById('cuenta')
+        cargarURL(url, div);
       }
     });
 
 
+
+
   });
   
+function cargarURL(url, div){
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      var resultado = xhr.responseText;
+      div.innerHTML = resultado;
+    }
+  };
+  xhr.send();
+}
+
 function cargarCarac(url) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
@@ -94,4 +110,18 @@ function cargarFiltro(url) {
     }
   };
   xhr.send();
+}
+
+
+function eliminarCuenta(event, url) {
+  event.preventDefault();  // Evita que se siga el enlace por defecto
+
+  // Aquí puedes realizar las acciones que deseas con la URL
+  // Por ejemplo, puedes enviar una petición AJAX para eliminar la cuenta
+
+  // Ejemplo de petición AJAX utilizando jQuery
+
+  div = document.getElementById('cuentas_usuario')
+  cargarURL(url, div)
+  console.log(url)
 }
