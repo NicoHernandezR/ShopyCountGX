@@ -5,7 +5,7 @@ from .models import CaracTipoCuenta,Cuenta,CuentaCarac
 from django.db.models import F, Q
 from .forms import CrearUsuario
 from django.contrib.auth import authenticate, login
-from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -191,18 +191,30 @@ def registro(request):
 
     return render(request, 'Shopy/registro.html', context)
 
-def my_view(request):
+def login(request):
     if request.method == 'POST':
-        form = CrearUsuario(request.POST)
+        # Validar el formulario
+        form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            # Validar la contraseña y determinar que es incorrecta
-            if contraseña_incorrecta:
-                messages.error(request, 'Contraseña incorrecta')
-                return render(request, 'nombre_del_template.html', {'form': form})
+            # Obtener las credenciales del formulario
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            # Verificar si el usuario está registrado
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                # El usuario está registrado, realizar la autenticación y redireccionar a otra página
+                login(request, user)
+                return redirect(to='index')
             else:
-                # Lógica para el caso de que la contraseña sea correcta
-                return redirect('index.html')  # Redirigir a otra vista si es necesario
+                # El usuario no está registrado, agregar mensaje de error
+                messages.error(request, 'El usuario no está registrado.')
+        else:
+            # El formulario no es válido, mostrar el formulario con los errores
+            pass
     else:
-        form = CrearUsuario()
-    
-    return render(request, 'nombre_del_template.html', {'form': form})
+        # Mostrar el formulario vacío
+        form = AuthenticationForm()
+
+    return render(request, 'registro.html', {'form': form})
+
+
