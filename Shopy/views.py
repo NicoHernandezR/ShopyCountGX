@@ -191,7 +191,7 @@ def registro(request):
 
     return render(request, 'Shopy/registro.html', context)
 
-def login(request):
+def login_view(request):
     if request.method == 'POST':
         # Validar el formulario
         form = AuthenticationForm(request, data=request.POST)
