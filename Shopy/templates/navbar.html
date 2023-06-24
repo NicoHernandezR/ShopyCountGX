@@ -22,7 +22,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="{% url 'tienda' %}">Buscar</a></li>
-                  <li><a class="dropdown-item" href="carro.html">Ver Carro</a></li>
+                  <li><a class="dropdown-item" href="{% url 'carro' %}">Ver Carro</a></li>
                   <li><a class="dropdown-item" href="{% url 'vender' %}">Vender</a></li>
                 </ul>
               </li>
@@ -60,7 +60,7 @@
             </div>
 
         {% endif %}
-            <a class="navbar-brand" href="carro.html"><img src="{% static 'Shopy/img/carro.png'%}" alt="" height="55"></a>
+            <a class="navbar-brand" href="{% url 'carro' %}"><img src="{% static 'Shopy/img/carro.png'%}" alt="" height="55"></a>
     
           </div>
         </div>

@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from .models import TipoCuenta,ConexionTipoCarac,ImagenCuenta
-from .models import CaracTipoCuenta,Cuenta,CuentaCarac
+from .models import CaracTipoCuenta,Cuenta,CuentaCarac, Carro
 from django.db.models import F, Q
 from .forms import CrearUsuario
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -200,9 +201,6 @@ def aplicarFiltro(request, tipo):
 
     user = request.user
     context = {}
-    print(type(tipo))
-    print(tipo)
-    print(tipo != 0)
 
     
 
@@ -259,7 +257,7 @@ def filtroValores(request, filtro):
 
         # Filtrar por el tipo de cuenta
         if tipo:
-            print(tipo)
+
             consulta_combinada = Q()
 
             for i in filtrosTupla:
@@ -309,7 +307,58 @@ def eliminarCuenta(request, id):
      
 
 
+def agregarAlCarro(request, id):
+
+    user = request.user
+    if user.is_authenticated:
+        context = {}
+        cuentaV = Cuenta.objects.get(id=id)
+        try:
+            ag = Carro.objects.get(cuenta=cuentaV, user = user)
+
+            context.update({'mensaje': 'Cuenta ya esta en el carro'})
+            return render(request, 'mensaje.html', context)
+            # La consulta encontró una fila
+            # Aquí puedes realizar las acciones que deseas cuando la consulta devuelve una fila
+
+        except ObjectDoesNotExist:
+        
+            agregar =  Carro.objects.create(
+                user = user,
+                cuenta = cuentaV
+            )
+            agregar.save()
+
+            context.update({'mensaje': 'Cuenta agregada al carro.'})
+            return render(request, 'mensaje.html', context)
+    return render(request, 'Shopy/tienda.html')
 
 
+def carro(request):
 
-    
+    user = request.user
+    context = {}
+
+    contenido = Carro.objects.filter(user = user)
+
+    context.update({'contenido':contenido})
+
+
+    return render(request, 'Shopy/carro.html', context)
+
+
+def eliminarDelCarro(request, id):
+
+    user = request.user
+    cuentaV = Cuenta.objects.get(id = id)
+    carroElement = Carro.objects.get(user = user, cuenta = cuentaV)
+    carroElement.delete()
+
+    context = {}
+
+    contenido = Carro.objects.filter(user = user)
+
+    context.update({'contenido':contenido})
+
+
+    return render(request, 'contenido_carro.html', context)

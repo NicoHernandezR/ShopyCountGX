@@ -75,3 +75,7 @@ class ImagenUsuario(models.Model):
 
 
 
+
+class Carro(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cuenta = models.ForeignKey('Cuenta', on_delete=models.CASCADE)

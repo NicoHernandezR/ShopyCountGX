@@ -45,7 +45,7 @@
             {% endif %}</td>
             <td style="text-align: center; vertical-align: middle;">$ {{ c.precio }}</td>
             <td style="text-align: center; vertical-align: middle;">
-              <a href="#"><img src="{% static 'Shopy/img/agregarCarritoV.png' %}" alt="" width="50px"></a>
+              <a href="#" data-url="{% url 'agregarAlCarro' id=c.id %}" onclick="agregarAlCarro(event, this.getAttribute('data-url'))"><img src="{% static 'Shopy/img/agregarCarritoV.png' %}" alt="" width="50px"></a>
             </td> 
           </tr>
 

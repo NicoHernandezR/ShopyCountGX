@@ -16,6 +16,11 @@
     {% include "navbar.html" %}
 
 
+    <div id="mensaje">
+      {% include "mensaje.html" %}
+    </div>
+
+
     <div id="cuentas_usuario">
     {% include "cuentas_usu.html" %} 
   </div>
@@ -33,7 +38,7 @@
         <div class="riglhtcol small responsive_local_menu autocollapse_enabled bg_filtro"> 
           <div class="block search_collapse_block">
             <select class="col-12 inp_form"  name="tipoCuenta" id="tipoCuenta">
-              <option value="0"> Seleccionar</option>
+              <option value="0" data-url="{% url 'cargarFiltro' id=0 %}" > Seleccionar</option>
               {% for tpc in tipoCuenta%}
               <option value="{{ tpc.id_tipo_cuenta }}" data-url="{% url 'cargarFiltro' id=tpc.id_tipo_cuenta %}" id="tpc.id_tipo_cuenta">
                 {{ tpc.nom_tipo_cuenta }}

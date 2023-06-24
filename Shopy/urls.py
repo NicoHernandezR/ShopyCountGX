@@ -10,8 +10,11 @@ urlpatterns = [
     path('aplicarFiltro/<int:tipo>', views.aplicarFiltro, name='aplicarFiltro'),
     path('filtroValores/<str:filtro>', views.filtroValores, name='filtroValores'),
     path('eliminarCuenta/<int:id>', views.eliminarCuenta, name='eliminarCuenta'),
+    path('agregarAlCarro/<int:id>', views.agregarAlCarro, name='agregarAlCarro'),
     path('registro',views.registro, name='registro'),
     path('cuenta/<int:id>',views.cuenta, name='cuenta'),
+    path('carro',views.carro, name='carro'),
+    path('eliminarDelCarro/<int:id>',views.eliminarDelCarro, name='eliminarDelCarro'),
     #path('alumnosList', views.alumnosList, name='alumnosList'),
     #path('alumnosAdd', views.alumnosAdd, name='alumnosAdd'),
 ]
