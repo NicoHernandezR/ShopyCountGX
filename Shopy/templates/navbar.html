@@ -32,7 +32,9 @@
               <li><a class="dropdown-item" href="#">Historial Compras</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+              {% if not user.is_authenticated %}
               <li><a class="dropdown-item" href="{% url 'registro' %}">Crear Cuenta</a></li>
+              {% endif %}
             </ul>
           </li>
         </ul>
