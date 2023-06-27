@@ -3,7 +3,7 @@ from django.contrib import messages
 from .models import TipoCuenta,ConexionTipoCarac,ImagenCuenta
 from .models import CaracTipoCuenta,Cuenta,CuentaCarac
 from django.db.models import F, Q
-from .forms import CrearUsuario
+from .forms import CrearUsuario, EditarUsuarioForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -15,6 +15,9 @@ def index(request):
 
 def navbar(request):
     return render(request,'Shopy/navbar.html')
+
+def cuenta_2(request):
+    return render(request,'Shopy/cuenta_2.html')
 
 def cuenta(request,id):
 
@@ -191,6 +194,23 @@ def registro(request):
 
     return render(request, 'Shopy/registro.html', context)
 
+def Registrarse(request):
+    #el view entrega el form al template
+    context={'form' : CrearUsuario()}
+    #verifico que la petición sea post
+    if request.method=='POST':
+        #con request recupero la información del formulario
+        formulario=CrearUsuario(request.POST)
+        #valido el formulario
+        if formulario.is_valid:
+            #lo guardo
+            formulario.save()
+            context={'mensaje':"OK, datos guardados correctamente..."}
+    return render(request, 'Shopy/index.html', context)
+
+
+
+
 def login_view(request):
     if request.method == 'POST':
         # Validar el formulario
@@ -216,5 +236,19 @@ def login_view(request):
         form = AuthenticationForm()
 
     return render(request, 'registro.html', {'form': form})
+
+
+@login_required
+def perfil(request):
+    if request.method == 'POST':
+        form = EditarUsuarioForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')  # Redirige a la página de perfil o a donde desees
+
+    else:
+        form = EditarUsuarioForm(instance=request.user)
+
+    return render(request, 'perfil.html', {'form': form})
 
 

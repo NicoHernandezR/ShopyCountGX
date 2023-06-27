@@ -1,5 +1,4 @@
 {% load static %}
-{% load messages %}
 {% load i18n %}
 <!DOCTYPE html>
 <html lang="es">
@@ -25,9 +24,7 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     
-                    {% messages %} <!-- Mostrar mensajes de error aquí -->
-
-                    {{ form }}
+                    {{ form.as_p }}
 
                     <input type="submit" value="ingresar" class="btn btn-success float-right">
                 </form>

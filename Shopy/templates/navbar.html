@@ -1,73 +1,64 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-  <head>  
-    
+<head>  
   <link rel="stylesheet" href="{% static 'Shopy/css/navbar.css'%}">
 </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary nv_bg">
-      <div class="container-fluid nv_bg">
-        <a class="navbar-brand" href="index.html"><img src="{% static 'Shopy/img/log2r.png' %}" alt="" height="55"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Tienda
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{% url 'tienda' %}">Buscar</a></li>
-                  <li><a class="dropdown-item" href="carro.html">Ver Carro</a></li>
-                  <li><a class="dropdown-item" href="{% url 'vender' %}">Vender</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Cuenta
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="cuenta_2.html">Ver cuenta</a></li>
-                  <li><a class="dropdown-item" href="#">Historial Compras</a></li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
-                  <li><a class="dropdown-item" href="{% url 'registro' %}">Crear Cuenta</a></li>
-                </ul>
-              </li>
-    
-    
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary nv_bg">
+    <div class="container-fluid nv_bg">
+      <a class="navbar-brand" href="index.html"><img src="{% static 'Shopy/img/log2r.png' %}" alt="" height="55"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Tienda
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'tienda' %}">Buscar</a></li>
+              <li><a class="dropdown-item" href="carro.html">Ver Carro</a></li>
+              <li><a class="dropdown-item" href="{% url 'vender' %}">Vender</a></li>
             </ul>
-            {% if user.is_authenticated %}
-
-            <div class="btn_div">
-              <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit" class="btn_ini_s">Cerrar sesión</button>
-              </form>
-            </div>
-
-            {% else %}
-
-            <div class="btn_div">
-              <form method="post" action="{% url 'login' %}">
-                {% csrf_token %}
-                <button type="submit" class="btn_ini_s">Iniciar sesión</button>
-              </form>
-            </div>
-
-        {% endif %}
-            <a class="navbar-brand" href="carro.html"><img src="{% static 'Shopy/img/carro.png'%}" alt="" height="55"></a>
-    
-          </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Cuenta
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'perfil' %}">Ver cuenta</a></li>
+              <li><a class="dropdown-item" href="#">Historial Compras</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+              <li><a class="dropdown-item" href="{% url 'registro' %}">Crear Cuenta</a></li>
+            </ul>
+          </li>
+        </ul>
+        {% if user.is_authenticated %}
+        <div class="btn_div">
+          <p class="navbar-text">Bienvenido, {{ user.username }}</p>
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn_ini_s">Cerrar sesión</button>
+          </form>
         </div>
-      </nav>
+        {% else %}
+        <div class="btn_div">
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn_ini_s">Iniciar sesión</button>
+          </form>
+        </div>
+        {% endif %}
+        <a class="navbar-brand" href="carro.html"><img src="{% static 'Shopy/img/carro.png'%}" alt="" height="55"></a>
+      </div>
+    </div>
+  </nav>
 
-      <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
 
-
-  </body>
+</body>
 </html>
+
