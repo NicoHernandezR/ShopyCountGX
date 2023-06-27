@@ -28,18 +28,20 @@
               Cuenta
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'perfil' %}">Ver cuenta</a></li>
+              <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
               <li><a class="dropdown-item" href="#">Historial Compras</a></li>
+              {% if user.is_authenticated %}
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
-              {% if not user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
+              <li><a class="dropdown-item" href="{% url 'editar' %}">Editar</a></li>
+              {% else %}
               <li><a class="dropdown-item" href="{% url 'registro' %}">Crear Cuenta</a></li>
               {% endif %}
             </ul>
           </li>
         </ul>
         {% if user.is_authenticated %}
-        <div class="btn_div">
+        <div class="btn_div d-flex justify-content-center">
           <p class="navbar-text">Bienvenido, {{ user.username }}</p>
           <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
@@ -58,9 +60,4 @@
       </div>
     </div>
   </nav>
-
-  <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
-
-</body>
-</html>
-
+</body

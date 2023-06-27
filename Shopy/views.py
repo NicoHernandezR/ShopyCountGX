@@ -177,36 +177,19 @@ def cargarFiltro(request, id):
 
 
 def registro(request):
-
-    context = {
-        'form' : CrearUsuario()
-    }
-
     if request.method == 'POST':
-        formulario = CrearUsuario(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+        form = CrearUsuario(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(request, username=username, password=password)
             login(request, user)
-            messages.success(request, "Te registraste")
-            return redirect(to='index')
-        context["form"] = formulario
+            return redirect('index')  # Cambia 'inicio' con la URL de la página a la que deseas redirigir después del registro exitoso
+    else:
+        form = CrearUsuario()
+    return render(request, 'Shopy/registro.html', {'form': form})
 
-    return render(request, 'Shopy/registro.html', context)
-
-def Registrarse(request):
-    #el view entrega el form al template
-    context={'form' : CrearUsuario()}
-    #verifico que la petición sea post
-    if request.method=='POST':
-        #con request recupero la información del formulario
-        formulario=CrearUsuario(request.POST)
-        #valido el formulario
-        if formulario.is_valid:
-            #lo guardo
-            formulario.save()
-            context={'mensaje':"OK, datos guardados correctamente..."}
-    return render(request, 'Shopy/index.html', context)
 
 
 
@@ -239,16 +222,16 @@ def login_view(request):
 
 
 @login_required
-def perfil(request):
+def editar(request):
     if request.method == 'POST':
         form = EditarUsuarioForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('perfil')  # Redirige a la página de perfil o a donde desees
+            return redirect('index')  # Redirige a la página de perfil o a donde desees
 
     else:
         form = EditarUsuarioForm(instance=request.user)
 
-    return render(request, 'perfil.html', {'form': form})
+    return render(request, 'Shopy/editar.html', {'form': form})
 
 

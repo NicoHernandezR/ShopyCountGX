@@ -22,16 +22,13 @@
                     <div class="card-body">
 
                         <h2>{% trans 'Registrar Usuario' %}</h2>
-                        <h2>
-                            <form action="" method="post">
+                        
+                            <form method="post">
                                 {% csrf_token %}
-                                {{form.as_table}}
-                              
-                                
-
-                                <input type="submit" value="registrar" class="btn btn-success float-right">
+                                {{ form.as_p }}
+                                <button type="submit">Registrarse</button>
                             </form>
-                        </h2>
+                        
                     </div>
 
                 </div>
