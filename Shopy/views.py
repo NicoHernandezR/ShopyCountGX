@@ -316,7 +316,7 @@ def agregarAlCarro(request, id):
         try:
             ag = Carro.objects.get(cuenta=cuentaV, user = user)
 
-            context.update({'mensaje': 'Cuenta ya esta en el carro'})
+            context.update({'mensaje': 'La Cuenta ya esta en el carro'})
             return render(request, 'mensaje.html', context)
             # La consulta encontró una fila
             # Aquí puedes realizar las acciones que deseas cuando la consulta devuelve una fila
@@ -329,7 +329,7 @@ def agregarAlCarro(request, id):
             )
             agregar.save()
 
-            context.update({'mensaje': 'Cuenta agregada al carro.'})
+            context.update({'mensaje': 'La Cuenta fue agregada al carro.'})
             return render(request, 'mensaje.html', context)
     return render(request, 'Shopy/tienda.html')
 

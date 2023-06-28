@@ -7,9 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'Shopy/css/cuenta.css'%}">
+    <link rel="stylesheet" href="{% static 'Shopy/css/cuadrado.css'%}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  // Obtener todas las imágenes pequeñas dentro del div de la clase "rectangulo"
+  var imagenesPequenas = $(".rectangulo img");
+
+  // Asignar un controlador de eventos a cada imagen pequeña
+  imagenesPequenas.click(function() {
+    // Obtener la URL de la imagen seleccionada
+    var urlImagen = $(this).attr("src");
+
+    // Actualizar la imagen grande con la URL seleccionada
+    $("#car .imgCar").attr("src", urlImagen);
+  });
+});
+</script>
     <title>Cuenta</title>
 </head>
 <body>
+
+  <style>
+
+
+  </style>
 
     {% include "navbar.html" %}
 
@@ -24,47 +47,54 @@
         <div class="col-12 col-md-9 br_pg">
             <div class="container_cuenta">
                 <div class="row r_c">
-                    <div class="col-12 col-md-6 br_in">
+                  <div class="col-12 col-xl-6 br_in">
 
-                        <div id="carousel" class="carousel slide">
-                            <div class="carousel-inner" id="cinner">
-                                {% for img in imagenes%}
 
-                                <div class="carousel-item active">
-                                    <img src="{{ img.img.url }}" class="custom-img">
-                                </div>
-
-                                {% endfor %}
-                            </div>
-                            <button class="carousel-control-prev" id="fl_iz" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" id="fl_dr" type="button" data-bs-target="#carousel" data-bs-slide="next">
-                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                              <span class="visually-hidden">Next</span>
-                            </button>
-                          </div>
-
+                    <div id="car" style="width: 100%; display: flex;">
+                      {% for img in imagenes %}
+                        <div class="carousel-item">
+                          <img src="{{ img.img.url }}" class="imgCar" id="{{ img.img.url }}">
+                        </div>
+                      {% endfor %}
                     </div>
 
-                <div class="col-12 col-md-6 br_in">
-                    <div class="col-12 br_in_pg inf">
-                        <h3 class="tipo_cuenta_h3">  {{cuenta.id_tipo_cuenta.nom_tipo_cuenta}}</h3>
-                        <p>{{cuenta.info_ext}}</p>
-                    </div>
 
-                    <div class="container_info inf">
-                        {% for c in carac %}
-                            <p>{{c.id_carac.nom_carac}} : {{c.valor}} </p>
-                        {% endfor %}
+
+                    <div class="rectangulo">
+                      {% for img in imagenes %}
+                      <div data-panel="{'focusable':true,'clickOnActivate':true}" 
+                      class="highlight_strip_item highlight_strip_screenshot">
+                      <img src="{{ img.img.url }}" >
+                      </div>
+                        
+                      {% endfor %}
                     </div>
+                  
+                  </div>
+
+
+
+                <div class="col-12 col-xl-6 br_in">
+                  <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                    <img src="{% static 'Shopy/img/CardsMain/icon' %}{{ cuenta.id_tipo_cuenta.id_tipo_cuenta }}.png" class="" style="margin-right: 10px; width: 150px;">
+                  </div>
+                  <div style="height: 15px;"></div>
+                  <label class="game_description_snippet">{{cuenta.info_ext}}</label>
+                  <div style="height: 15px;"></div>
+                  
+
+                  {% for c in carac %}
+                  <div class="dev_row">
+                    <div class="subtitle column">{{c.id_carac.nom_carac}}:</div>
+                    <div class="subtitle column" style="color: #8f98a0;">
+                      {{c.valor}}
+                    </div>
+                  </div>
+                  {% endfor %}
+
+                  <h3>Precio: ${{cuenta.precio}} </h3>
+
                 </div>
-                </div>
-                <div class="row container_img" >
-
-                    <h3>Precio: ${{cuenta.precio}} </h3>
-
                 </div>
 
             </div>
@@ -78,18 +108,26 @@
       <div class="row btn_centrar_row">
 
         <div class="col-12 col-md-3 btn_centrar">
+          <a href="#" onclick="mostrarCuadrado(event)">
           <button class="btn_size"> Comprar</button>
+        </a>
         </div>
         <div class="col-12 col-md-3 btn_centrar">
+          <a href="#" data-url="{% url 'agregarAlCarro' id=cuenta.id %}" onclick="agregarAlCarro(event, this.getAttribute('data-url'))">
           <button class="btn_size"> Anadir al Carro</button>
+        </a>
         </div>
         <div class="col-12 col-md-3 btn_centrar">
+          <a href="{% url 'tienda' %}">
           <button class="btn_size"> Cancelar</button>
+        </a>
         </div>
       </div>
     </div>
 
     {% include "footer.html" %}
+    <script src="{% static 'Shopy/js/cargarURLS.js'%}"></script>
+    <script src="{% static 'Shopy/js/carro.js'%}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 </body>

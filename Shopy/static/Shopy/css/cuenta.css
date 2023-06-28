@@ -17,6 +17,11 @@ body{
     padding-right: 0%;
 }
 
+.pdl_pdr{
+    padding-left: 100px;
+    padding-right: 100px
+}
+
 .navbar_bg{
     --bs-bg-opacity: 1;
     background-color: #1b3039;
@@ -28,14 +33,18 @@ body{
     border-style: solid;
     border-color: rgba(255, 255, 255, 0.6);
     z-index: 1;
-    height: auto;
+    height: 430px;
+    color: white;
     /*
     background: linear-gradient(150deg, #6C3483, #58D68D);
     */
-    background-color: #6d726dec;
-    color: #F7A211;
+    background: rgb(75,103,45);
+    background: radial-gradient(circle, #1b2838 0%, #1b2838 100%);
+
     
 }
+
+
 
 @media (max-width: 760px){
     .con_pg{
@@ -87,7 +96,7 @@ p {
 
 .br_in, .r_p{
     padding-top: 2%;
-    height: 400px;
+    height: 350px;
 }
 
 .r_p{
@@ -193,3 +202,97 @@ p {
     left: 18px;
     position: relative;
 }
+
+
+.dev_row {
+    display: flex;
+    line-height: 25px;
+}
+
+
+.column{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.subtitle, .title {
+    color: #556772;
+}
+.subtitle {
+    font-size: 20px;
+    padding-right: 10px;
+    min-width: 125px;
+}
+
+.glance_ctn .user_reviews_summary_row, .glance_ctn .dev_row, .glance_ctn .release_date {
+    display: flex;
+    line-height: 16px;
+}
+
+
+.game_description_snippet {
+    max-height: 111px;
+    overflow: hidden;
+    font-size: 13px;
+    line-height: 18px;
+    padding-right: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
+@media (max-width:1200px){
+    .br_pg{
+    
+        height: auto;
+    }
+
+}
+
+
+.col-12.col-xl-6.br_in {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+      .imgCar{
+        width: 100%;
+        height: 300px;
+  
+      }
+        .rectangulo {
+        width: auto;
+        height: 50px;
+        display: flex;
+        padding-top: 15px;
+      }
+  
+      .rectangulo img {
+        width: 90px; /* 150px / 5 */
+        height: 50px;
+        margin-right: 3px;
+  }
+  
+    .rectangulo img:last-child {
+      margin-right: 0;
+    }
+
+    #car div:first-child {
+        display: block;
+      }
+  
+    .car img:last-child{
+      display: block;
+    }
+
+    .highlight_strip_item {
+        float: left;
+        height: 52px;
+        width: 92px;
+        cursor: pointer;
+        text-align: center;
+        margin: 2px;
+        background-color: #000000;
+        position: relative;
+    }

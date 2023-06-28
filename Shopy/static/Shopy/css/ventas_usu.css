@@ -84,3 +84,19 @@ tbody, td, tfoot, th, thead, tr {
 .table{
     --bs-table-bg: none;
 }
+
+@media screen and (max-width: 500px) {
+    .table {
+      font-size: 10px;
+    }
+
+    .ventas{
+        min-width: 100px;
+    }
+    
+    img {
+        width: 30px;
+        height: 30px;
+    }
+
+  }
