@@ -96,7 +96,7 @@ p {
 
 .br_in, .r_p{
     padding-top: 2%;
-    height: 350px;
+    height: 450px;
 }
 
 .r_p{
@@ -263,20 +263,52 @@ p {
       }
         .rectangulo {
         width: auto;
-        height: 50px;
+        height: 70px;
         display: flex;
         padding-top: 15px;
+        scrollbar-width: thin;
+        scrollbar-color: #000000 #CCCCCC;
       }
-  
+      
+      .scroll-container::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      .scroll-container::-webkit-scrollbar-track {
+        background-color: #CCCCCC;
+      }
+      
+      .scroll-container::-webkit-scrollbar-thumb {
+        background-color: #000000;
+      }
+      
+      .scroll-container::-webkit-scrollbar-thumb:hover {
+        background-color: #555555;
+      }
+      .rectangulo {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      
+      .scroll-container {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+      
+      .highlight_strip_item {
+        margin-right: 10px;
+      }
+      
       .rectangulo img {
-        width: 90px; /* 150px / 5 */
+        width: 90px;
         height: 50px;
-        margin-right: 3px;
-  }
-  
-    .rectangulo img:last-child {
-      margin-right: 0;
-    }
+      }
+      
+      .rectangulo img:last-child {
+        margin-right: 0;
+      }
+
 
     #car div:first-child {
         display: block;
@@ -296,3 +328,25 @@ p {
         background-color: #000000;
         position: relative;
     }
+
+
+.highlight_strip_item.selected {
+  border: 2px solid white;
+  position: relative;
+}
+
+.highlight_strip_item.selected:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+}
+
+
+#highlight_strip_scroll {
+    position: absolute;
+}

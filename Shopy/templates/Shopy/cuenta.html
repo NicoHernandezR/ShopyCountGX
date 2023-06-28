@@ -29,10 +29,9 @@ $(document).ready(function() {
 </head>
 <body>
 
-  <style>
-
-
-  </style>
+  <div id="mensaje">
+    {% include "mensaje.html" %}
+  </div>
 
     {% include "navbar.html" %}
 
@@ -58,16 +57,16 @@ $(document).ready(function() {
                       {% endfor %}
                     </div>
 
-
-
+                    
                     <div class="rectangulo">
-                      {% for img in imagenes %}
-                      <div data-panel="{'focusable':true,'clickOnActivate':true}" 
-                      class="highlight_strip_item highlight_strip_screenshot">
-                      <img src="{{ img.img.url }}" >
+                      <div class="scroll-container">
+                        {% for img in imagenes %}
+                          <div data-panel="{'focusable':true,'clickOnActivate':true}" 
+                          class="highlight_strip_item highlight_strip_screenshot {% if forloop.first %}selected{% endif %}">
+                            <img src="{{ img.img.url }}">
+                          </div>
+                        {% endfor %}
                       </div>
-                        
-                      {% endfor %}
                     </div>
                   
                   </div>
@@ -128,6 +127,22 @@ $(document).ready(function() {
     {% include "footer.html" %}
     <script src="{% static 'Shopy/js/cargarURLS.js'%}"></script>
     <script src="{% static 'Shopy/js/carro.js'%}"></script>
+    <script>
+      var items = document.querySelectorAll('.highlight_strip_item');
+
+// Agrega un controlador de eventos a cada elemento
+items.forEach(function(item) {
+  item.addEventListener('click', function() {
+    // Remueve la clase 'selected' de todos los elementos
+    items.forEach(function(i) {
+      i.classList.remove('selected');
+    });
+
+    // Agrega la clase 'selected' al elemento clickeado
+    item.classList.add('selected');
+  });
+});
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 </body>
