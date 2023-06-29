@@ -7,7 +7,7 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary nv_bg">
     <div class="container-fluid nv_bg">
-      <a class="navbar-brand" href="index.html"><img src="{% static 'Shopy/img/log2r.png' %}" alt="" height="55"></a>
+      <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'Shopy/img/log2r.png' %}" alt="" height="55"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -19,8 +19,10 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{% url 'tienda' %}">Buscar</a></li>
-              <li><a class="dropdown-item" href="carro.html">Ver Carro</a></li>
+              {% if user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'carro' %}">Ver Carro</a></li>
               <li><a class="dropdown-item" href="{% url 'vender' %}">Vender</a></li>
+              {% endif %}
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -28,14 +30,12 @@
               Cuenta
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
               {% if user.is_authenticated %}
               <li><a class="dropdown-item" href="{% url 'editar' %}">Editar Cuenta</a></li>
               {% endif %}
               {% if user.is_authenticated %}
               <li><a class="dropdown-item" href="{% url 'cambiarcontra' %}">Cambiar Contraseña</a></li>
               {% endif %}
-              <li><a class="dropdown-item" href="#">Historial Compras</a></li>
               {% if user.is_authenticated %}
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
@@ -47,7 +47,7 @@
         </ul>
         {% if user.is_authenticated %}
         <div class="btn_div d-flex justify-content-center">
-          <p class="navbar-text">Bienvenido, {{ user.username }}</p>
+          <p class="navbar-text-p">Bienvenido, {{ user.username }}</p>
           <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="btn_ini_s">Cerrar sesión</button>
@@ -61,7 +61,9 @@
           </form>
         </div>
         {% endif %}
-        <a class="navbar-brand" href="carro.html"><img src="{% static 'Shopy/img/carro.png'%}" alt="" height="55"></a>
+        {% if user.is_authenticated %}
+        <a class="navbar-brand" href="{% url 'carro' %}"><img src="{% static 'Shopy/img/carro.png'%}" alt="" height="55"></a>
+        {% endif %}
       </div>
     </div>
   </nav>
