@@ -220,7 +220,7 @@ def login_view(request):
         # Mostrar el formulario vacío
         form = AuthenticationForm()
 
-    return render(request, 'Shopy/registro.html', {'form': form})
+    return render(request, 'registration/login.html', {'form': form})
 
 
 @login_required
@@ -244,7 +244,7 @@ def cambiarcontra(request):
             user = form.save()
             update_session_auth_hash(request, user)
             logout(request)  # Cierra la sesión del usuario
-            return redirect('login')  # Redirige a la página de éxito
+            return redirect('login')  # Redirige a la página de login para volver iniciar sesion ya que cambio la contraseña
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'Shopy/cambiarcontra.html', {'form': form})
