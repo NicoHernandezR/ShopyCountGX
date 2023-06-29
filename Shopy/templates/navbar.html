@@ -55,7 +55,7 @@
         </div>
         {% else %}
         <div class="btn_div">
-          <form method="post" action="{% url 'login' %}">
+          <form method="get" action="{% url 'loginP' %}">
             {% csrf_token %}
             <button type="submit" class="btn_ini_s">Iniciar sesión</button>
           </form>
