@@ -1,161 +1,166 @@
 body {
-    margin: 0;
-    padding: 0;
-    background:  linear-gradient(150deg, #6C3483, #58D68D);
-    font-family: sans-serif;
-    height: 100vh !important;
-  }
-  
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(150deg, #6C3483, #58D68D);
+  font-family: sans-serif;
+  height: 150vh !important;
+}
+
+.login-box {
+  width: 330px;
+  height: 550px;
+  background: #f9f9f9;
+  color: #1f1e1e;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: 70px 30px;
+}
+
+.login-box .avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 50px);
+}
+
+.login-box h1 {
+  margin: 0;
+  padding: 0 0 20px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.login-box label {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: block;
+}
+
+.login-box input,
+.Cancelar {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #080808;
+  background: transparent;
+  outline: none;
+  height: 40px;
+  color: #1c1b1b;
+  font-size: 16px;
+}
+
+.login-box input[type="submit"],
+.Cancelar {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #6C3483;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+.login-box input[type="submit"]:hover,
+.Cancelar:hover {
+  cursor: pointer;
+  background: #58D68D;
+  color: #000;
+}
+
+.login-box a {
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 20px;
+  color: rgb(14, 13, 18);
+}
+
+.login-box a:hover {
+  color: #0199f8;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #6C3483;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 20px;
+}
+
+@media (max-width: 991px) {
   .login-box {
-    width: 320px;
-    height: 500px;
-    background: #f9f9f9;
-    color: #1f1e1e;
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    box-sizing: border-box;
-    padding: 70px 30px;
+    width: 90%;
+    height: auto;
+    min-height: 400px;
+    max-height: 600px;
+    padding: 40px 20px;
   }
-  
+
   .login-box .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    position: absolute;
-    top: -50px;
-    left: calc(50% - 50px);
+    width: 80px;
+    height: 80px;
+    top: -40px;
+    left: calc(50% - 40px);
   }
-  
+
   .login-box h1 {
-    margin: 0;
-    padding: 0 0 20px;
-    text-align: center;
-    font-size: 22px;
+    font-size: 20px;
   }
-  
-  .login-box label {
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-    display: block;
-  }
-  
-  .login-box input, .Cancelar {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .login-box input[type="text"], .login-box input[type="password"] {
-    border: none;
-    border-bottom: 1px solid #080808;
-    background: transparent;
-    outline: none;
-    height: 40px;
-    color: #1c1b1b;
+
+  .login-box input[type="submit"],
+  .Cancelar {
+    height: 35px;
     font-size: 16px;
   }
-  
-  .login-box input[type="submit"], .Cancelar {
-    border: none;
-    outline: none;
-    height: 40px;
-    background: #6C3483;
-    color: #fff;
+
+  .login-box input[type="text"],
+  .login-box input[type="password"] {
+    height: 30px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 575px) {
+  .login-box {
+    width: 90%;
+    height: auto;
+    min-height: 400px;
+    max-height: 600px;
+    padding: 40px 20px;
+  }
+
+  .login-box .avatar {
+    width: 60px;
+    height: 60px;
+    top: -30px;
+    left: calc(50% - 30px);
+  }
+
+  .login-box h1 {
     font-size: 18px;
-    border-radius: 20px;
-  
-  }
-  
-  .login-box input[type="submit"]:hover{
-    cursor: pointer;
-    background: #58D68D;
-    color: #000;
   }
 
-  .Cancelar:hover{
-    cursor: pointer;
-    background: #58D68D;
-    color: #000;
+  .login-box input[type="submit"],
+  .Cancelar {
+    height: 30px;
+    font-size: 14px;
   }
 
-  
-  .login-box a {
-    text-decoration: none;
+  .login-box input[type="text"],
+  .login-box input[type="password"] {
+    height: 25px;
     font-size: 12px;
-    line-height: 20px;
-    color: rgb(14, 13, 18);
   }
-  
-  .login-box a:hover {
-    color: #0199f8;
-  }
-
-  .btn{
-    border: none;
-    outline: none;
-    height: 40px;
-    background: #6C3483;
-    color: #fff;
-    font-size: 18px;
-    border-radius: 20px;
-}
-
-@media (max-height:525px){
-  .avatar {
-    width: 70px !important;
-    height: 70px !important;
-    border-radius: 50%;
-    position: absolute;
-    top: -50px;
-    left: calc(50% - 35px) !important;
-  }
-  .login-box{
-    width: 224px;
-    height: 294px;
-    border-radius: 5%;
-    position: absolute;
-    left: calc(50%);
-    font-size: 12px;
-    padding: 20px 30px;
-  }
-
-  h1{
-    font-size: 18px !important;
-  }
-
-  input[type="text"], input[type="password" i], input[type="submit"]{
-    font-size: 12px !important;
-  }
-
-  input[type="submit"]{
-    height: 20px !important;
-    margin-bottom: 10px;
-  }
-
-  
-  input[type="submit"]{
-    height: 20px !important;
-    margin-bottom: 10px;
-  }
-
-}
-@media (max-width:991px) {
-    .btn_div {
-        right: 0px;
-    }
-    
-}
-
-.ct{
-    justify-content: center !important;
-    text-align:  center;
-}
-
-.error-message {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
 }
 
