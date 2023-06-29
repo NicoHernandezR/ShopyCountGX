@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'Shopy/css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'Shopy/css/index_info.css'%}">
     <script src="{% static 'Shopy/js/card.js'%}"> </script>
     <title>Menu</title>
 </head>
@@ -57,82 +58,28 @@
       </div>
     
     
-      <div class="container-fluid pad_top">
-        <div class="row">
-    
-          <div class="col-12 col-md-4 justify-content-center">
-            <div class="card bg_wh">
-              <img src="{% static 'Shopy/img/CardsMain/micro.png'%}" class="img_crd"alt="Card Back">
-              <div class="card-content">
 
-                <a href="{% url 'cargarFiltroIndex' tipo=0 %}">
-              <button class="btn" name="num" value="7">Buscar Cuentas de Microsoft</button>
-            </a>
-          </div>
+      <section data-testid="site-shopping-info" class="site-shopping-info" 
+      type="site-shopping-info">
+      <div class="container">
+        <div class="info-slide">
+          <h2>Elige cómo pagar</h2>
+          <p><span>Con ShopyCountGX, paga con tus tarjetas de débito y crédito. 
+            Paga siempre desde ShopyCounGX
+             para que podamos asegurar tu dinero.</span> </p>
             </div>
-          </div>
-          <div class="col-12 col-md-4 justify-content-center">
-            <div class="card bg_wh">
-              <img src="{% static 'Shopy/img/CardsMain/steam.png' %}"class="img_crd"alt="Card Back">
-              <div class="card-content">
-                <a href="{% url 'cargarFiltroIndex' tipo=1 %}">
-                <button class="btn" name="num" value="1">Buscar Cuentas de Steam</button>
-                  </a>
-            </div>
-          </div>
-          </div>
-          <div class="col-12 col-md-4 justify-content-center">
-            <div class="card bg_wh">
-              <img src="{% static 'Shopy/img/CardsMain/riot.png'%}" class="img_crd"alt="Card Back">
-              <div class="card-content">
-                <a href="{% url 'cargarFiltroIndex' tipo=0 %}">
-                <button class="btn" name="num" value="8"> 
-                  Buscar Cuentas de Riot</button>
-                </a>
-            </div>
-          </div>
-          </div>
-    
-    
-        </div>
-        <div class="row">
-    
-          <div class="col-12 col-md-4 justify-content-center">
-            <div class="card bg_wh">
-              <img src="{% static 'Shopy/img/CardsMain/play.png'%}" class="img_crd"alt="Card Back">
-                <form action="venta.html">
-                  <div class="card-content">
-                    <a href="{% url 'cargarFiltroIndex' tipo=4 %}">
-                    <button class="btn" name="num" value="4"> Buscar Cuentas de PlayStation</button>
-                    </a>
+            <div class="info-slide">
+              <h2>En la Variedad esta el Gusto</h2>
+              <p><span>Con solo estar registrado en ShopyCountGX, 
+                podras comprar una variedad de cuentas de todas las plataformas</span> </p>
                 </div>
-              </form>
-          </div>
-          </div>
-          <div class="col-12 col-md-4 justify-content-center">
-            <div class="card bg_wh">
-              <img src="{% static 'Shopy/img/CardsMain/switch.png'%}" class="img_crd1"alt="Card Back">
-              <div class="card-content">
-                <a href="{% url 'cargarFiltroIndex' tipo=0 %}">
-                <button class="btn" name="num" value="6"> Buscar Cuentas de Switch</button>
-                </a>
-            </div>
-          </div>
-          </div>
-          <div class="col-12 col-md-4 justify-content-center">
-            <div class="card bg_wh">
-              <img src="{% static 'Shopy/img/CardsMain/battlenet.jpg'%}" class="img_crd"alt="Card Back">
-              <div class="card-content">
-                <a href="{% url 'cargarFiltroIndex' tipo=0 %}">
-                <button class="btn" name="num" value="9">Buscar Cuentas de Battle Net</button>
-                </a>
-            </div>
-          </div>
-          </div>
-    
-    
-        </div>
-      </div>
+                <div class="info-slide">
+                    <h2>Compra Protegida</h2>
+                    <p><span>Completa tus compras en ShopyCountGX para que estén siempre protegidas. 
+                      Si cuenta nno es lo que esperabas, te devolvemos tu dinero.</span> </p>
+                    </div>
+                  </div>
+                </section>
     
       <div class="container-fluid">
         <div class="row r_ll"></div>
