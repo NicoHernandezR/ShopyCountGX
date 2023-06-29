@@ -20,26 +20,26 @@
             <div class="login-box" id="div-main">
                 <img src="{% static 'Shopy/img/logo.jpg'%}" class="avatar" alt="Avatar Image">
                 <h1>{% trans 'Iniciar Sesion' %}</h1>
-    
+
                 <form action="" method="post">
                     {% csrf_token %}
-    
+
                     {{ form.as_p }}
-    
+
                     {% if messages %}
                         {% for message in messages %}
                             <p class="error-message">{{ message }}</p>
                         {% endfor %}
                     {% endif %}
-    
+
                     <input type="submit" value="ingresar" class="btn btn-success float-right">
                 </form>
                 <div class="elmain">
-                    
+
                         <button class="Cancelar" onclick="goBack()">Cancelar</button>
                         <a href="#">¿Olvido su contraseña?</a><br>
                         <a href="{% url 'registro'%}">Registrarse</a>
-                    
+
                 </div>
             </div>
         </div>
