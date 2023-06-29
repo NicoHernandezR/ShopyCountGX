@@ -7,4 +7,3 @@ class ShopyConfig(AppConfig):
 
     def ready(self):
         import Shopy.signals
-

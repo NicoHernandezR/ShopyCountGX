@@ -7,3 +7,7 @@ const ulElements = divMain.querySelectorAll('ul');
 ulElements.forEach((ul) => {
     ul.remove();
   });
+
+function goBack() {
+    window.history.back();
+  }

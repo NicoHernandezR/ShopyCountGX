@@ -8,7 +8,11 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
+<<<<<<< HEAD
 set VIRTUAL_ENV=C:\Users\vina\Desktop\Nueva carpeta\ShopyCountGX
+=======
+set VIRTUAL_ENV=C:\Users\lazca\Desktop\ShopyCountGX-entrega3\ShopyCountGX
+>>>>>>> 9308e953c3e1a2440a980c8db2b4a2e397fe0754
 
 if not defined PROMPT set PROMPT=$P$G
 

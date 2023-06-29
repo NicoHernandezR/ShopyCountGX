@@ -1,5 +1,9 @@
 from django.urls import path
 from . import views
+<<<<<<< HEAD
+=======
+from .views import login_view
+>>>>>>> 9308e953c3e1a2440a980c8db2b4a2e397fe0754
 
 urlpatterns = [
     path('index', views.index, name='index'),
@@ -7,6 +11,7 @@ urlpatterns = [
     path('vender/<int:id>', views.cargarCarac, name='cargarCarac'),
     path('tienda',views.tienda, name='tienda'),
     path('tienda/<int:id>',views.cargarFiltro, name='cargarFiltro'),
+<<<<<<< HEAD
     path('aplicarFiltro/<int:tipo>', views.aplicarFiltro, name='aplicarFiltro'),
     path('cargarFiltroIndex/<int:tipo>', views.cargarFiltroIndex, name='cargarFiltroIndex'),
     path('filtroValores/<str:filtro>', views.filtroValores, name='filtroValores'),
@@ -17,6 +22,13 @@ urlpatterns = [
     path('carro',views.carro, name='carro'),
     path('comprar',views.comprar, name='comprar'),
     path('eliminarDelCarro/<int:id>',views.eliminarDelCarro, name='eliminarDelCarro'),
+=======
+    path('registro',views.registro, name='registro'),
+    path('cuenta/<int:id>',views.cuenta, name='cuenta'),
+    path('login/', login_view, name='login'),
+    path('editar/', views.editar, name='editar'),
+    path('cambiarcontra/', views.cambiarcontra, name='cambiarcontra'),
+>>>>>>> 9308e953c3e1a2440a980c8db2b4a2e397fe0754
     #path('alumnosList', views.alumnosList, name='alumnosList'),
     #path('alumnosAdd', views.alumnosAdd, name='alumnosAdd'),
 ]

@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+
 from .models import TipoCuenta,ConexionTipoCarac,ImagenCuenta
 from .models import CaracTipoCuenta,Cuenta,CuentaCarac, Carro
 from django.db.models import F, Q
@@ -8,6 +9,18 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Sum
+
+from django.contrib import messages
+from .models import TipoCuenta,ConexionTipoCarac,ImagenCuenta
+from .models import CaracTipoCuenta,Cuenta,CuentaCarac
+from django.db.models import F, Q
+from .forms import CrearUsuario, EditarUsuarioForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash, logout
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -36,8 +49,6 @@ def cuenta(request,id):
 
 
 def vender(request):
-    print("Cargando")
-    print('AYUDA')
     if request.method != "POST":
         tipoCuenta=TipoCuenta.objects.all()
         #carac = ConexionTipoCarac.objects.all()
@@ -68,6 +79,7 @@ def vender(request):
             carac = CaracTipoCuenta.objects.get(nom_carac=i.id_carac)
             if caracDesc == carac.nom_carac:
                 caracValor = request.POST[carac.nom_carac]
+
 
         cuentaV = Cuenta.objects.create(
             id_cuenta=user,
@@ -162,6 +174,7 @@ def tienda(request):
 
         context.update({'cuentas_vender':cuentas_vender})
 
+
     
 
 
@@ -170,6 +183,7 @@ def tienda(request):
 
 def cargarFiltro(request, id):
     tipoCuenta = TipoCuenta.objects.all()
+
     if id == 0:
         return render(request, 'filtro_carac.html')
     try:
@@ -182,21 +196,19 @@ def cargarFiltro(request, id):
 
 def registro(request):
 
-    context = {
-        'form' : CrearUsuario()
-    }
 
     if request.method == 'POST':
-        formulario = CrearUsuario(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+        form = CrearUsuario(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(request, username=username, password=password)
             login(request, user)
-            messages.success(request, "Te registraste")
-            return redirect(to='index')
-        context["form"] = formulario
-
-    return render(request, 'Shopy/registro.html', context)
+            return redirect('index')  # Cambia 'inicio' con la URL de la página a la que deseas redirigir después del registro exitoso
+    else:
+        form = CrearUsuario()
+    return render(request, 'Shopy/registro.html', {'form': form})
 
 def aplicarFiltro(request, tipo):
 
@@ -430,3 +442,64 @@ def comprar(request):
     context.update({'comprar':"Cuentas Compradas"})
 
     return render(request,'contenido_carro.html', context)
+
+
+
+
+
+
+
+def login_view(request):
+    if request.method == 'POST':
+        # Validar el formulario
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            # Obtener las credenciales del formulario
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            # Verificar si el usuario está registrado
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                # El usuario está registrado, realizar la autenticación y redireccionar a otra página
+                login(request, user)
+                return redirect(to='index')
+            else:
+                # El usuario no está registrado, agregar mensaje de error
+                return render(request, 'login', {'messagge':'El usuario no está registrado'})
+               
+        else:
+            # El formulario no es válido, mostrar el formulario con los errores
+            pass
+    else:
+        # Mostrar el formulario vacío
+        form = AuthenticationForm()
+
+    return render(request, 'registration/login.html', {'form': form})
+
+
+@login_required
+def editar(request):
+    if request.method == 'POST':
+        form = EditarUsuarioForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('index')  # Redirige a la página de perfil o a donde desees
+
+    else:
+        form = EditarUsuarioForm(instance=request.user)
+
+    return render(request, 'Shopy/editar.html', {'form': form})
+
+
+def cambiarcontra(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            logout(request)  # Cierra la sesión del usuario
+            return redirect('login')  # Redirige a la página de login para volver iniciar sesion ya que cambio la contraseña
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'Shopy/cambiarcontra.html', {'form': form})
+

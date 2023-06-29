@@ -38,7 +38,11 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
+<<<<<<< HEAD
 VIRTUAL_ENV="C:\Users\vina\Desktop\Nueva carpeta\ShopyCountGX"
+=======
+VIRTUAL_ENV="C:\Users\lazca\Desktop\ShopyCountGX-entrega3\ShopyCountGX"
+>>>>>>> 9308e953c3e1a2440a980c8db2b4a2e397fe0754
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
