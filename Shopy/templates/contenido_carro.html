@@ -3,33 +3,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 
-    <div class="contenedor-cuentas">
-        <div class="div-nav">
-          <a href="#">
-          <div class="ventas float-start">
-           Mis compras
-        </div>
-      </a>
-    
-      <a href="{% url 'tienda' %}">
-        <div class="ventas float-end">
-          Tienda
-        </div>
-      </a>
-        </div>
-      </div>
+
+
+
+
+    <div  id="comprar" class="row" style="    justify-content: center !important;
+    text-align: center;"><label style="color: white; font-size: 25px;"> {{comprar}}</label></div>
+  
+
+  {% if comprar %}
+
+  {% else %}
 
 
     {% if contenido %}
 
+    <div class="contenedor-cuentas" id="barra">
+      <div class="div-nav">
+        <a href="#">
+        <div class="ventas float-start">
+         Mis compras
+      </div>
+    </a>
+  
+    <a href="{% url 'tienda' %}">
+      <div class="ventas float-end">
+        Tienda
+      </div>
+    </a>
+      </div>
+    </div>
+
+  <div class="menu_filtro" id="filtros">
+      <div class="menu_bar">
+              <a href="#" class="bt-menu" id="btn_c"></a>
+          </div>
+      <nav class="rightcol mfl" id="nv" >
+  
+  
+    <div class="row sidebar_dis " style="display: block;">
+      <div class="col-0 col-md-12">
+        <div class="riglhtcol small responsive_local_menu autocollapse_enabled bg_filtro"> 
+          <div class="block search_collapse_block">
+            <p class="titulo" style="margin-top: 30px;">Total a pagar: <p class="texto">${{total.total}} </p></p>
+            <p class="titulo">Tipos de cuentas a comprar: <p class="texto">{{stringTipos}} </p></p>
+
+            <div class="boton_pagar">
+            <button  onclick="mostrarConfirmacion(event, 'pag')">
+              Pagar
+            </button>
+            <div class="encima" name = "pag" id="encimapag" data-panel="{'focusable':true,'clickOnActivate':true}"
+            onclick="cerrarConfirmacion(this.getAttribute('name'))"> 
+            <div id="confirmacionpag" class="confirmacion confiCar" style="display: none;"
+            data-panel="{'focusable':true}">
+              <p>Confime que comprara lo del carro</p>
+              <p>Que tendra un total de: ${{total.total}}</p>
+              <div class="button-container">
+              <button data-url="{% url 'comprar' %}" onclick="comprar(this.getAttribute('data-url'))">Confirmar</button>
+              <button name = "pag" onclick="cerrarConfirmacion(this.getAttribute('name'))">Cancelar</button>
+            </div>
+            </div>
+          </div>
+          </div>
+
+          </div>
+        </div>
+    </div>
+    </div>
+  </nav>
+</div>
 
   
-    <div class="contenedor-cuentas" id="cuentas_carro" >
+    <div class="contenedor_cuenta" id="cuentas_carro" >
   
       
       <div class="row mb-3">
@@ -63,10 +112,25 @@
             {% endif %}</td>
             <td style="text-align: center; vertical-align: middle;">$ {{ con.cuenta.precio }}</td>
             <td style="text-align: center; vertical-align: middle;">
-              <a href="#" data-url="{% url 'eliminarDelCarro' id=con.cuenta.id %}" onclick="eliminarDelCarro(event, this.getAttribute('data-url'))"><img src="{% static 'Shopy/img/eliminar.png' %}" alt="" width="50px"></a>
+              <a href="#" class="click" id = "{{con.cuenta.id}}" onclick="mostrarConfirmacion(event, this.getAttribute('id'))"><img src="{% static 'Shopy/img/eliminar.png' %}" alt="" width="50px"></a>
             </td>
           </tr>
-  
+
+          <div class="encima" name = {{con.cuenta.id}} id="encima{{con.cuenta.id}}" data-panel="{'focusable':true,'clickOnActivate':true}"
+          onclick="cerrarConfirmacion(this.getAttribute('name'))"> 
+          <div id="confirmacion{{con.cuenta.id}}" class="confirmacion" style="display: none;"
+          data-panel="{'focusable':true}">
+            <p>Eliminar cuenta: {{con.cuenta.id_tipo_cuenta.nom_tipo_cuenta}} </p>
+            <p>Precio: {{con.cuenta.precio}}</p>
+            <div class="button-container">
+            <button data-url="{% url 'eliminarDelCarro' id=con.cuenta.id %}" onclick="eliminarDelCarro(event, this.getAttribute('data-url'))">Sí</button>
+            <button name = '{{con.cuenta.id}}' onclick="cerrarConfirmacion(this.getAttribute('name'))">No</button>
+          </div>
+          </div>
+        </div>
+
+        
+
           {% endfor %}
         </table>
       </div>
@@ -77,10 +141,42 @@
 
     {% else %}
 
-    Sin Contenido
+
+
+    
+    <div class="row" style="    justify-content: center !important;
+    text-align: center;"><label style="color: white; font-size: 25px;">No se Encontraron Resultados</label></div>
+  
+    <div style="height: 200px;"></div>
+  
+    
 
     {% endif %}
+    {% endif %}
 
+    <script>
+      $(document).ready(main);
+  
+      var contador = 1;
+  
+      function main() {
+        $('.menu_bar').click(function() {
+          if (contador == 1) {
+            $('#nv').animate({
+              right: '0'
+            });
+            $('#l').css('display', 'block');
+            contador = 0;
+          } else {
+            contador = 1;
+            $('#nv').animate({
+              right: '-100%'
+            });
+            $('#l').css('display', 'none');
+          }
+        });
+      }
+    </script>
 
 </body>
 </html>

@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Sum
 
 # Create your views here.
 
@@ -201,14 +202,17 @@ def aplicarFiltro(request, tipo):
 
     user = request.user
     context = {}
+    print(type(tipo))
+    print(tipo)
 
     
 
     if user.is_authenticated:
 
+
         if tipo != 0:
             cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user), id_tipo_cuenta=tipo)
- 
+
             context.update({'cuentas_vender':cuentas_vender})
 
         else:
@@ -230,6 +234,51 @@ def aplicarFiltro(request, tipo):
             context.update({'cuentas_vender':cuentas_vender})
 
     return render(request, 'cuentas_vender.html', context)
+
+def cargarFiltroIndex(request, tipo):
+    user = request.user
+    context = {}
+
+    print(type(tipo))
+    print(tipo)
+
+
+    if user.is_authenticated:
+        cuentas_usu = Cuenta.objects.filter(id_cuenta = user)
+        cuentas_usu_cant = cuentas_usu.count()
+        print(cuentas_usu)
+        print("cuentas_usu")
+        
+        context.update({'cuentas_usu':cuentas_usu})
+        context.update({'cuentas_usu_cant':cuentas_usu_cant})
+
+        if tipo != 0:
+            cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user), id_tipo_cuenta=tipo)
+            print(cuentas_vender)
+            context.update({'cuentas_vender':cuentas_vender})
+            
+
+        else:
+            cuentas_vender = Cuenta.objects.filter(~Q(id_cuenta=user))
+            
+            context.update({'cuentas_vender':cuentas_vender})
+            print('else 1')
+
+    else:
+
+        if tipo!= 0:
+            cuentas_vender = Cuenta.objects.filter(id_tipo_cuenta=tipo)
+
+            context.update({'cuentas_vender':cuentas_vender})
+            print('if 2')
+
+        else:
+            cuentas_vender = Cuenta.objects.all()
+
+            context.update({'cuentas_vender':cuentas_vender})
+            print('else 2')
+
+    return render(request, 'Shopy/tienda.html', context)
 
 
 def filtroValores(request, filtro):
@@ -340,8 +389,13 @@ def carro(request):
     context = {}
 
     contenido = Carro.objects.filter(user = user)
+    total = contenido.aggregate(total=Sum('cuenta__precio'))
+    stringTipos = contenido.values_list('cuenta__id_tipo_cuenta__nom_tipo_cuenta', flat=True).distinct()
+    tipos_cuenta_string = ', '.join(stringTipos)
 
     context.update({'contenido':contenido})
+    context.update({'total':total})
+    context.update({'stringTipos':tipos_cuenta_string})
 
 
     return render(request, 'Shopy/carro.html', context)
@@ -362,3 +416,17 @@ def eliminarDelCarro(request, id):
 
 
     return render(request, 'contenido_carro.html', context)
+
+
+def comprar(request):
+
+    user = request.user
+
+    carro = Carro.objects.filter(user=user)
+    cuentas_a_eliminar = carro.values_list('cuenta', flat=True)
+    Cuenta.objects.filter(id__in=cuentas_a_eliminar).delete()
+
+    context = {}
+    context.update({'comprar':"Cuentas Compradas"})
+
+    return render(request,'contenido_carro.html', context)

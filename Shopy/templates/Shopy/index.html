@@ -64,9 +64,10 @@
             <div class="card bg_wh">
               <img src="{% static 'Shopy/img/CardsMain/micro.png'%}" class="img_crd"alt="Card Back">
               <div class="card-content">
-              <form action="venta.html">
+
+                <a href="{% url 'cargarFiltroIndex' tipo=0 %}">
               <button class="btn" name="num" value="7">Buscar Cuentas de Microsoft</button>
-            </form>
+            </a>
           </div>
             </div>
           </div>
@@ -74,9 +75,9 @@
             <div class="card bg_wh">
               <img src="{% static 'Shopy/img/CardsMain/steam.png' %}"class="img_crd"alt="Card Back">
               <div class="card-content">
-                <form action="venta.html">
+                <a href="{% url 'cargarFiltroIndex' tipo=1 %}">
                 <button class="btn" name="num" value="1">Buscar Cuentas de Steam</button>
-              </form>
+                  </a>
             </div>
           </div>
           </div>
@@ -84,10 +85,10 @@
             <div class="card bg_wh">
               <img src="{% static 'Shopy/img/CardsMain/riot.png'%}" class="img_crd"alt="Card Back">
               <div class="card-content">
-                <form action="venta.html">
+                <a href="{% url 'cargarFiltroIndex' tipo=0 %}">
                 <button class="btn" name="num" value="8"> 
                   Buscar Cuentas de Riot</button>
-              </form>
+                </a>
             </div>
           </div>
           </div>
@@ -101,9 +102,9 @@
               <img src="{% static 'Shopy/img/CardsMain/play.png'%}" class="img_crd"alt="Card Back">
                 <form action="venta.html">
                   <div class="card-content">
-                    <form action="venta.html">
+                    <a href="{% url 'cargarFiltroIndex' tipo=4 %}">
                     <button class="btn" name="num" value="4"> Buscar Cuentas de PlayStation</button>
-                  </form>
+                    </a>
                 </div>
               </form>
           </div>
@@ -112,9 +113,9 @@
             <div class="card bg_wh">
               <img src="{% static 'Shopy/img/CardsMain/switch.png'%}" class="img_crd1"alt="Card Back">
               <div class="card-content">
-                <form action="venta.html">
+                <a href="{% url 'cargarFiltroIndex' tipo=0 %}">
                 <button class="btn" name="num" value="6"> Buscar Cuentas de Switch</button>
-              </form>
+                </a>
             </div>
           </div>
           </div>
@@ -122,9 +123,9 @@
             <div class="card bg_wh">
               <img src="{% static 'Shopy/img/CardsMain/battlenet.jpg'%}" class="img_crd"alt="Card Back">
               <div class="card-content">
-                <form action="venta.html">
+                <a href="{% url 'cargarFiltroIndex' tipo=0 %}">
                 <button class="btn" name="num" value="9">Buscar Cuentas de Battle Net</button>
-              </form>
+                </a>
             </div>
           </div>
           </div>

@@ -35,9 +35,11 @@ function quitarHiddenInfPrc() {
 
     let carousel = document.getElementById('carousel')
     let btn_img = document.getElementById('btn_img')
+    let btns = document.getElementById('btns')
 
     precio.classList.remove('hidden')
     info_ext.classList.remove('hidden')
+    btns.classList.remove('hidden')
 
     carousel.classList.remove('hidden')
     btn_img.classList.remove('hidden')
@@ -49,9 +51,11 @@ function agregarHiddenInfPrc() {
 
     let carousel = document.getElementById('carousel')
     let btn_img = document.getElementById('btn_img')
+    let btns = document.getElementById('btns')
 
     precio.classList.add('hidden')
     info_ext.classList.add('hidden')
+    btns.classList.add('hidden')
 
     carousel.classList.add('hidden')
     btn_img.classList.add('hidden')
@@ -125,6 +129,8 @@ function calcularAnchoImagen() {
 function cargarPlaceHolder() {
     let carousel = document.getElementById('carousel')
     let carruselInner = carousel.querySelector('.carousel-inner');
+    carruselInner.innerHTML = ''
+    inputImagen.value = "";
     let img = document.createElement('img');
     img.classList.add('d-block', 'img_size', 'placeholderCar');
     img.style.width = calcularAnchoImagen() ;
@@ -146,7 +152,13 @@ selectTipo.addEventListener('change', function(event) {
         return null
     }
 
-
+    var errorextra = document.getElementById('errorextra');
+    errorextra.classList.add('hidden')
+    var errorPrecio = document.getElementById("errorprecio")
+    errorPrecio.classList.add('hidden')
+    var lblError = document.getElementById('errorImg');
+    lblError.classList.add('hidden')
+  
     quitarHiddenInfPrc() 
     cargarPlaceHolder()
     cargarAnimaciones(cont)
@@ -284,4 +296,19 @@ function validarFormulario() {
     
 
     
+}
+
+function limpiarFormulario(){
+  agregarHiddenInfPrc()
+
+  divCaracs = document.getElementById('resultado-carac').innerHTML = ''
+  selectTipo.value = '0'
+  precio = document.getElementById('precio')
+  precio.value = ''
+  info_extra = document.getElementById('info_extra')
+  info_extra.value = ''
+  cargarPlaceHolder()
+  var lblError = document.getElementById('errorImg');
+  lblError.classList.add('hidden')
+
 }

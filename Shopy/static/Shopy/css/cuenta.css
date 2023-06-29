@@ -263,7 +263,7 @@ p {
       }
         .rectangulo {
         width: auto;
-        height: 70px;
+        height: 100px;
         display: flex;
         padding-top: 15px;
         scrollbar-width: thin;
@@ -279,11 +279,11 @@ p {
       }
       
       .scroll-container::-webkit-scrollbar-thumb {
-        background-color: #000000;
+        background-color: red;
       }
       
       .scroll-container::-webkit-scrollbar-thumb:hover {
-        background-color: #555555;
+        background-color: red;
       }
       .rectangulo {
         width: 100%;

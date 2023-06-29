@@ -111,6 +111,8 @@ html.responsive .leftcol, html.responsive {
 .autocollapse_enabled .search_collapse_block .block_.menu_bar {
     cursor: pointer;
 }
+
+
 .block .block_.menu_bar {
     background: rgba( 255, 255, 255, 0.1);
     padding: 4px 4px 4px 6px;
@@ -160,21 +162,69 @@ html.responsive .leftcol, html.responsive {
     margin-left: 14px;
     float: right;
     position:relative;
-    background-color: #0a4657 !important;
+    background: radial-gradient(circle, #1b2838 0%, #1b2838 100%) !important;
     opacity: 1;
     z-index: 4;
     border: solid;
     border-color: white;
     border-radius: 5px;
+    color: white;
+}
 
+.rightcol p{
+    text-align: center;
+    max-height: 200px;
+    font-size: 20px;
+    line-height: 18px;
+    padding-right: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    
+}
+
+.rightcol button{
+    width: 100px;
+    height: 50px;
+    background: rgb(75,103,45);
+    color: white;
+    font-size: 20px;
 
 }
 
-.bg_filtro {
-    background-color: #0a4657 !important;
-    color: #F7A211;
+#btnF{
+    width: 150px;
 }
 
+
+.rightcol select{
+    height: 50px;
+    width: 90%;
+    font-size: 20px;
+    background: rgb(75,103,45);
+    color: white;
+    
+}
+
+.search_collapse_block{
+    margin-left: 5%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.mfl{
+    height: 300px;
+}
+
+.boton_pagar{
+    justify-content: center;
+    display: flex;
+}
+
+.titulo{
+    color: #556772;
+    font-weight: bold;
+}
 
 
 .leftcol {
@@ -241,10 +291,6 @@ section {
 	padding:20px;
 }
 
-.inp_form{
-    background-color: #0a4657;
-    color: #F7A211;
-}
 
 .inp_color{
     color: black;
@@ -466,8 +512,10 @@ a:-webkit-any-link {
 
 }
 
-.pad-bot-opt{
+.pad-bot-opt {
     padding-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 40px;
 }
 
 

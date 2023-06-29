@@ -60,10 +60,23 @@
             {% endif %}</td>
             <td style="text-align: center; vertical-align: middle;">$ {{ c.precio }}</td>
             <td style="text-align: center; vertical-align: middle;">
-              <a href="#" data-url="{% url 'eliminarCuenta' id=c.id %}" onclick="eliminarCuenta(event, this.getAttribute('data-url'))"><img src="{% static 'Shopy/img/eliminar.png' %}" alt="" width="50px"></a>
+              <a href="#" id = "{{c.id}}" onclick="mostrarConfirmacion(event, this.getAttribute('id'))"><img src="{% static 'Shopy/img/eliminar.png' %}" alt="" width="50px"></a>
             </td>
           </tr>
-  
+
+          <div class="encima" name = {{c.id}} id="encima{{c.id}}" data-panel="{'focusable':true,'clickOnActivate':true}"
+          onclick="cerrarConfirmacion(this.getAttribute('name'))"> 
+          <div id="confirmacion{{c.id}}" class="confirmacion" style="display: none;"
+          data-panel="{'focusable':true}">
+            <p>Eliminar cuenta: {{c.id_tipo_cuenta.nom_tipo_cuenta}} </p>
+            <p>Precio: {{c.precio}}</p>
+            <div class="button-container">
+            <button data-url="{% url 'eliminarCuenta' id=c.id %}" onclick="eliminarCuenta(event, this.getAttribute('data-url'))">Sí</button>
+            <button name = '{{c.id}}' onclick="cerrarConfirmacion(this.getAttribute('name'))">No</button>
+          </div>
+          </div>
+        </div>
+
           {% endfor %}
         </table>
       </div>
