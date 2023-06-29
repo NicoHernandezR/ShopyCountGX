@@ -24,7 +24,7 @@ urlpatterns = [
 
     path('registro',views.registro, name='registro'),
     path('cuenta/<int:id>',views.cuenta, name='cuenta'),
-    path('login/', login_view, name='login'),
+    path('loginP', views.loginP, name='loginP'),
     path('editar/', views.editar, name='editar'),
     path('cambiarcontra/', views.cambiarcontra, name='cambiarcontra'),
 
