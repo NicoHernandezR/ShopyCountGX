@@ -251,8 +251,10 @@ def cargarFiltroIndex(request, tipo):
     user = request.user
     context = {}
 
-    print(type(tipo))
-    print(tipo)
+    tipoCuenta = TipoCuenta.objects.all()
+    context.update({
+        'tipoCuenta' : tipoCuenta,
+    })
 
 
     if user.is_authenticated:
@@ -420,11 +422,18 @@ def eliminarDelCarro(request, id):
     carroElement = Carro.objects.get(user = user, cuenta = cuentaV)
     carroElement.delete()
 
+
+
     context = {}
 
     contenido = Carro.objects.filter(user = user)
+    total = contenido.aggregate(total=Sum('cuenta__precio'))
+    stringTipos = contenido.values_list('cuenta__id_tipo_cuenta__nom_tipo_cuenta', flat=True).distinct()
+    tipos_cuenta_string = ', '.join(stringTipos)
 
     context.update({'contenido':contenido})
+    context.update({'total':total})
+    context.update({'stringTipos':tipos_cuenta_string})
 
 
     return render(request, 'contenido_carro.html', context)
@@ -435,7 +444,9 @@ def comprar(request):
     user = request.user
 
     carro = Carro.objects.filter(user=user)
+    print(carro)
     cuentas_a_eliminar = carro.values_list('cuenta', flat=True)
+    print(cuentas_a_eliminar)
     Cuenta.objects.filter(id__in=cuentas_a_eliminar).delete()
 
     context = {}
@@ -502,4 +513,5 @@ def cambiarcontra(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'Shopy/cambiarcontra.html', {'form': form})
+
 
