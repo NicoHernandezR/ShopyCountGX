@@ -29,11 +29,16 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Ver cuenta</a></li>
+              {% if user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'editar' %}">Editar Cuenta</a></li>
+              {% endif %}
+              {% if user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'cambiarcontra' %}">Cambiar Contraseña</a></li>
+              {% endif %}
               <li><a class="dropdown-item" href="#">Historial Compras</a></li>
               {% if user.is_authenticated %}
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
-              <li><a class="dropdown-item" href="{% url 'editar' %}">Editar</a></li>
               {% else %}
               <li><a class="dropdown-item" href="{% url 'registro' %}">Crear Cuenta</a></li>
               {% endif %}

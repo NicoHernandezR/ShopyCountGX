@@ -17,28 +17,29 @@
         <br>
         <div class="row">
             <div class="col-12 col-md-6 offset-md-3">
-
                 <div class="card">
                     <div class="card-body">
-
                         <h2>{% trans 'Registrar Usuario' %}</h2>
-                        
-                            <form method="post">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <button type="submit">Registrarse</button>
-                            </form>
-                        
+                        <form method="post">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            {{ form.as_p }}
+                            <button type="submit">Registrarse</button>
+                        </form>
                     </div>
-
                 </div>
-
-
-
             </div>
         </div>
-
     </div>
+    
     
     <script src="{% static 'Shopy/js/register.js'%}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>

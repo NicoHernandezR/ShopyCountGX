@@ -12,6 +12,7 @@ urlpatterns = [
     path('cuenta/<int:id>',views.cuenta, name='cuenta'),
     path('login/', login_view, name='login'),
     path('editar/', views.editar, name='editar'),
+    path('cambiarcontra/', views.cambiarcontra, name='cambiarcontra'),
     #path('alumnosList', views.alumnosList, name='alumnosList'),
     #path('alumnosAdd', views.alumnosAdd, name='alumnosAdd'),
 ]

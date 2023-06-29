@@ -6,6 +6,8 @@ from django.db.models import F, Q
 from .forms import CrearUsuario, EditarUsuarioForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash, logout
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -218,7 +220,7 @@ def login_view(request):
         # Mostrar el formulario vacío
         form = AuthenticationForm()
 
-    return render(request, 'registro.html', {'form': form})
+    return render(request, 'Shopy/registro.html', {'form': form})
 
 
 @login_required
@@ -233,5 +235,20 @@ def editar(request):
         form = EditarUsuarioForm(instance=request.user)
 
     return render(request, 'Shopy/editar.html', {'form': form})
+
+
+def cambiarcontra(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            logout(request)  # Cierra la sesión del usuario
+            return redirect('login')  # Redirige a la página de éxito
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'Shopy/cambiarcontra.html', {'form': form})
+
+
 
 

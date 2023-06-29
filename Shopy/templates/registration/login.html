@@ -20,12 +20,18 @@
             <div class="login-box" id="div-main">
                 <img src="{% static 'Shopy/img/logo.jpg'%}" class="avatar" alt="Avatar Image">
                 <h1>{% trans 'Iniciar Sesion' %}</h1>
-
+    
                 <form action="" method="post">
                     {% csrf_token %}
-                    
+    
                     {{ form.as_p }}
-
+    
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="error-message">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+    
                     <input type="submit" value="ingresar" class="btn btn-success float-right">
                 </form>
                 <div class="elmain">
@@ -35,11 +41,10 @@
                         <a href="{% url 'registro'%}">Registrarse</a>
                     </form>
                 </div>
-              
-
             </div>
         </div>
     </div>
+    
 
     <script src="{% static 'Shopy/js/login.js'%}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
