@@ -212,7 +212,8 @@ def login_view(request):
                 return redirect(to='index')
             else:
                 # El usuario no está registrado, agregar mensaje de error
-                messages.error(request, 'El usuario no está registrado.')
+                return render(request, 'login', {'messagge':'El usuario no está registrado'})
+               
         else:
             # El formulario no es válido, mostrar el formulario con los errores
             pass
