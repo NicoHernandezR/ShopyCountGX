@@ -194,20 +194,27 @@ def cargarFiltro(request, id):
     return render(request, 'Shopy/tienda.html', {'tipoCuenta': tipoCuenta})
 
 
+from django.contrib.auth.models import User
 def registro(request):
-
-
     if request.method == 'POST':
         form = CrearUsuario(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password1')
-            user = authenticate(request, username=username, password=password)
-            login(request, user)
-            return redirect('index')  # Cambia 'inicio' con la URL de la página a la que deseas redirigir después del registro exitoso
+            email = form.cleaned_data.get('email')
+            
+            if User.objects.filter(email=email).exists():
+                # El correo ya está registrado
+                form.add_error('email', 'Este correo ya está registrado')
+            else:
+                # El correo no está registrado, puedes proceder con el registro
+                form.save()
+                username = form.cleaned_data.get('username')
+                password = form.cleaned_data.get('password1')
+                user = authenticate(request, username=username, password=password)
+                login(request, user)
+                return redirect('index')  # Cambia 'index' con la URL de la página a la que deseas redirigir después del registro exitoso
     else:
         form = CrearUsuario()
+        
     return render(request, 'Shopy/registro.html', {'form': form})
 
 def aplicarFiltro(request, tipo):
@@ -476,7 +483,10 @@ def login_view(request):
                 return redirect(to='index')
             else:
                 # El usuario no está registrado, agregar mensaje de error
-                return render(request, 'login', {'messagge':'El usuario no está registrado'})
+                context = {}
+                context.update({'mensaje':'El usuario no está registrado'})
+                context.update({'form': form})
+                return render(request, 'loginVal.html', context)
                
         else:
             # El formulario no es válido, mostrar el formulario con los errores
@@ -515,3 +525,26 @@ def cambiarcontra(request):
     return render(request, 'Shopy/cambiarcontra.html', {'form': form})
 
 
+from django.contrib.auth.views import LoginView
+from django.contrib import messages
+from django.contrib.auth import authenticate
+def loginP(request):
+    form = AuthenticationForm(request, data=request.POST)
+    if request.method == 'POST':
+        username = request.POST.get('username', '')  # Obtener el valor de 'username' o cadena vacía si no está presente
+        password = request.POST.get('password', '') 
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                # El usuario existe y la contraseña es correcta, puedes continuar con el inicio de sesión
+                # ...
+                login(request, user)
+                return redirect('index')
+            else:
+                # El usuario existe pero la cuenta está desactivada
+                messages.error(request, 'La cuenta está desactivada')
+        else:
+            # El usuario no existe o la contraseña es incorrecta
+            messages.error(request, 'Usuario o contraseña incorrectos')
+
+    return render(request, 'login.html', {'form': form})
