@@ -107,11 +107,6 @@ $(document).ready(function() {
       <div class="row btn_centrar_row">
 
         <div class="col-12 col-md-3 btn_centrar">
-          <a href="#" onclick="mostrarCuadrado(event)">
-          <button class="btn_size"> Comprar</button>
-        </a>
-        </div>
-        <div class="col-12 col-md-3 btn_centrar">
           <a href="#" data-url="{% url 'agregarAlCarro' id=cuenta.id %}" onclick="agregarAlCarro(event, this.getAttribute('data-url'))">
           <button class="btn_size"> Anadir al Carro</button>
         </a>
@@ -123,6 +118,8 @@ $(document).ready(function() {
         </div>
       </div>
     </div>
+
+    <div style="height: 50px;"></div>
 
     {% include "footer.html" %}
     <script src="{% static 'Shopy/js/cargarURLS.js'%}"></script>
