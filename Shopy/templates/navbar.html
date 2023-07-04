@@ -46,8 +46,10 @@
           </li>
         </ul>
         {% if user.is_authenticated %}
-        <div class="btn_div d-flex justify-content-center">
-          <p class="navbar-text-p">Bienvenido, {{ user.username }}</p>
+        <div class="btn_div d-flex">
+        <p class="text-usu">Bienvenido, {{ user.username }}</p>
+        </div>
+        <div class="btn_div d-flex">
           <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="btn_ini_s">Cerrar sesión</button>
