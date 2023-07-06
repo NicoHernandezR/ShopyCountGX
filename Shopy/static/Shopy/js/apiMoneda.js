@@ -1,3 +1,5 @@
+var selectMoneda = undefined
+
 async function obtenerTasasDeCambio() {
     const url = `https://api.fastforex.io/fetch-multi?from=clp&to=clp,USD,EUR&api_key=78ed57430b-e04549ec35-rxclzb`;
   
@@ -12,18 +14,21 @@ async function obtenerTasasDeCambio() {
       const resultados = data.results;
   
       // Crear un elemento <select>
-      const selectElement = document.createElement('select');
+      selectMoneda = document.createElement('select');
   
       // Iterar sobre los resultados y crear opciones correspondientes
       for (const moneda in resultados) {
         const opcion = document.createElement('option');
         opcion.value = resultados[moneda];
         opcion.text = moneda;
-        selectElement.appendChild(opcion);
+        selectMoneda.appendChild(opcion);
       }
   
       // Agregar el elemento <select> al documento
-      document.body.appendChild(selectElement);
+
+      var divSelect = document.getElementsByClassName('monedaSelect')[0]
+
+      divSelect.appendChild(selectMoneda);
   
       // Obtener los elementos con la clase 'moneda'
       const elementosMoneda = document.getElementsByClassName('moneda');
@@ -32,8 +37,8 @@ async function obtenerTasasDeCambio() {
       const valoresOriginales = Array.from(elementosMoneda).map(elemento => parseFloat(elemento.dataset.valorOriginal));
   
       // Agregar un evento 'change' al elemento <select>
-      selectElement.addEventListener('change', function() {
-        const valorSeleccionado = parseFloat(selectElement.value);
+      selectMoneda.addEventListener('change', function() {
+        const valorSeleccionado = parseFloat(selectMoneda.value);
 
   
         // Actualizar los valores de los elementos con la clase 'moneda'
