@@ -109,6 +109,7 @@ $(document).ready(function() {
       <div class="row btn_centrar_row">
 
 
+        {% if user.is_authenticated %}
         {% if cuenta.id_cuenta != user %}
         <div class="col-12 col-md-3 btn_centrar">
           <a href="#" data-url="{% url 'agregarAlCarro' id=cuenta.id %}" onclick="agregarAlCarro(event, this.getAttribute('data-url'))">
@@ -116,10 +117,16 @@ $(document).ready(function() {
           </a>
         </div>
         {% endif %}
+        {% endif %}
+
         <div class="col-12 col-md-3 btn_centrar">
           <a href="{% url 'tienda' %}">
           <button class="btn_size"> Cancelar</button>
         </a>
+        </div>
+
+        <div class="col-12 col-md-3 monedaSelect btn_centrar">
+
         </div>
       </div>
     </div>
