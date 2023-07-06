@@ -23,8 +23,9 @@
               <th scope="col">Cuenta</th>
               <th scope="col" style="text-align: center; vertical-align: middle;">Caracteristica</th>
               <th scope="col" style="text-align: center; vertical-align: middle;">Precio</th>
+              {% if user.is_authenticated  %}
               <th scope="col" style="text-align: center; vertical-align: middle;">Agregar Carro</th>
-
+              {% endif %}
             </tr>
           </thead>
           {% for c in cuentas_vender %}
@@ -43,10 +44,16 @@
               {{ c.carac_desc }}
               {{ c.carac_valor }}
             {% endif %}</td>
-            <td style="text-align: center; vertical-align: middle;">$ {{ c.precio }}</td>
+            <td style="text-align: center; vertical-align: middle;     bottom: -8px;
+            position: relative;">
+              $ <p class='moneda' data-valor-original="{{c.precio}}" style="display: inline-block;">{{c.precio}}</p>
+            </td>
+
+            {% if user.is_authenticated  %}
             <td style="text-align: center; vertical-align: middle;">
               <a href="#" data-url="{% url 'agregarAlCarro' id=c.id %}" onclick="agregarAlCarro(event, this.getAttribute('data-url'))"><img src="{% static 'Shopy/img/agregarCarritoV.png' %}" alt="" width="50px"></a>
             </td> 
+            {% endif %}
           </tr>
 
           {% endfor %}
