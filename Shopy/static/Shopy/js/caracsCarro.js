@@ -15,8 +15,10 @@ function cargarURL(url, div){
 
 function eliminarDelCarro(event, url) {
 
+
   div = document.getElementById('cuentas')
   cargarURL(url, div)
+  obtenerTasasDeCambio()
 
 
 }
