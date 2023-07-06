@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (url) {
         let div = document.getElementById('cuenta')
         cargarURL(url, div);
+        selectMoneda.value = 1
       }
     });
 
