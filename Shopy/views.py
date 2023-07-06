@@ -30,16 +30,20 @@ def index(request):
 def navbar(request):
     return render(request,'Shopy/navbar.html')
 
+
 def cuenta(request,id):
+
 
     cuentaV = Cuenta.objects.get(id = id)
     imagenes = ImagenCuenta.objects.filter(id_cuenta=cuentaV)
     carac = CuentaCarac.objects.filter(id_cuenta=cuentaV)
+    
 
     context = {
         'cuenta':  cuentaV,
         'imagenes': imagenes,
-        'carac' : carac
+        'carac' : carac,
+        'user' : request.user
     }
 
 
@@ -49,6 +53,10 @@ def cuenta(request,id):
 
 
 def vender(request):
+
+    if not request.user.is_authenticated:
+            return redirect('loginP')
+
     if request.method != "POST":
         tipoCuenta=TipoCuenta.objects.all()
         #carac = ConexionTipoCarac.objects.all()
@@ -406,6 +414,9 @@ def agregarAlCarro(request, id):
 
 def carro(request):
 
+    if not request.user.is_authenticated:
+        return redirect('loginP')
+
     user = request.user
     context = {}
 
@@ -513,6 +524,11 @@ def editar(request):
 
 
 def cambiarcontra(request):
+
+    if not request.user.is_authenticated:
+        return redirect('loginP')
+
+    
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
