@@ -91,8 +91,10 @@ $(document).ready(function() {
                   </div>
                   {% endfor %}
 
-                  <h3>Precio: ${{cuenta.precio}} </h3>
-
+                  <div style="display: flex;">
+                    <h3 style="margin-right: 10px;">Precio: $</h3>
+                    <h3 class="moneda" data-valor-original="{{cuenta.precio}}">{{cuenta.precio}}</h3>
+                  </div>
                 </div>
                 </div>
 
@@ -106,11 +108,14 @@ $(document).ready(function() {
     <div class="container-fluid">
       <div class="row btn_centrar_row">
 
+
+        {% if cuenta.id_cuenta != user %}
         <div class="col-12 col-md-3 btn_centrar">
           <a href="#" data-url="{% url 'agregarAlCarro' id=cuenta.id %}" onclick="agregarAlCarro(event, this.getAttribute('data-url'))">
-          <button class="btn_size"> Anadir al Carro</button>
-        </a>
+            <button class="btn_size">Añadir al Carro</button>
+          </a>
         </div>
+        {% endif %}
         <div class="col-12 col-md-3 btn_centrar">
           <a href="{% url 'tienda' %}">
           <button class="btn_size"> Cancelar</button>
@@ -124,6 +129,7 @@ $(document).ready(function() {
     {% include "footer.html" %}
     <script src="{% static 'Shopy/js/cargarURLS.js'%}"></script>
     <script src="{% static 'Shopy/js/carro.js'%}"></script>
+    <script src="{% static 'Shopy/js/apiMoneda.js'%}"></script>
     <script>
       var items = document.querySelectorAll('.highlight_strip_item');
 
