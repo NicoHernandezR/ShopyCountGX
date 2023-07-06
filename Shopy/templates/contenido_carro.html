@@ -49,7 +49,7 @@
       <div class="col-0 col-md-12">
         <div class="riglhtcol small responsive_local_menu autocollapse_enabled bg_filtro"> 
           <div class="block search_collapse_block">
-            <p class="titulo" style="margin-top: 30px;">Total a pagar: <p class="texto">${{total.total}} </p></p>
+            <p class="titulo" style="margin-top: 30px;">Total a pagar:  $<p class='moneda texto' data-valor-original="{{total.total}}">{{total.total}}</p></p>
             <p class="titulo">Tipos de cuentas a comprar: <p class="texto">{{stringTipos}} </p></p>
 
             <div class="boton_pagar">
@@ -61,7 +61,7 @@
             <div id="confirmacionpag" class="confirmacion confiCar" style="display: none;"
             data-panel="{'focusable':true}">
               <p>Confime que comprara lo del carro</p>
-              <p>Que tendra un total de: ${{total.total}}</p>
+              <p style="display: inline-block;">Total a pagar: $<p class='moneda' data-valor-original="{{total.total}}" style="display: inline-block;">{{total.total}}</p></p>
               <div class="button-container">
               <button data-url="{% url 'comprar' %}" onclick="comprar(this.getAttribute('data-url'))">Confirmar</button>
               <button name = "pag" onclick="cerrarConfirmacion(this.getAttribute('name'))">Cancelar</button>
@@ -110,7 +110,7 @@
   
   
             {% endif %}</td>
-            <td style="text-align: center; vertical-align: middle;">$ {{ con.cuenta.precio }}</td>
+            <td style="text-align: center; vertical-align: middle;bottom: -16px; position: relative;"><p style="display: inline-block;">$<p class="moneda" style="display: inline-block;" data-valor-original="{{con.cuenta.precio}}">{{con.cuenta.precio}}</p></p></td>
             <td style="text-align: center; vertical-align: middle;">
               <a href="#" class="click" id = "{{con.cuenta.id}}" onclick="mostrarConfirmacion(event, this.getAttribute('id'))"><img src="{% static 'Shopy/img/eliminar.png' %}" alt="" width="50px"></a>
             </td>
@@ -121,7 +121,7 @@
           <div id="confirmacion{{con.cuenta.id}}" class="confirmacion" style="display: none;"
           data-panel="{'focusable':true}">
             <p>Eliminar cuenta: {{con.cuenta.id_tipo_cuenta.nom_tipo_cuenta}} </p>
-            <p>Precio: {{con.cuenta.precio}}</p>
+            <p style="display: inline-block;">Precio: $<p class="moneda" style="display: inline-block;" data-valor-original="{{con.cuenta.precio}}">{{con.cuenta.precio}}</p></p>
             <div class="button-container">
             <button data-url="{% url 'eliminarDelCarro' id=con.cuenta.id %}" onclick="eliminarDelCarro(event, this.getAttribute('data-url'))">Sí</button>
             <button name = '{{con.cuenta.id}}' onclick="cerrarConfirmacion(this.getAttribute('name'))">No</button>
@@ -145,7 +145,7 @@
 
     
     <div class="row" style="    justify-content: center !important;
-    text-align: center;"><label style="color: white; font-size: 25px;">El carro esta vacio</label></div>
+    text-align: center;"><label style="color: white; font-size: 25px;">No se Encontraron Resultados</label></div>
   
     <div style="height: 200px;"></div>
   
