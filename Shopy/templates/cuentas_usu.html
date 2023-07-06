@@ -58,7 +58,10 @@
   
   
             {% endif %}</td>
-            <td style="text-align: center; vertical-align: middle;">$ {{ c.precio }}</td>
+            <td style="text-align: center; vertical-align: middle;     bottom: -8px;
+            position: relative;">
+              $ <p class='moneda' data-valor-original="{{c.precio}}" style="display: inline-block;">{{c.precio}}</p>
+            </td>
             <td style="text-align: center; vertical-align: middle;">
               <a href="#" id = "{{c.id}}" onclick="mostrarConfirmacion(event, this.getAttribute('id'))"><img src="{% static 'Shopy/img/eliminar.png' %}" alt="" width="50px"></a>
             </td>
@@ -69,7 +72,7 @@
           <div id="confirmacion{{c.id}}" class="confirmacion" style="display: none;"
           data-panel="{'focusable':true}">
             <p>Eliminar cuenta: {{c.id_tipo_cuenta.nom_tipo_cuenta}} </p>
-            <p>Precio: {{c.precio}}</p>
+            <p style="display: inline-block;">Precio: $<p class='moneda' data-valor-original="{{c.precio}}" style="display: inline-block;">{{c.precio}}</p></p>
             <div class="button-container">
             <button data-url="{% url 'eliminarCuenta' id=c.id %}" onclick="eliminarCuenta(event, this.getAttribute('data-url'))">Sí</button>
             <button name = '{{c.id}}' onclick="cerrarConfirmacion(this.getAttribute('name'))">No</button>
